@@ -8,17 +8,27 @@ public class PlayerStamina : MonoBehaviour
 
     [Tooltip("How much stamina is recovered per second. Must be greater than 0.")]
     [SerializeField]
-    private float recoveryRate = 40.0f;
+    private float recoveryRateNormal = 30.0f;
 
     [Tooltip("Delay in seconds between stamina consumption and recovery. Must be greater than 0.")]
     [SerializeField]
-    private float recoveryDelay = 0.1f;
+    private float recoveryDelayNormal = 0.1f;
+
+    [Tooltip("How much stamina is recovered per second when consumption has depleted stamina. Must be greater than 0.")]
+    [SerializeField]
+    private float recoveryRateOnDepleted = 50.0f;
 
     [Tooltip("Delay in seconds between stamina consumption and recovery when consumption has depleted stamina. Must be greater than 0.")]
     [SerializeField]
     private float recoveryDelayOnDepleted = 5.0f;
 
+    [Tooltip("At what amount of stamina in percentage when it is recovered from depleted change the recovery rate to normal. " +
+        "Must be between 0 and 1, where 1 is 100%")]
+    [SerializeField]
+    private float recoverySwitchValue = 0.5f;
+
     private float currentRecoveryDelay = 0.0f;
+    private bool recoveryFromDepleated;
 
     public float CurrentStamina { get; private set; }
 
@@ -49,11 +59,13 @@ public class PlayerStamina : MonoBehaviour
     /// <summary>
     /// Tries to consume the given amount of stamina.
     /// </summary>
-    /// <param name="staminaAmount">Amount of stamina to consume.</param>
+    /// <param name="staminaAmount">Amount of stamina to consume. Must be greater than 0.</param>
     /// <returns><see langword="true"/> if the specified amount of stamina was successfully consumed, <see langword="false"/> otherwise.</returns>
     public bool TryConsumeExact(float staminaAmount)
     {
-        if (staminaAmount <= 0 || CurrentStamina < staminaAmount || !HasStamina)
+        Debug.Assert(staminaAmount > 0.0f);
+
+        if (CurrentStamina < staminaAmount || !HasStamina)
         {
             return false;
         }
@@ -69,14 +81,11 @@ public class PlayerStamina : MonoBehaviour
     /// <remarks>
     /// If the amount of stamina is less than the amount to be consumed, it will consume all the stamina and return how much was actually consumed.
     /// </remarks>
-    /// <param name="staminaAmount">Amount of stamina to consume.</param>
+    /// <param name="staminaAmount">Amount of stamina to consume. Must be greater than 0.</param>
     /// <returns>The actual amount of stamina consumed.</returns>
     public float ConsumeApproximate(float staminaAmount)
     {
-        if (staminaAmount <= 0 || !HasStamina)
-        {
-            return 0.0f;
-        }
+        Debug.Assert(staminaAmount > 0.0f);
 
         var consumedStamina = Mathf.Min(staminaAmount, CurrentStamina);
 
@@ -92,10 +101,11 @@ public class PlayerStamina : MonoBehaviour
         if (!HasStamina)
         {
             currentRecoveryDelay = recoveryDelayOnDepleted;
+            recoveryFromDepleated = true;
             return;
         }
 
-        currentRecoveryDelay = recoveryDelay;
+        currentRecoveryDelay = recoveryDelayNormal;
     }
 
     private void HandleRecovery()
@@ -106,15 +116,35 @@ public class PlayerStamina : MonoBehaviour
             return;
         }
 
+        var recoveryRate = CalculateRecoveryRate();
+
         CurrentStamina = Mathf.Min(CurrentStamina + recoveryRate * Time.deltaTime, maxStamina);
+    }
+
+    private float CalculateRecoveryRate()
+    {
+        if (!recoveryFromDepleated)
+        {
+            return recoveryRateNormal;
+        }
+
+        if (CurrentStaminaNormalized >= recoverySwitchValue)
+        {
+            recoveryFromDepleated = false;
+
+            return recoveryRateNormal;
+        }
+
+        return recoveryRateOnDepleted;
     }
 
     private void AssertDesinerFileds()
     {
         Debug.Assert(maxStamina > 0.0f);
-        Debug.Assert(recoveryRate > 0.0f);
-        Debug.Assert(recoveryDelay > 0.0f);
-        Debug.Assert(recoveryDelayOnDepleted > 0.0f);
+        Debug.Assert(recoveryRateNormal > 0.0f);
+        Debug.Assert(recoveryDelayNormal > 0.0f);
+        Debug.Assert(recoveryRateOnDepleted > 0.0f);
+        Debug.Assert(recoverySwitchValue > 0.0f && recoverySwitchValue <= 1.0f);
     }
 
     private void DebugHandleInput()
@@ -148,5 +178,6 @@ public class PlayerStamina : MonoBehaviour
     {
         Debug.Log($"stamina: {CurrentStamina}");
         Debug.Log($"recovery delay: {currentRecoveryDelay}");
+        Debug.Log($"recovery from depleated: {recoveryFromDepleated}");
     }
 }

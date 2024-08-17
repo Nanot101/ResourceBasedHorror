@@ -65,11 +65,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (wantsToRun)
         {
-            var staminToConsume = runningStaminaConsumption * Time.deltaTime;
+            var staminaToConsume = runningStaminaConsumption * Time.deltaTime;
 
-            _ = playerStamina.ConsumeApproximate(staminToConsume);
-
-            return runningSpeed;
+            if (playerStamina.ConsumeApproximate(staminaToConsume) > 0.0f)
+            {
+                return runningSpeed;
+            }
         }
 
         return walkingSpeed;

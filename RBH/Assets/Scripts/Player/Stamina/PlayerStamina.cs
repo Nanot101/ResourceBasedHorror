@@ -27,8 +27,14 @@ public class PlayerStamina : MonoBehaviour
     [SerializeField]
     private float recoverySwitchValue = 0.5f;
 
+    [Tooltip("At what amount of stamina in percentage when it is recovered from depleted it is possible to start consumption. " +
+        "Must be between 0 and 1, where 1 is 100%")]
+    [SerializeField]
+    private float minStaminaAvailable = 0.2f;
+
     private float currentRecoveryDelay = 0.0f;
     private bool recoveryFromDepleated;
+    private bool canBeConsumedFormDepleated;
 
     public float CurrentStamina { get; private set; }
 
@@ -44,6 +50,7 @@ public class PlayerStamina : MonoBehaviour
         AssertDesinerFileds();
 
         CurrentStamina = maxStamina;
+        canBeConsumedFormDepleated = true;
     }
 
     // Update is called once per frame
@@ -65,7 +72,7 @@ public class PlayerStamina : MonoBehaviour
     {
         Debug.Assert(staminaAmount > 0.0f);
 
-        if (CurrentStamina < staminaAmount || !HasStamina)
+        if (CurrentStamina < staminaAmount || !CanBeConsumed())
         {
             return false;
         }
@@ -87,11 +94,35 @@ public class PlayerStamina : MonoBehaviour
     {
         Debug.Assert(staminaAmount > 0.0f);
 
+        if (!CanBeConsumed())
+        {
+            return 0.0f;
+        }
+
         var consumedStamina = Mathf.Min(staminaAmount, CurrentStamina);
 
         RemoveStamina(consumedStamina);
 
         return consumedStamina;
+    }
+
+    /// <summary>
+    /// Checks whether stamina can be consumed in the current state.
+    /// </summary>
+    /// <returns><see langword="true"/> if stamina can be consumed, <see langword="false"/> otherwise.</returns>
+    public bool CanBeConsumed()
+    {
+        if (!HasStamina)
+        {
+            return false;
+        }
+
+        if (!canBeConsumedFormDepleated)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     private void RemoveStamina(float amount)
@@ -102,6 +133,7 @@ public class PlayerStamina : MonoBehaviour
         {
             currentRecoveryDelay = recoveryDelayOnDepleted;
             recoveryFromDepleated = true;
+            canBeConsumedFormDepleated = false;
             return;
         }
 
@@ -119,6 +151,11 @@ public class PlayerStamina : MonoBehaviour
         var recoveryRate = CalculateRecoveryRate();
 
         CurrentStamina = Mathf.Min(CurrentStamina + recoveryRate * Time.deltaTime, maxStamina);
+
+        if (recoveryFromDepleated && CurrentStaminaNormalized > minStaminaAvailable)
+        {
+            canBeConsumedFormDepleated = true;
+        }
     }
 
     private float CalculateRecoveryRate()
@@ -145,6 +182,7 @@ public class PlayerStamina : MonoBehaviour
         Debug.Assert(recoveryDelayNormal > 0.0f);
         Debug.Assert(recoveryRateOnDepleted > 0.0f);
         Debug.Assert(recoverySwitchValue > 0.0f && recoverySwitchValue <= 1.0f);
+        Debug.Assert(minStaminaAvailable > 0.0f && minStaminaAvailable <= 1.0f);
     }
 
     private void DebugHandleInput()
@@ -171,6 +209,7 @@ public class PlayerStamina : MonoBehaviour
         {
             CurrentStamina = maxStamina;
             currentRecoveryDelay = 0.0f;
+            recoveryFromDepleated = false;
         }
     }
 
@@ -179,5 +218,6 @@ public class PlayerStamina : MonoBehaviour
         Debug.Log($"stamina: {CurrentStamina}");
         Debug.Log($"recovery delay: {currentRecoveryDelay}");
         Debug.Log($"recovery from depleated: {recoveryFromDepleated}");
+        Debug.Log($"can be consumed form depleated: {canBeConsumedFormDepleated}");
     }
 }

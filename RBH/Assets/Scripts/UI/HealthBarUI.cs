@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HealthBarUI : MonoBehaviour
 {
-    [SerializeField]private Image healthBarImage;
+    [SerializeField] private Image healthBarImage;
 
     private void OnEnable()
     {
@@ -17,6 +17,11 @@ public class HealthBarUI : MonoBehaviour
 
     private void OnPlayerDamaged(float health, float maxHealth)
     {
-        healthBarImage.fillAmount =  (float)health/maxHealth;
+        if (healthBarImage == null)
+        {
+            Debug.LogError("HealthBarImage is not assigned in the inspector");
+            return;
+        }
+        healthBarImage.fillAmount = (float)health / maxHealth;
     }
 }

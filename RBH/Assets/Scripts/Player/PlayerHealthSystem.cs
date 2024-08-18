@@ -12,16 +12,23 @@ public class PlayerHealthSystem : MonoBehaviour
     [SerializeField] float regenerationDelay = 5;
     [SerializeField] float regenerationRate = .1f;
     [SerializeField] float regenerationSpeed = 0.01f;
+    #region Events
     public static Action<float> onPlayerDamaged;
     public static Action<float, float> onPlayerHealthChanged;
     public static Action onPlayerDied;
-
+    #endregion
+    #region Coroutines
     private Coroutine regenerationCoroutine;
+    #endregion
     void Start()
     {
         ChangeHealth(maxHealth);
     }
-   
+    
+    /// <summary>
+    /// Damages the player and start regeneration if health is above 0
+    /// </summary>
+    /// <param name="damage">Damage taken</param>
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -42,12 +49,16 @@ public class PlayerHealthSystem : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Changes the health of the player
+    /// </summary>
+    /// <param name="_health">health value</param>
     public void ChangeHealth(float _health)
     {
         health = _health;
         onPlayerHealthChanged?.Invoke(health, maxHealth);
     }
-
+    #region Regeneration
     private IEnumerator StartRegenerationAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -81,4 +92,5 @@ public class PlayerHealthSystem : MonoBehaviour
             regenerationCoroutine = null;
         }
     }
+    #endregion
 }

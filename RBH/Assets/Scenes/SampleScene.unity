@@ -485,9 +485,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxStamina: 100
-  recoveryRate: 40
-  recoveryDelay: 0.1
+  recoveryRateNormal: 30
+  recoveryDelayNormal: 0.1
+  recoveryRateOnDepleted: 50
   recoveryDelayOnDepleted: 5
+  recoverySwitchValue: 0.5
+  minStaminaAvailable: 0.2
 --- !u!1 &348261363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,6 +1419,58 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -9, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1759388337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1759388339}
+  - component: {fileID: 1759388338}
+  m_Layer: 0
+  m_Name: DayNightCycle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1759388338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759388337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1cbe79442789b4e813cd36a9a5c918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 519420031}
+  dayDuration: 60
+  dayColor: {r: 0.9150943, g: 0.9059103, b: 0.80718225, a: 1}
+  nightDuration: 60
+  nightColor: {r: 0.1938412, g: 0.1938412, b: 0.41509432, a: 1}
+  transitionDuration: 10
+  debugMode: 1
+  currentCycle: 0
+--- !u!4 &1759388339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759388337}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 524.8055, y: 277.00867, z: -3.7045455}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1427,3 +1482,4 @@ SceneRoots:
   - {fileID: 1389638550}
   - {fileID: 1226432705}
   - {fileID: 348261366}
+  - {fileID: 1759388339}

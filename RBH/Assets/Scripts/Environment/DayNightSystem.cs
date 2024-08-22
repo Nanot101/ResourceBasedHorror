@@ -49,7 +49,7 @@ public class DayNightSystem : MonoBehaviour
             DebugMessage(DebugType.Warning, "No target camera assigned to the DayNightSystem");
             if (!Camera.main)
             {
-                DebugMessage(DebugType.Error, "No main camera found in the scene, please assign a target camera to the DayNightSystem");
+                Debug.LogError("No main camera found in the scene, please assign a target camera to the DayNightSystem");
                 return;
             }
             target = Camera.main;
@@ -132,7 +132,6 @@ public class DayNightSystem : MonoBehaviour
     {
         Message,
         Warning,
-        Error
     }
     private void DebugMessage(DebugType debugType, string message)
     {
@@ -146,9 +145,6 @@ public class DayNightSystem : MonoBehaviour
             case DebugType.Warning:
                 Debug.LogWarning(message);
                 break;
-            case DebugType.Error:
-                Debug.LogError(message);
-                break;
         }
     }
 
@@ -157,7 +153,7 @@ public class DayNightSystem : MonoBehaviour
     {
         if (target == null)
         {
-            DebugMessage(DebugType.Error, "Target Camera was not assigned, assign it or setup a main camera before debugging");
+            Debug.LogError("Target Camera was not assigned, assign it or setup a main camera before debugging");
         }
         Debug.Log("Manually triggering day-night transition.");
         StopAllCoroutines();

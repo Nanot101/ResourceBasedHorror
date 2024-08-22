@@ -1448,14 +1448,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad1cbe79442789b4e813cd36a9a5c918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 519420031}
+  target: {fileID: 0}
   dayDuration: 60
   dayColor: {r: 0.9150943, g: 0.9059103, b: 0.80718225, a: 1}
   nightDuration: 60
   nightColor: {r: 0.1938412, g: 0.1938412, b: 0.41509432, a: 1}
   transitionDuration: 10
-  debugMode: 1
   currentCycle: 0
+  debugMode: 0
 --- !u!4 &1759388339
 Transform:
   m_ObjectHideFlags: 0

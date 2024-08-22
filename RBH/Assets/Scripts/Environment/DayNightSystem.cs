@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DayNightSystem : MonoBehaviour
 {
-    [SerializeField] Camera cam;
+    #region Fields
+    [Tooltip("Camera to change background color from, if not assigned will try to use main camera")]
+    [SerializeField] Camera target;
 
     [Header("Day")]
     [Tooltip("Duration of the day in seconds")]
@@ -17,44 +19,42 @@ public class DayNightSystem : MonoBehaviour
     [SerializeField] Color nightColor = Color.blue;
 
     [Header("Transition")]
-    [Tooltip("Duration of the transition in seconds")]
+    [Tooltip("Duration of the transition in seconds (part of the total duration of the cycle)")]
     [SerializeField] float transitionDuration = 10;
+    private Color targetTransitionColor;
+    private float currentCycleDuration;
+
+    [Header("Cycle")]
+    [Tooltip("Cycle the system is currently in")]
+    public Cycle currentCycle = Cycle.Day;
 
     [Header("Debbuging")]
     [SerializeField] bool debugMode = false;
-
-    private Color targetColor;
-    private float currentCycleDuration;
-
+    #endregion
+    #region Enums
     public enum Cycle
     {
         Day,
-        Transition,
         Night
     }
-    //Can be expanded to other classes to listen to the cycle change, right now it is only used as a debbuging tool
-    public Cycle currentCycle;
-
+    #endregion
+    #region Events
     public static Action<Cycle> onTransitionWarning;
     public static Action<Cycle> onCycleChange;
-
-    private void OnEnable()
-    {
-
-    }
-
-    private void OnDisable()
-    {
-
-    }
-
+    #endregion
     private void Start()
     {
-        cam.clearFlags = CameraClearFlags.SolidColor;
-        cam.backgroundColor = dayColor;
-        currentCycle = Cycle.Day;
-        targetColor = nightColor;
-        currentCycleDuration = nightDuration;
+        if (target == null)
+        {
+            DebugMessage(DebugType.Warning, "No target camera assigned to the DayNightSystem");
+            if (!Camera.main)
+            {
+                DebugMessage(DebugType.Error, "No main camera found in the scene, please assign a target camera to the DayNightSystem");
+                return;
+            }
+            target = Camera.main;
+        }
+        SetCycle(currentCycle);
 
         StartCoroutine(CycleDayNight());
     }
@@ -62,55 +62,106 @@ public class DayNightSystem : MonoBehaviour
     private IEnumerator CycleDayNight()
     {
         yield return new WaitForSeconds(currentCycleDuration - transitionDuration);
-        StartCoroutine(Transition());
+        StartCoroutine(StartTransition());
     }
-    private IEnumerator Transition()
+
+    private IEnumerator StartTransition()
     {
         onTransitionWarning?.Invoke(currentCycle);
-        DebugMessage("Starting day night cycle transition");
-        currentCycle = Cycle.Transition;
+
+        DebugMessage(DebugType.Message,"Starting day night-cycle transition");
+        yield return StartCoroutine(Transition());
+        DebugMessage(DebugType.Message, "Day-night cycle transition ended");
+    }
+
+    private IEnumerator Transition()
+    {
         float transitionStartTime = Time.time;
         float elapsedTime = 0f;
-        Color initialColor = cam.backgroundColor;
+        Color initialColor = target.backgroundColor;
 
         while (elapsedTime < transitionDuration) //Transitions happens here
         {
             elapsedTime = Time.time - transitionStartTime;
-            cam.backgroundColor = Color.Lerp(initialColor, targetColor, elapsedTime / transitionDuration);
+            target.backgroundColor = Color.Lerp(initialColor, targetTransitionColor, elapsedTime / transitionDuration);
             yield return null;
         }
-        DebugMessage("Day night cycle transition ended");
+
         SwitchCycle();
         onCycleChange?.Invoke(currentCycle);
         StartCoroutine(CycleDayNight());
     }
     private void SwitchCycle()
     {
-        if (targetColor == dayColor)
+        if (currentCycle != Cycle.Day)
         {
             currentCycle = Cycle.Day;
-            currentCycleDuration = nightDuration;
-            targetColor = nightColor;
+            currentCycleDuration = dayDuration;
+            targetTransitionColor = nightColor;
         }
         else
         {
             currentCycle = Cycle.Night;
-            currentCycleDuration = dayDuration;
-            targetColor = dayColor;
+            currentCycleDuration = nightDuration;
+            targetTransitionColor = dayColor;
         }
     }
 
-    private void DebugMessage(string message)
+    private void SetCycle(Cycle cycle)
     {
-        if (!debugMode)
-            return;
-        Debug.Log(message);
+        target.clearFlags = CameraClearFlags.SolidColor;
+        switch (cycle)
+        {
+            case Cycle.Day:
+                target.backgroundColor = dayColor;
+                currentCycle = Cycle.Day;
+                currentCycleDuration = dayDuration;
+                targetTransitionColor = nightColor;
+                break;
+            case Cycle.Night:
+                target.backgroundColor = nightColor;
+                currentCycle = Cycle.Night;
+                currentCycleDuration = nightDuration;
+                targetTransitionColor = dayColor;
+                break;
+        }
+        
     }
+    #region Debugging
+    enum DebugType
+    {
+        Message,
+        Warning,
+        Error
+    }
+    private void DebugMessage(DebugType debugType, string message)
+    {
+        if (!debugMode) return;
+
+        switch (debugType)
+        {
+            case DebugType.Message:
+                Debug.Log(message);
+                break;
+            case DebugType.Warning:
+                Debug.LogWarning(message);
+                break;
+            case DebugType.Error:
+                Debug.LogError(message);
+                break;
+        }
+    }
+
     [ContextMenu("Debug Day-Night Transition")]
     private void DebugTransition()
     {
-        Debug.Log("Manually triggering day night transition.");
+        if (target == null)
+        {
+            DebugMessage(DebugType.Error, "Target Camera was not assigned, assign it or setup a main camera before debugging");
+        }
+        Debug.Log("Manually triggering day-night transition.");
         StopAllCoroutines();
         StartCoroutine(Transition());
     }
+    #endregion
 }

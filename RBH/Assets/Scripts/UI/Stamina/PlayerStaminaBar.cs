@@ -9,7 +9,6 @@ public class PlayerStaminaBar : MonoBehaviour
     [SerializeField]
     private Image sliderBackground;
 
-    [SerializeField]
     private PlayerStamina playerStamina;
 
     // Start is called before the first frame update
@@ -17,12 +16,18 @@ public class PlayerStaminaBar : MonoBehaviour
     {
         Debug.Assert(slider != null);
         Debug.Assert(sliderBackground != null);
-        Debug.Assert(playerStamina != null);
+
+        PlayerSpawnManager.Instance.OnPlayerSpawn += OnPlayerSpawn;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playerStamina == null)
+        {
+            return;
+        }
+
         slider.value = playerStamina.CurrentStaminaNormalized;
 
         if (playerStamina.HasStamina)
@@ -33,5 +38,17 @@ public class PlayerStaminaBar : MonoBehaviour
         }
 
         sliderBackground.color = Color.red;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerSpawnManager.Instance.OnPlayerSpawn -= OnPlayerSpawn;
+    }
+
+    private void OnPlayerSpawn(object sender, OnPlayerSpawnArgs args)
+    {
+        var player = args.SpawnedPlayer.transform;
+
+        playerStamina = player.GetComponent<PlayerStamina>();
     }
 }

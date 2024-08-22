@@ -1,0 +1,109 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
+public class PlayerDamageReceiver : MonoBehaviour
+{
+    [SerializeField]
+    private PlayerHealthSystem healthSystem;
+
+    [Tooltip("How long in seconds the player is invincible after receiving damage. Must be greater than 0.")]
+    [SerializeField]
+    private float invincibilityTime = 2.0f;
+
+    private Coroutine invincibilityCoroutine;
+
+    public event EventHandler OnInvincibilityStarted;
+
+    public event EventHandler OnInvincibilityEnded;
+
+    public bool IsInvincible { get; private set; }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Assert(healthSystem != null, " Health system must be set");
+        Debug.Assert(invincibilityTime > 0.0f, "Invincibility time must be greater than 0");
+
+        PlayerHealthSystem.onPlayerDied += OnPlayerDied;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerHealthSystem.onPlayerDied -= OnPlayerDied;
+    }
+
+    /// <summary>
+    /// Tries to deal damage to the player.
+    /// </summary>
+    /// <remarks>
+    /// If the player is invincible then the method will return <see langword="false"/>.
+    /// </remarks>
+    /// <param name="damageAmount">Amount of damage</param>
+    /// <returns><see langword="true"/> if damage was dealt, <see langword="false"/> otherwise.</returns>
+    public bool TryDealDamage(float damageAmount)
+    {
+        Debug.Assert(damageAmount > 0.0f);
+
+        if (IsInvincible)
+        {
+            //Debug.Log("Player is invincible");
+            return false;
+        }
+
+        healthSystem.TakeDamage(damageAmount);
+
+        StartInvincibility();
+
+        return true;
+    }
+
+    private void StartInvincibility()
+    {
+        //Debug.Log("Invincibility started");
+
+        IsInvincible = true;
+
+        OnInvincibilityStarted?.Invoke(this, EventArgs.Empty);
+
+        if (invincibilityCoroutine != null)
+        {
+            StopCoroutine(invincibilityCoroutine);
+        }
+
+        invincibilityCoroutine = StartCoroutine(Invincibility());
+    }
+
+    private IEnumerator Invincibility()
+    {
+        yield return new WaitForSeconds(invincibilityTime);
+
+        EndInvincibility();
+    }
+
+    private void EndInvincibility()
+    {
+        //Debug.Log("Invincibility ended");
+
+        IsInvincible = false;
+
+        OnInvincibilityEnded?.Invoke(this, EventArgs.Empty);
+
+        invincibilityCoroutine = null;
+    }
+
+    private void OnPlayerDied()
+    {
+        if (!IsInvincible)
+        {
+            return;
+        }
+
+        if (invincibilityCoroutine != null)
+        {
+            StopCoroutine(invincibilityCoroutine);
+        }
+
+        EndInvincibility();
+    }
+}

@@ -30,15 +30,24 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        AssertDesinerFileds();
+        AssertDesignerFileds();
 
         playerStamina = GetComponent<PlayerStamina>();
         rb = GetComponent<Rigidbody2D>();
+
+        PlayerHealthSystem.onPlayerDied += OnPlayerDied;
     }
+
     void Update()
     {
         PlayerMove();
     }
+
+    private void OnDestroy()
+    {
+        PlayerHealthSystem.onPlayerDied -= OnPlayerDied;
+    }
+
     private void PlayerMove()
     {
         velocityX = Input.GetAxisRaw("Horizontal");
@@ -76,7 +85,14 @@ public class PlayerMovement : MonoBehaviour
         return walkingSpeed;
     }
 
-    private void AssertDesinerFileds()
+    private void OnPlayerDied()
+    {
+        enabled = false;
+
+        rb.velocity = Vector2.zero;
+    }
+
+    private void AssertDesignerFileds()
     {
         Debug.Assert(walkingSpeed > 0.0f);
         Debug.Assert(runningSpeed > 0.0f);

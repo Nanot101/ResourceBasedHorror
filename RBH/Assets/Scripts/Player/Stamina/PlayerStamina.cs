@@ -47,20 +47,27 @@ public class PlayerStamina : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        AssertDesinerFileds();
+        AssertDesignerFileds();
+
+        PlayerHealthSystem.onPlayerDied += OnPlayerDied;
 
         CurrentStamina = maxStamina;
         canBeConsumedFormDepleated = true;
     }
 
+    private void OnDestroy()
+    {
+        PlayerHealthSystem.onPlayerDied -= OnPlayerDied;
+    }
+
     // Update is called once per frame
     private void Update()
     {
-        DebugHandleInput();
+        //DebugHandleInput();
 
         HandleRecovery();
 
-        DebugDisplayValues();
+        //DebugDisplayValues();
     }
 
     /// <summary>
@@ -175,14 +182,19 @@ public class PlayerStamina : MonoBehaviour
         return recoveryRateOnDepleted;
     }
 
-    private void AssertDesinerFileds()
+    private void OnPlayerDied()
     {
-        Debug.Assert(maxStamina > 0.0f);
-        Debug.Assert(recoveryRateNormal > 0.0f);
-        Debug.Assert(recoveryDelayNormal > 0.0f);
-        Debug.Assert(recoveryRateOnDepleted > 0.0f);
-        Debug.Assert(recoverySwitchValue > 0.0f && recoverySwitchValue <= 1.0f);
-        Debug.Assert(minStaminaAvailable > 0.0f && minStaminaAvailable <= 1.0f);
+        enabled = false;
+    }
+
+    private void AssertDesignerFileds()
+    {
+        Debug.Assert(maxStamina > 0.0f, "Max stamina must be greater than 0");
+        Debug.Assert(recoveryRateNormal > 0.0f, "Recovery rate normal must be greater than 0");
+        Debug.Assert(recoveryDelayNormal > 0.0f, "Recovery delay normal must be greater than 0");
+        Debug.Assert(recoveryRateOnDepleted > 0.0f, "Recovery rate on depleted must be greater than 0");
+        Debug.Assert(recoverySwitchValue > 0.0f && recoverySwitchValue <= 1.0f, "Recovery switch value must be between 0 and 1");
+        Debug.Assert(minStaminaAvailable > 0.0f && minStaminaAvailable <= 1.0f, "Min stamina avaiable must be between 0 and 1");
     }
 
     private void DebugHandleInput()

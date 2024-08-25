@@ -666,6 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 861876674}
   sliderBackground: {fileID: 1106486098}
+  playerStamina: {fileID: 1068700122}
 --- !u!1 &861876672
 GameObject:
   m_ObjectHideFlags: 0

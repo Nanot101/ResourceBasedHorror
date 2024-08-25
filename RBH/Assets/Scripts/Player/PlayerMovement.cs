@@ -38,14 +38,11 @@ public class PlayerMovement : MonoBehaviour
         PlayerHealthSystem.onPlayerDied += OnPlayerDied;
     }
 
+    private void OnDestroy() => PlayerHealthSystem.onPlayerDied -= OnPlayerDied;
+
     void Update()
     {
         PlayerMove();
-    }
-
-    private void OnDestroy()
-    {
-        PlayerHealthSystem.onPlayerDied -= OnPlayerDied;
     }
 
     private void PlayerMove()
@@ -85,18 +82,18 @@ public class PlayerMovement : MonoBehaviour
         return walkingSpeed;
     }
 
-    private void OnPlayerDied()
-    {
-        enabled = false;
-
-        rb.velocity = Vector2.zero;
-    }
-
     private void AssertDesignerFileds()
     {
         Debug.Assert(walkingSpeed > 0.0f);
         Debug.Assert(runningSpeed > 0.0f);
         Debug.Assert(exhaustedSpeed > 0.0f);
         Debug.Assert(runningStaminaConsumption > 0.0f);
+    }
+
+    private void OnPlayerDied()
+    {
+        enabled = false;
+
+        rb.velocity = Vector2.zero;
     }
 }

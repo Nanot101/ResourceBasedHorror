@@ -22,15 +22,8 @@ public class PlayerDamageReceiver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Assert(healthSystem != null, " Health system must be set");
+        Debug.Assert(healthSystem != null, "Health system is required for player damage reciver");
         Debug.Assert(invincibilityTime > 0.0f, "Invincibility time must be greater than 0");
-
-        PlayerHealthSystem.onPlayerDied += OnPlayerDied;
-    }
-
-    private void OnDestroy()
-    {
-        PlayerHealthSystem.onPlayerDied -= OnPlayerDied;
     }
 
     /// <summary>
@@ -92,7 +85,7 @@ public class PlayerDamageReceiver : MonoBehaviour
         invincibilityCoroutine = null;
     }
 
-    private void OnPlayerDied()
+    public void OnPlayerRespawned()
     {
         if (!IsInvincible)
         {

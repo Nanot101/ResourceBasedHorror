@@ -24,7 +24,7 @@ public class PlayerHealthSystem : MonoBehaviour
     {
         ChangeHealth(maxHealth);
     }
-    
+
     /// <summary>
     /// Damages the player and start regeneration if health is above 0
     /// </summary>

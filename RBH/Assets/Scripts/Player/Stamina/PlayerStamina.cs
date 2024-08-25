@@ -49,16 +49,13 @@ public class PlayerStamina : MonoBehaviour
     {
         AssertDesignerFileds();
 
-        PlayerHealthSystem.onPlayerDied += OnPlayerDied;
-
         CurrentStamina = maxStamina;
         canBeConsumedFormDepleated = true;
+
+        PlayerHealthSystem.onPlayerDied += OnPlayerDied;
     }
 
-    private void OnDestroy()
-    {
-        PlayerHealthSystem.onPlayerDied -= OnPlayerDied;
-    }
+    void OnDestroy() => PlayerHealthSystem.onPlayerDied -= OnPlayerDied;
 
     // Update is called once per frame
     private void Update()
@@ -182,9 +179,15 @@ public class PlayerStamina : MonoBehaviour
         return recoveryRateOnDepleted;
     }
 
-    private void OnPlayerDied()
+    private void OnPlayerDied() => enabled = false;
+
+    public void OnPlayerRespawned()
     {
-        enabled = false;
+        enabled = true;
+        CurrentStamina = maxStamina;
+        currentRecoveryDelay = 0.0f;
+        recoveryFromDepleated = false;
+        canBeConsumedFormDepleated = true;
     }
 
     private void AssertDesignerFileds()

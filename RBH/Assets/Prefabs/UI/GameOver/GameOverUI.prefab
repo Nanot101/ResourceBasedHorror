@@ -348,7 +348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2168601672560055468
 RectTransform:
   m_ObjectHideFlags: 0
@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnButton: {fileID: 1002184050968292266}
+  playerRespawn: {fileID: 0}
 --- !u!1 &8123626168950322999
 GameObject:
   m_ObjectHideFlags: 0

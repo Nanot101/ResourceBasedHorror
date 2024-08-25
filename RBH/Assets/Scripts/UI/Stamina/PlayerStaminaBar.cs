@@ -15,8 +15,23 @@ public class PlayerStaminaBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Assert(slider != null);
-        Debug.Assert(sliderBackground != null);
+        if (slider == null)
+        {
+            Debug.LogError("slider is required for player stamina bar");
+            Destroy(this);
+        }
+
+        if (sliderBackground == null)
+        {
+            Debug.LogError("slider background is required for player stamina bar");
+            Destroy(this);
+        }
+
+        if (playerStamina == null)
+        {
+            Debug.LogError("Player stamina is required for player stamina bar");
+            Destroy(this);
+        }
 
         PlayerHealthSystem.onPlayerDied += OnPlayerDied;
     }

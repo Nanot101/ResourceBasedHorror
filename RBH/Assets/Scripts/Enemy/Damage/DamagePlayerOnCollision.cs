@@ -16,7 +16,7 @@ public class DamagePlayerOnCollision : MonoBehaviour
     void Start()
     {
         Debug.Assert(damage > 0, "Damage must be greater than 0");
-        Debug.Assert(collider != null, "Collider must be set");
+        Debug.Assert(collider != null, "Collider is required for damage player on collision");
     }
 
     private void OnCollisionStay2D(Collision2D collision)

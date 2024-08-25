@@ -13,8 +13,17 @@ public class GameOverUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Assert(respawnButton != null, "Respawn button is required for game over UI");
-        Debug.Assert(playerRespawn != null, "Player respawn is required for game over UI");
+        if (respawnButton == null)
+        {
+            Debug.LogError("Respawn button is required for game over UI");
+            Destroy(this);
+        }
+
+        if (playerRespawn == null)
+        {
+            Debug.LogError("Player respawn is required for game over UI");
+            Destroy(this);
+        }
 
         respawnButton.onClick.AddListener(OnRespawnButtonClick);
 

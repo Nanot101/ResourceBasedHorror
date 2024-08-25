@@ -9,7 +9,7 @@ public class PlayerFadeWhileInvincible : MonoBehaviour
     [SerializeField]
     private List<SpriteRenderer> spritesToFade;
 
-    [Tooltip("How much time in seconds will it take to fade. Must be greater than 0.")]
+    [Tooltip("How much time in seconds will it take to fade in and out. Must be greater than 0.")]
     [SerializeField]
     private float fadeCycleTime = 0.2f;
 
@@ -22,7 +22,12 @@ public class PlayerFadeWhileInvincible : MonoBehaviour
     void Start()
     {
         Debug.Assert(fadeCycleTime > 0.0f, "Fade cycle time must be greater than 0");
-        Debug.Assert(playerDamageReciver != null, "Player damage reciver must be set");
+
+        if (playerDamageReciver == null)
+        {
+            Debug.LogError("Player damage reciver is required for player fade while invincible");
+            Destroy(this);
+        }
 
         playerDamageReciver.OnInvincibilityStarted += OnInvincibilityStarted;
         playerDamageReciver.OnInvincibilityEnded += OnInvincibilityEnded;

@@ -22,11 +22,35 @@ public class PlayerRespawn : MonoBehaviour
 
     private void Start()
     {
-        Debug.Assert(healthSystem != null, "Player health system is required for player respawn");
-        Debug.Assert(movement != null, "Player movement is required for player respawn");
-        Debug.Assert(damageReceiver != null, "Player damage reciver is required for player respawn");
-        Debug.Assert(stamina != null, "Player stamina is required for player respawn");
-        Debug.Assert(staminaBar != null, "Stamina bar is required for player respawn");
+        if (healthSystem == null)
+        {
+            Debug.LogError("Player health system is required for player respawn");
+            Destroy(this);
+        }
+
+        if (movement == null)
+        {
+            Debug.LogError("Player movement is required for player respawn");
+            Destroy(this);
+        }
+
+        if (damageReceiver == null)
+        {
+            Debug.LogError("Player damage reciver is required for player respawn");
+            Destroy(this);
+        }
+
+        if (stamina == null)
+        {
+            Debug.LogError("Player stamina is required for player respawn");
+            Destroy(this);
+        }
+
+        if (staminaBar == null)
+        {
+            Debug.LogError("Stamina bar is required for player respawn");
+            Destroy(this);
+        }
     }
 
     public void RespawnPlayer()

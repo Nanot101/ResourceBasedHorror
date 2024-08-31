@@ -9,7 +9,7 @@ public class InteractionLog : InteractionBase
 
     public override void Interact(IInteractionCaller caller)
     {
-        Debug.Log($"Interaction with text: {text} called by: {caller.GameObject.name} on: {gameObject.name}");
+        Debug.Log($"Interaction with text: \"{text}\" called by: {caller.GameObject.name} on: {gameObject.name}");
         //Destroy(gameObject);
     }
 }

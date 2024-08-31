@@ -6,6 +6,9 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [SerializeField]
+    private InteractableUI UI;
+
+    [SerializeField]
     private InteractionBase interaction;
 
     private IInteractionCaller currentCaller = null;
@@ -13,6 +16,12 @@ public class Interactable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (UI == null)
+        {
+            Debug.LogError("UI is required for interactable");
+            Destroy(this);
+        }
+
         if (interaction == null)
         {
             Debug.LogError("Interaction is required for interactable");
@@ -24,16 +33,17 @@ public class Interactable : MonoBehaviour
     {
         if (currentCaller == null)
         {
+            UI.Hide();
             return;
         }
 
         if (!interaction.CanInteract(currentCaller))
         {
-            // TODO - hide UI
+            UI.Hide();
             return;
         }
 
-        // TODO - show UI
+        UI.Show();
 
         if (!Input.GetKeyDown(KeyCode.E))
         {
@@ -51,7 +61,7 @@ public class Interactable : MonoBehaviour
             return;
         }
 
-        if(!collider.TryGetComponent<IInteractionCaller>(out var caller))
+        if (!collider.TryGetComponent<IInteractionCaller>(out var caller))
         {
             //Debug.Log("Collider doesn't have interaction caller");
             return;
@@ -75,7 +85,7 @@ public class Interactable : MonoBehaviour
             return;
         }
 
-        if(caller != currentCaller)
+        if (caller != currentCaller)
         {
             //Debug.Log("Exited collider isn't current caller");
             return;

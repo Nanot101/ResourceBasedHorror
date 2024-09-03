@@ -9,10 +9,8 @@ public class Projectile : MonoBehaviour
 
     private Collider2D playerCollider;
 
-    //We are multiplying the projectile speed by the player's running speed
-    public void InitializeProjectile(float _projectileSpeedMultiplier, Collider2D _playerCollider)
+    public void InitializeProjectile( Collider2D _playerCollider)
     {
-        projectileSpeed *= _projectileSpeedMultiplier;
         playerCollider = _playerCollider;
     }
 

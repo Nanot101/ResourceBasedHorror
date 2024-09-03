@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 4
-  projectileSpeed: 2
+  projectileSpeed: 20
 --- !u!61 &4693553345750444808
 BoxCollider2D:
   m_ObjectHideFlags: 0

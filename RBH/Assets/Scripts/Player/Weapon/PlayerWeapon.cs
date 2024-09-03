@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour
 {
     [SerializeField] private Collider2D playerCollider;
-    [SerializeField]private PlayerMovement playerMovement;
     [SerializeField] Projectile projectilePrefab;
     [SerializeField] private float cooldown = 6f;
     public bool canShoot = true;
@@ -35,7 +34,7 @@ public class PlayerWeapon : MonoBehaviour
     private void Shoot()
     {
         Projectile instantiatedProjectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-        instantiatedProjectile.InitializeProjectile(playerMovement.RunningSpeed,playerCollider);
+        instantiatedProjectile.InitializeProjectile(playerCollider);
     }
 
     public void GetCooldown(out float currentCooldown, out float maxCooldown)

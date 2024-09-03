@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 3171541740345446729}
   - component: {fileID: 8287974565075454170}
   - component: {fileID: 6206257594817900122}
+  - component: {fileID: -3768524912040191805}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -384,3 +385,15 @@ MonoBehaviour:
   damageReceiver: {fileID: 8287974565075454170}
   stamina: {fileID: 1164421808771507386}
   staminaBar: {fileID: 0}
+--- !u!114 &-3768524912040191805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9065289971253864303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a656de87863cc84cbb0598e829701fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

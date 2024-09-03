@@ -20,6 +20,10 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Amount of stamina consumption per second while running. Must be greater than 0.")]
     private float runningStaminaConsumption = 40.0f;
 
+    #region Properties
+    public float RunningSpeed { get { return runningSpeed; } }
+    #endregion
+
     private PlayerStamina playerStamina;
 
     private Rigidbody2D rb;

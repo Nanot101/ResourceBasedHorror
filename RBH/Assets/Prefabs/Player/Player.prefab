@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6601156218098631653}
   - component: {fileID: 7496654748333850850}
   - component: {fileID: 2332075194105918399}
+  - component: {fileID: 487708150151464056}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -116,6 +117,23 @@ MonoBehaviour:
   - {fileID: 7087995687798769848}
   fadeCycleTime: 0.35
   playerDamageReciver: {fileID: 8287974565075454170}
+--- !u!114 &487708150151464056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033805069991406761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac3844a19ef73049b1a231877d40730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 1335401080097150228}
+  cooldown: 6
+  projectilePrefab: {fileID: 2289292700147475393, guid: a8107f295cdd02940ab29cc94541aa0f, type: 3}
+  playerMovement: {fileID: 3171541740345446729}
+  canShoot: 1
 --- !u!1 &8479202090399757915
 GameObject:
   m_ObjectHideFlags: 0

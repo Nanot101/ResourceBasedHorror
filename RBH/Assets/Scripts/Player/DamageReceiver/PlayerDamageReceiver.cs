@@ -13,6 +13,8 @@ public class PlayerDamageReceiver : MonoBehaviour
 
     private Coroutine invincibilityCoroutine;
 
+    private bool playerDied = false;
+
     public event EventHandler OnInvincibilityStarted;
 
     public event EventHandler OnInvincibilityEnded;
@@ -29,6 +31,8 @@ public class PlayerDamageReceiver : MonoBehaviour
             Debug.LogError("Health system is required for player damage reciver.");
             Destroy(this);
         }
+
+        PlayerHealthSystem.onPlayerDied += OnPlayerDied;
     }
 
     /// <summary>
@@ -43,7 +47,7 @@ public class PlayerDamageReceiver : MonoBehaviour
     {
         Debug.Assert(damageAmount > 0.0f);
 
-        if (IsInvincible)
+        if (IsInvincible || playerDied)
         {
             //Debug.Log("Player is invincible");
             return false;
@@ -51,7 +55,10 @@ public class PlayerDamageReceiver : MonoBehaviour
 
         healthSystem.TakeDamage(damageAmount);
 
-        StartInvincibility();
+        if (!playerDied)
+        {
+            StartInvincibility();
+        }
 
         return true;
     }
@@ -92,6 +99,8 @@ public class PlayerDamageReceiver : MonoBehaviour
 
     public void OnPlayerRespawned()
     {
+        playerDied = false;
+
         if (!IsInvincible)
         {
             return;
@@ -104,4 +113,6 @@ public class PlayerDamageReceiver : MonoBehaviour
 
         EndInvincibility();
     }
+
+    private void OnPlayerDied() => playerDied = true;
 }

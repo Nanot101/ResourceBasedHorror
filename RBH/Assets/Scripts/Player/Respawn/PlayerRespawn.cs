@@ -17,9 +17,6 @@ public class PlayerRespawn : MonoBehaviour
     [SerializeField]
     private PlayerStamina stamina;
 
-    [SerializeField]
-    private PlayerStaminaBar staminaBar;
-
     private void Start()
     {
         if (healthSystem == null)
@@ -45,12 +42,6 @@ public class PlayerRespawn : MonoBehaviour
             Debug.LogError("Player stamina is required for player respawn");
             Destroy(this);
         }
-
-        if (staminaBar == null)
-        {
-            Debug.LogError("Stamina bar is required for player respawn");
-            Destroy(this);
-        }
     }
 
     public void RespawnPlayer()
@@ -65,6 +56,5 @@ public class PlayerRespawn : MonoBehaviour
 
         damageReceiver.OnPlayerRespawned();
         stamina.OnPlayerRespawned();
-        staminaBar.OnPlayerRespawned();
     }
 }

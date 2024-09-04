@@ -32,11 +32,7 @@ public class PlayerStaminaBar : MonoBehaviour
             Debug.LogError("Player stamina is required for player stamina bar");
             Destroy(this);
         }
-
-        PlayerHealthSystem.onPlayerDied += OnPlayerDied;
     }
-
-    private void OnDestroy() => PlayerHealthSystem.onPlayerDied -= OnPlayerDied;
 
     // Update is called once per frame
     void Update()
@@ -52,8 +48,4 @@ public class PlayerStaminaBar : MonoBehaviour
 
         sliderBackground.color = Color.red;
     }
-
-    private void OnPlayerDied() => enabled = false;
-
-    public void OnPlayerRespawned() => enabled = true;
 }

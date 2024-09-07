@@ -41,6 +41,7 @@ public class DayNightSystem : MonoBehaviour
     #region Events
     public static Action<Cycle> onTransitionWarning;
     public static Action<Cycle> onCycleChange;
+    public static Action<float, float, float> onDayNightSystemStarted;
     #endregion
     private void Start()
     {
@@ -54,7 +55,12 @@ public class DayNightSystem : MonoBehaviour
             }
             target = Camera.main;
         }
+
+        onDayNightSystemStarted?.Invoke(dayDuration, nightDuration, transitionDuration);
+
         SetCycle(currentCycle);
+
+        onCycleChange?.Invoke(currentCycle);
 
         StartCoroutine(CycleDayNight());
     }
@@ -69,7 +75,7 @@ public class DayNightSystem : MonoBehaviour
     {
         onTransitionWarning?.Invoke(currentCycle);
 
-        DebugMessage(DebugType.Message,"Starting day night-cycle transition");
+        DebugMessage(DebugType.Message, "Starting day night-cycle transition");
         yield return StartCoroutine(Transition());
         DebugMessage(DebugType.Message, "Day-night cycle transition ended");
     }
@@ -125,7 +131,7 @@ public class DayNightSystem : MonoBehaviour
                 targetTransitionColor = dayColor;
                 break;
         }
-        
+
     }
     #region Debugging
     enum DebugType

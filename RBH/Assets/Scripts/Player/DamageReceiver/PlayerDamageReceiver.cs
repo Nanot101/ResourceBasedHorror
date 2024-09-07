@@ -39,7 +39,7 @@ public class PlayerDamageReceiver : MonoBehaviour
     /// Tries to deal damage to the player.
     /// </summary>
     /// <remarks>
-    /// If the player is invincible then the method will return <see langword="false"/>.
+    /// If the player is invincible or dead then the method will return <see langword="false"/>.
     /// </remarks>
     /// <param name="damageAmount">Amount of damage</param>
     /// <returns><see langword="true"/> if damage was dealt, <see langword="false"/> otherwise.</returns>

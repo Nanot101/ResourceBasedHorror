@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class DayNighClock : MonoBehaviour
+public class DayNightClock : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI clockText;
@@ -16,14 +14,14 @@ public class DayNighClock : MonoBehaviour
     [SerializeField]
     private string nightStartText = "7PM";
 
-    private float dayHourDuration;
-    private float nightHourDuration;
+    private float dayMinuteDuration;
+    private float nightMinuteDuration;
 
     private DateTime dayStart;
     private DateTime nightStart;
 
     private DateTime currentTime;
-    //private DayNightSystem.Cycle currentCycle;
+    private DayNightSystem.Cycle currentCycle;
 
     private void Awake()
     {
@@ -40,6 +38,22 @@ public class DayNighClock : MonoBehaviour
         DayNightSystem.onCycleChange += OnCycleChange;
     }
 
+    private void Update()
+    {
+        var minuteChangeSpeed = Time.deltaTime;
+
+        minuteChangeSpeed *= currentCycle switch
+        {
+            DayNightSystem.Cycle.Day => dayMinuteDuration,
+            DayNightSystem.Cycle.Night => nightMinuteDuration,
+            _ => 0.0f,
+        };
+
+        currentTime = currentTime.AddMinutes(minuteChangeSpeed);
+
+        UpdateUI();
+    }
+
     private void OnDestroy()
     {
         DayNightSystem.onDayNightSystemStarted -= OnDayNightSystemStarted;
@@ -48,18 +62,16 @@ public class DayNighClock : MonoBehaviour
 
     private void OnDayNightSystemStarted(float dayDuration, float nightDuration, float transitionDuration)
     {
-        var dayHours = (float)(nightStart - dayStart).TotalHours;
-        var nightHours = (float)(dayStart.AddDays(1) - nightStart).TotalHours;
+        var dayMinutes = (float)(nightStart - dayStart).TotalMinutes;
+        var nightMinutes = (float)(dayStart.AddDays(1) - nightStart).TotalMinutes;
 
-        dayHourDuration = dayDuration / dayHours;
-        nightHourDuration = nightDuration / nightHours;
+        dayMinuteDuration = 1.0f / (dayDuration / dayMinutes);
+        nightMinuteDuration = 1.0f / (nightDuration / nightMinutes);
     }
 
     private void OnCycleChange(DayNightSystem.Cycle cycle)
     {
-        StopAllCoroutines();
-
-        //currentCycle = cycle;
+        currentCycle = cycle;
 
         switch (cycle)
         {
@@ -67,15 +79,11 @@ public class DayNighClock : MonoBehaviour
 
                 currentTime = dayStart;
 
-                StartCoroutine(ClockCorutine(dayHourDuration));
-
                 break;
 
             case DayNightSystem.Cycle.Night:
 
                 currentTime = nightStart;
-
-                StartCoroutine(ClockCorutine(nightHourDuration));
 
                 break;
         }
@@ -83,23 +91,13 @@ public class DayNighClock : MonoBehaviour
         UpdateUI();
     }
 
-    private IEnumerator ClockCorutine(float hourDuration)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(hourDuration);
-
-            currentTime = currentTime.AddHours(1);
-
-            UpdateUI();
-        }
-    }
-
     private void UpdateUI()
     {
-        //Debug.Log($"day night clock: {currentTime:hh tt}");
+        const string timeFormat = "hh:mm tt";
 
-        clockText.text = currentTime.ToString("hh tt");
+        //Debug.Log($"day night clock: {currentTime.ToString(timeFormat)}");
+
+        clockText.text = currentTime.ToString(timeFormat);
     }
 
     private DateTime TryParseTimeText(string timeText)

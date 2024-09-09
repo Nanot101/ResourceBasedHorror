@@ -43,6 +43,9 @@ public class DayNightSystem : MonoBehaviour
     public static Action<Cycle> onCycleChange;
     public static Action<float, float, float> onDayNightSystemStarted;
     #endregion
+    #region Lighting
+    public UnityEngine.Rendering.Universal.Light2D worldLight;
+    #endregion
     private void Start()
     {
         if (target == null)
@@ -88,6 +91,7 @@ public class DayNightSystem : MonoBehaviour
 
         while (elapsedTime < transitionDuration) //Transitions happens here
         {
+            TransitionLighting(elapsedTime, transitionDuration);
             elapsedTime = Time.time - transitionStartTime;
             target.backgroundColor = Color.Lerp(initialColor, targetTransitionColor, elapsedTime / transitionDuration);
             yield return null;
@@ -132,6 +136,14 @@ public class DayNightSystem : MonoBehaviour
                 break;
         }
 
+    }
+
+    private void TransitionLighting(float currentTime, float duration) //Matches transition to global lighting
+    {
+        if (currentCycle == Cycle.Day)
+            worldLight.intensity = 1 - (currentTime / duration);
+        else if (currentCycle == Cycle.Night)
+            worldLight.intensity = (currentTime / duration);
     }
     #region Debugging
     enum DebugType

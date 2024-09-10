@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04a4626aadec6447a0ceacee6a3e50e, type: 3}
+  m_Name: QueenBeeSO
+  m_EditorClassIdentifier: 
+  <HealthPoints>k__BackingField: 100
+  <WalkSpeed>k__BackingField: 2
+  <RunSpeed>k__BackingField: 4
+  <OnNight>k__BackingField: 5
+  <Drops>k__BackingField:
+  - {fileID: 11400000, guid: fcf5bbbd741ccba4e9cccca8ebd8390f, type: 2}
+  - {fileID: 11400000, guid: 6b76c55a8cce4ba4ebdfcc06f4b812b3, type: 2}
+  - {fileID: 11400000, guid: a91e37fb85dd92e4496ff5bb4021444f, type: 2}

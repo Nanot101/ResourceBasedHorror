@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class EnemyDropSo : ScriptableObject
+[CreateAssetMenu(fileName = "MyDropSO", menuName = "Enemy Drop SO")]
+public class EnemyDropSO : ScriptableObject
 {
     [field: SerializeField]
     public string DropName { get; set; }

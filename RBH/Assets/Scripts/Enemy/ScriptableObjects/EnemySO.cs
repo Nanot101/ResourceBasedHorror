@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "MyEnemySO", menuName = "Enemy SO")]
 public class EnemySO : ScriptableObject
 {
     [field: SerializeField]
@@ -20,5 +19,5 @@ public class EnemySO : ScriptableObject
     public int OnNight { get; set; }
 
     [field: SerializeField]
-    public List<EnemyDropSo> Drops { get; set; }
+    public List<EnemyDropSO> Drops { get; set; }
 }

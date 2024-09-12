@@ -65,7 +65,7 @@ public class DayNightCounter : Singleton<DayNightCounter>
                 break;
         }
 
-        Debug.Log($"Current day: {CurrentDay}, current night: {CurrentNight}, is night: {IsNight}");
+        //Debug.Log($"Current day: {CurrentDay}, current night: {CurrentNight}, is night: {IsNight}");
     }
 
     private void ResetCounters()

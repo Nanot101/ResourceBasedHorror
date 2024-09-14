@@ -11,12 +11,15 @@ public class DayNightTransitionUI : MonoBehaviour
     [SerializeField]
     private Image background;
 
+    [Tooltip("How long in seconds UI fades in. It must be greater than zero")]
     [SerializeField]
     private float fadeInTime = 2.0f;
 
+    [Tooltip("How long in seconds UI stays after fade in. It must be greater than zero")]
     [SerializeField]
     private float stayTime = 1.0f;
 
+    [Tooltip("How long in seconds UI fades out after stay. It must be greater than zero")]
     [SerializeField]
     private float fadeOutTime = 2.0f;
 

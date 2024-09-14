@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class DayNightCounter : Singleton<DayNightCounter>
 {
-    [Tooltip("It must be greater than zero")]
+    [Tooltip("Maximum number of nights after which game ends. It must be greater than zero")]
     [SerializeField]
-    private int MaxDays = 5;
+    private int MaxNights = 5;
 
     public int CurrentDay { get; private set; }
 
@@ -20,7 +20,7 @@ public class DayNightCounter : Singleton<DayNightCounter>
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Assert(MaxDays > 0, "Max days must be greater than zero");
+        Debug.Assert(MaxNights > 0, "Max days must be greater than zero");
 
         DayNightSystem.onCycleChange += OnDayNightCycleChange;
     }
@@ -29,7 +29,7 @@ public class DayNightCounter : Singleton<DayNightCounter>
 
     private void OnDayNightCycleChange(DayNightSystem.Cycle newCycle)
     {
-        if (CurrentNight >= MaxDays)
+        if (CurrentNight >= MaxNights)
         {
             ResetCounters();
         }

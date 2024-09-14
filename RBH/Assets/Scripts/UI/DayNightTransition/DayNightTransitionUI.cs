@@ -117,7 +117,7 @@ public class DayNightTransitionUI : MonoBehaviour
 
     private IEnumerator FadeIn()
     {
-        const float stepDelay = 0.1f;
+        const float stepDelay = 0.05f;
 
         var stepValue = stepDelay / fadeInTime;
         var currentAlpha = 0.0f;

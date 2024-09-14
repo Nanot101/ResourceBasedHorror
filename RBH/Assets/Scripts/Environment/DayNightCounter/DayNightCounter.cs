@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class DayNightCounter : Singleton<DayNightCounter>
 {
+    [SerializeField]
+    private PlayerRespawn playerRespawn;
+
     [Tooltip("Maximum number of nights after which game ends. It must be greater than zero")]
     [SerializeField]
-    private int MaxNights = 5;
+    private int maxNights = 5;
 
     public int CurrentDay { get; private set; }
 
@@ -20,7 +23,9 @@ public class DayNightCounter : Singleton<DayNightCounter>
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Assert(MaxNights > 0, "Max days must be greater than zero");
+        Debug.Assert(maxNights > 0, "Max days must be greater than zero");
+
+        TrySetPlayerRespawn();
 
         DayNightSystem.onCycleChange += OnDayNightCycleChange;
     }
@@ -29,9 +34,10 @@ public class DayNightCounter : Singleton<DayNightCounter>
 
     private void OnDayNightCycleChange(DayNightSystem.Cycle newCycle)
     {
-        if (CurrentNight >= MaxNights)
+        if (CurrentNight >= maxNights)
         {
             ResetCounters();
+            TryRespawnPlayer();
         }
 
         switch (newCycle)
@@ -73,5 +79,25 @@ public class DayNightCounter : Singleton<DayNightCounter>
         CurrentDay = 0;
         CurrentNight = 0;
         IsNight = false;
+    }
+
+    private void TrySetPlayerRespawn()
+    {
+        if (playerRespawn != null)
+        {
+            return;
+        }
+
+        playerRespawn = FindFirstObjectByType<PlayerRespawn>();
+    }
+
+    private void TryRespawnPlayer()
+    {
+        if (playerRespawn == null)
+        {
+            return;
+        }
+
+        playerRespawn.RespawnPlayer();
     }
 }

@@ -713,28 +713,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5bfe0464d1e60247990ef9e33da872c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &838466238 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8287974565075454170, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
-  m_PrefabInstance: {fileID: 1959655736}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84864d60242a69a47b146a7c607f95bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &838466239 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 584156333593417796, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
-  m_PrefabInstance: {fileID: 1959655736}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c417311bb1d22ae459d0c829c9802ccc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &838466240 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1164421808771507386, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
@@ -744,17 +722,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06414243b87549c45b540ae812ce7bf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &838466241 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3171541740345446729, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
-  m_PrefabInstance: {fileID: 1959655736}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14341212799d7dd4ba7ea3171f5cd511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &838466244 stripped
@@ -1422,29 +1389,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6206257594817900122, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
-      propertyPath: stamina
-      value: 
-      objectReference: {fileID: 838466240}
-    - target: {fileID: 6206257594817900122, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
-      propertyPath: movement
-      value: 
-      objectReference: {fileID: 838466241}
-    - target: {fileID: 6206257594817900122, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 121033081}
     - target: {fileID: 6206257594817900122, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
-      propertyPath: healthSystem
-      value: 
-      objectReference: {fileID: 838466239}
-    - target: {fileID: 6206257594817900122, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 1241883389}
-    - target: {fileID: 6206257594817900122, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
-      propertyPath: damageReceiver
-      value: 
-      objectReference: {fileID: 838466238}
     - target: {fileID: 6206257594817900122, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
       propertyPath: playerRespawnObservers.Array.size
       value: 5

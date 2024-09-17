@@ -38,13 +38,6 @@ public class InventoryController : MonoBehaviour
     private void Update()
     {
         ItemIconDrag();
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (selectedItem != null)
-                return;
-            CreateRandomItem();
-        }
         if (Input.GetKeyDown(KeyCode.W))
         {
             if (selectedItem != null)

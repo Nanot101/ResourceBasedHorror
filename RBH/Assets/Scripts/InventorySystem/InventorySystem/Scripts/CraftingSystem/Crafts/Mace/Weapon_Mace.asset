@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ade466c3a66f2443a58faa74a6b3a29, type: 3}
+  m_Name: Weapon_Mace
+  m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  itemData: {fileID: 11400000, guid: 8665856456e05c84babaeebb7070ee9e, type: 2}
+  craftingRecipe:
+    ingredients:
+    - item: {fileID: 11400000, guid: b78f7c942093b1f4b80862385343a3b8, type: 2}
+      amount: 2
+    - item: {fileID: 11400000, guid: 1b6d43b55ab118842b4f8714d6ac9d86, type: 2}
+      amount: 1
+    - item: {fileID: 11400000, guid: 6cde7405399da4f46b7ac10bb8fda93e, type: 2}
+      amount: 4

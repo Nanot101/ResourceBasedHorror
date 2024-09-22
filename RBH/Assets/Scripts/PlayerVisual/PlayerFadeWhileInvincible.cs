@@ -69,13 +69,13 @@ public class PlayerFadeWhileInvincible : MonoBehaviour
 
         while (true)
         {
-            yield return FadeInSprites(stepDelay, stepValue);
-
             yield return FadeOutSprites(stepDelay, stepValue);
+
+            yield return FadeInSprites(stepDelay, stepValue);
         }
     }
 
-    private IEnumerator FadeInSprites(float stepDelay, float stepValue)
+    private IEnumerator FadeOutSprites(float stepDelay, float stepValue)
     {
         var currentAlpha = 1.0f;
 
@@ -89,7 +89,7 @@ public class PlayerFadeWhileInvincible : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeOutSprites(float stepDelay, float stepValue)
+    private IEnumerator FadeInSprites(float stepDelay, float stepValue)
     {
         var currentAlpha = 0.0f;
 

@@ -6,10 +6,18 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
 
     private void Awake()
     {
-        Debug.Assert(Instance == null, $"There can be only one instance of {nameof(T)} in the scene.");
+        if (Instance != null)
+        {
+            Debug.LogError($"There can be only one instance of {nameof(T)} in the scene.");
+            Destroy(this);
+        }
 
         Instance = (T)this;
 
-        Debug.Assert(Instance != null, $"Failed to assign single instence of {nameof(T)}");
+        if (Instance == null)
+        {
+            Debug.LogError($"Failed to assign single instence of {nameof(T)}");
+            Destroy(this);
+        }
     }
 }

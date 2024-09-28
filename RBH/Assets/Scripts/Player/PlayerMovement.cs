@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Amount of stamina consumption per second while running. Must be greater than 0.")]
     private float runningStaminaConsumption = 40.0f;
 
+    [SerializeField]
+    private DayNightPhase stopMovementPhase;
+
     #region Properties
     public float RunningSpeed { get { return runningSpeed; } }
     #endregion
@@ -39,10 +42,15 @@ public class PlayerMovement : MonoBehaviour
         playerStamina = GetComponent<PlayerStamina>();
         rb = GetComponent<Rigidbody2D>();
 
-        PlayerHealthSystem.onPlayerDied += OnPlayerDied;
+        PlayerHealthSystem.onPlayerDied += StopMovement;
+        DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
     }
 
-    private void OnDestroy() => PlayerHealthSystem.onPlayerDied -= OnPlayerDied;
+    private void OnDestroy()
+    {
+        PlayerHealthSystem.onPlayerDied -= StopMovement;
+        DayNightSystem.Instance.OnPhaseChanged -= OnDayNightPhaseChanged;
+    }
 
     void Update()
     {
@@ -94,7 +102,17 @@ public class PlayerMovement : MonoBehaviour
         Debug.Assert(runningStaminaConsumption > 0.0f);
     }
 
-    private void OnPlayerDied()
+    private void OnDayNightPhaseChanged(object sender, DayNightSystemEventArgs args)
+    {
+        var currentPhase = args.CurrentPhase;
+
+        if (currentPhase == stopMovementPhase)
+        {
+            StopMovement();
+        }
+    }
+
+    private void StopMovement()
     {
         enabled = false;
 

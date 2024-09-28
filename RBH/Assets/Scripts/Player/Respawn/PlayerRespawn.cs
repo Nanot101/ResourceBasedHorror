@@ -3,9 +3,6 @@ using UnityEngine;
 public class PlayerRespawn : MonoBehaviour
 {
     [SerializeField]
-    private Transform respawnPoint;
-
-    [SerializeField]
     private PlayerMovement movement;
 
     [SerializeField]
@@ -17,7 +14,66 @@ public class PlayerRespawn : MonoBehaviour
     [SerializeField]
     private PlayerStamina stamina;
 
+    [SerializeField]
+    private PlayerWeapon weapon;
+
+    [SerializeField]
+    private DayNightPhase moveToRespawnPhase;
+
+    [SerializeField]
+    private DayNightPhase respawnPhase;
+
     private void Start()
+    {
+        AssertComponents();
+
+        DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
+    }
+
+    private void OnDestroy() => DayNightSystem.Instance.OnPhaseChanged -= OnDayNightPhaseChanged;
+
+    private void OnDayNightPhaseChanged(object sender, DayNightSystemEventArgs args)
+    {
+        var currentPhase = args.CurrentPhase;
+
+        if (currentPhase == moveToRespawnPhase)
+        {
+            TryMovePlayerToRespawnPoint();
+        }
+        else if (currentPhase == respawnPhase)
+        {
+            RespawnPlayer();
+        }
+    }
+
+    public void RespawnPlayer()
+    {
+        StopAllCoroutines();
+
+        TryMovePlayerToRespawnPoint();
+
+        healthSystem.ChangeHealth(100);
+
+        movement.enabled = true;
+
+        damageReceiver.OnPlayerRespawned();
+        stamina.OnPlayerRespawned();
+        weapon.canShoot = true;
+    }
+
+    private void TryMovePlayerToRespawnPoint()
+    {
+        if (PlayerRespawnPoint.Instance == null)
+        {
+            Debug.LogError("Instance of PlayerRespawnPoint not found. Please place PlayerRespawnPoint on the scene.");
+
+            return;
+        }
+
+        PlayerRespawnPoint.Instance.MovePlayerObjectToRespawnPoint(gameObject);
+    }
+
+    private void AssertComponents()
     {
         if (healthSystem == null)
         {
@@ -42,19 +98,11 @@ public class PlayerRespawn : MonoBehaviour
             Debug.LogError("Player stamina is required for player respawn");
             Destroy(this);
         }
-    }
 
-    public void RespawnPlayer()
-    {
-        Debug.Assert(respawnPoint != null, "Respawn point is invalid");
-
-        gameObject.transform.SetPositionAndRotation(respawnPoint.position, respawnPoint.rotation);
-
-        healthSystem.ChangeHealth(100);
-
-        movement.enabled = true;
-
-        damageReceiver.OnPlayerRespawned();
-        stamina.OnPlayerRespawned();
+        if (stamina == null)
+        {
+            Debug.LogError("Player weapon is required for player respawn");
+            Destroy(this);
+        }
     }
 }

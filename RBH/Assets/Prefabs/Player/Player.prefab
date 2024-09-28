@@ -396,11 +396,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5bfe0464d1e60247990ef9e33da872c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPoint: {fileID: 0}
   movement: {fileID: 3171541740345446729}
   healthSystem: {fileID: 584156333593417796}
   damageReceiver: {fileID: 8287974565075454170}
   stamina: {fileID: 1164421808771507386}
+  weapon: {fileID: 487708150151464056}
+  respawnDelayAfterNighEnd: 2
 --- !u!114 &-3768524912040191805
 MonoBehaviour:
   m_ObjectHideFlags: 0

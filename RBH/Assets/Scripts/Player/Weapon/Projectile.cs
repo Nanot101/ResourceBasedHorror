@@ -7,6 +7,9 @@ public class Projectile : MonoBehaviour
     [SerializeField] float lifeTime = 4f;
     [SerializeField] private float projectileSpeed = 2f;
 
+    [SerializeField]
+    private DayNightPhase projectileDestroyPhase;
+
     private Collider2D playerCollider;
 
     public void InitializeProjectile( Collider2D _playerCollider)
@@ -21,6 +24,13 @@ public class Projectile : MonoBehaviour
         {
             Debug.LogError("Player collider is null, missing projectile Initialization");
         }
+
+        DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
+    }
+
+    private void OnDestroy()
+    {
+        DayNightSystem.Instance.OnPhaseChanged -= OnDayNightPhaseChanged;
     }
     private void Update()
     {
@@ -37,5 +47,15 @@ public class Projectile : MonoBehaviour
         }
         Destroy(gameObject);
 
+    }
+
+    private void OnDayNightPhaseChanged(object sender, DayNightSystemEventArgs args)
+    {
+        var currentPhase = args.CurrentPhase;
+
+        if (currentPhase == projectileDestroyPhase)
+        {
+            Destroy(gameObject);
+        }
     }
 }

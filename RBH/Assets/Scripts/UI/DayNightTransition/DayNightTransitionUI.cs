@@ -73,17 +73,17 @@ public class DayNightTransitionUI : MonoBehaviour
     {
         var text = $"{dayText} {args.NewDayNumber}";
 
-        StartTransition(text);
+        ShowDayNightText(text);
     }
 
     private void OnNewNight(object sender, OnNewNightArgs args)
     {
         var text = $"{nightText} {args.NewNightNumber}";
 
-        StartTransition(text);
+        ShowDayNightText(text);
     }
 
-    private void StartTransition(string transitionText)
+    private void ShowDayNightText(string transitionText)
     {
         StopAllCoroutines();
         gameObject.SetActive(true);
@@ -95,7 +95,7 @@ public class DayNightTransitionUI : MonoBehaviour
 
     private IEnumerator Transition()
     {
-        //Debug.Log("Fade start");
+        //Debug.Log("Day night UI fade start");
 
         yield return FadeIn();
 
@@ -105,7 +105,7 @@ public class DayNightTransitionUI : MonoBehaviour
 
         gameObject.SetActive(false);
 
-        //Debug.Log("Fade stop");
+        //Debug.Log("Day night UI fade stop");
     }
 
     private IEnumerator Stay()

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: NightPhase
   m_EditorClassIdentifier: 
   <Duration>k__BackingField: 300
-  <BackgroundColor>k__BackingField: {r: 0, g: 0, b: 1, a: 1}
+  <BackgroundColor>k__BackingField: {r: 0.19215687, g: 0.19215687, b: 0.41568628, a: 1}

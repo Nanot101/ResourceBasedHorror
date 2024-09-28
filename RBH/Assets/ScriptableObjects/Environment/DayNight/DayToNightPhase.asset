@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DayToNightPhase
   m_EditorClassIdentifier: 
   <Duration>k__BackingField: 10
-  <BackgroundColor>k__BackingField: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  <SecondBackgroundColor>k__BackingField: {r: 0, g: 0, b: 1, a: 1}
+  <BackgroundColor>k__BackingField: {r: 0.9137255, g: 0.90588236, b: 0.80784315, a: 1}
+  <SecondBackgroundColor>k__BackingField: {r: 0.19215687, g: 0.19215687, b: 0.41568628, a: 1}

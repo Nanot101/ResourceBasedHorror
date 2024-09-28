@@ -42,7 +42,7 @@ public class DayNightSystem : Singleton<DayNightSystem>
 
         OnPhaseChanged?.Invoke(this, new DayNightSystemEventArgs { CurrentPhase = CurrentPhase });
 
-        Debug.Log($"Day night system moved to {CurrentPhase.name}");
+        //Debug.Log($"Day night system moved to {CurrentPhase.name}");
     }
 
     private void StartPhases()
@@ -53,7 +53,7 @@ public class DayNightSystem : Singleton<DayNightSystem>
         OnDayNightStarted?.Invoke(this, new DayNightSystemEventArgs { CurrentPhase = CurrentPhase });
         OnPhaseChanged?.Invoke(this, new DayNightSystemEventArgs { CurrentPhase = CurrentPhase });
 
-        Debug.Log($"Day night system started with {CurrentPhase.name}");
+        //Debug.Log($"Day night system started with {CurrentPhase.name}");
     }
 
     private void IncrementPhaseIndex()

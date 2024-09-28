@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NightDayScreenTexture : MonoBehaviour
+public class DayNightScreenTexture : MonoBehaviour
 {
     [SerializeField]
     private DayNightPhase clearTexturePhase;

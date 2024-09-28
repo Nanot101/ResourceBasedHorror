@@ -5252,6 +5252,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DayNightSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 18261251298857917, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530063302224984722, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3823005088360274153, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.9317217
@@ -5293,6 +5301,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7888654926560434357, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888654926560434357, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: playerRespawn
       value: 
       objectReference: {fileID: 1616968772}
@@ -5300,6 +5312,18 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1103709119}
+    - target: {fileID: 8080677280103165981, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1103709119}
+    - target: {fileID: 8080677280103165981, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819161559872492601, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7205,37 +7229,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117341446}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1156149880
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1156149881}
-  m_Layer: 0
-  m_Name: PlayerRespawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1156149881
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1156149880}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1167984122
 GameObject:
   m_ObjectHideFlags: 0
@@ -7365,6 +7358,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167984122}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1176207397
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4936579380081031105, guid: b2720c0176b5e944785adc96edc353de, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936579380081031105, guid: b2720c0176b5e944785adc96edc353de, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936579380081031105, guid: b2720c0176b5e944785adc96edc353de, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936579380081031105, guid: b2720c0176b5e944785adc96edc353de, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936579380081031105, guid: b2720c0176b5e944785adc96edc353de, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936579380081031105, guid: b2720c0176b5e944785adc96edc353de, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936579380081031105, guid: b2720c0176b5e944785adc96edc353de, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936579380081031105, guid: b2720c0176b5e944785adc96edc353de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936579380081031105, guid: b2720c0176b5e944785adc96edc353de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936579380081031105, guid: b2720c0176b5e944785adc96edc353de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5190967044057593293, guid: b2720c0176b5e944785adc96edc353de, type: 3}
+      propertyPath: m_Name
+      value: PlayerRespawnPoint
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b2720c0176b5e944785adc96edc353de, type: 3}
 --- !u!1 &1193344920
 GameObject:
   m_ObjectHideFlags: 0
@@ -9205,7 +9255,7 @@ PrefabInstance:
     - target: {fileID: 6206257594817900122, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
       propertyPath: respawnPoint
       value: 
-      objectReference: {fileID: 1156149881}
+      objectReference: {fileID: 0}
     - target: {fileID: 9065289971253864303, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
       propertyPath: m_Name
       value: Player
@@ -12350,5 +12400,5 @@ SceneRoots:
   - {fileID: 1725313992}
   - {fileID: 676207883}
   - {fileID: 1616968771}
-  - {fileID: 1156149881}
+  - {fileID: 1176207397}
   - {fileID: 685775090}

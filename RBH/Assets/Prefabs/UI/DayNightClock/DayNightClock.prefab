@@ -185,8 +185,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clockText: {fileID: 2926251770958621831}
-  dayStartText: 7AM
-  nightStartText: 7PM
+  dayStartText: 12PM
+  dayEndText: 8PM
+  nightStartText: 8PM
+  nightEndText: 6AM
+  dayPhases:
+  - {fileID: 11400000, guid: dbbffb46257d8c44781caccf95143d93, type: 2}
+  - {fileID: 11400000, guid: bac3fd524bbce1b46b74286eaf07755e, type: 2}
+  nightPhases:
+  - {fileID: 11400000, guid: 329d963565edaca46962f629f4f65eeb, type: 2}
 --- !u!1 &2934262971962108766
 GameObject:
   m_ObjectHideFlags: 0

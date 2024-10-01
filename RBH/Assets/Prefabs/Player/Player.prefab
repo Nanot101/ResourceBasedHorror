@@ -132,6 +132,7 @@ MonoBehaviour:
   playerCollider: {fileID: 1335401080097150228}
   projectilePrefab: {fileID: 2289292700147475393, guid: a8107f295cdd02940ab29cc94541aa0f, type: 3}
   cooldown: 6
+  weaponDisablePhase: {fileID: 11400000, guid: 27299a03b6154c546bac6c6845a01fb3, type: 2}
   canShoot: 1
 --- !u!1 &8479202090399757915
 GameObject:
@@ -370,6 +371,7 @@ MonoBehaviour:
   runningSpeed: 10
   exhaustedSpeed: 2.5
   runningStaminaConsumption: 40
+  stopMovementPhase: {fileID: 11400000, guid: 27299a03b6154c546bac6c6845a01fb3, type: 2}
 --- !u!114 &8287974565075454170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,11 +398,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5bfe0464d1e60247990ef9e33da872c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPoint: {fileID: 0}
   movement: {fileID: 3171541740345446729}
   healthSystem: {fileID: 584156333593417796}
   damageReceiver: {fileID: 8287974565075454170}
   stamina: {fileID: 1164421808771507386}
+  weapon: {fileID: 487708150151464056}
+  moveToRespawnPhase: {fileID: 11400000, guid: 274edebd41b7f6a428f5312b49574b76, type: 2}
+  respawnPhase: {fileID: 11400000, guid: dbbffb46257d8c44781caccf95143d93, type: 2}
 --- !u!114 &-3768524912040191805
 MonoBehaviour:
   m_ObjectHideFlags: 0

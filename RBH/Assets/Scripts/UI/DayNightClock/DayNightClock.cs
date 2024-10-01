@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -12,83 +14,91 @@ public class DayNightClock : MonoBehaviour
     private string dayStartText = "7AM";
 
     [SerializeField]
+    private string dayEndText = "7PM";
+
+    [SerializeField]
     private string nightStartText = "7PM";
 
-    private float dayMinuteDuration;
-    private float nightMinuteDuration;
+    [SerializeField]
+    private string nightEndText = "7AM";
 
-    private DateTime dayStart;
-    private DateTime nightStart;
+    [SerializeField]
+    private List<DayNightPhase> dayPhases = new();
 
+    [SerializeField]
+    private List<DayNightPhase> nightPhases = new();
+
+    private float currentPhaseMinuteDuration = 0.0f;
     private DateTime currentTime;
-    private DayNightSystem.Cycle currentCycle;
+    private bool IsDayPhase;
 
     private void Awake()
     {
-        if (clockText == null)
-        {
-            Debug.LogError("Clock text is required for day night clock");
-            Destroy(this);
-        }
+        AsserDesignerFields();
 
-        dayStart = TryParseTimeText(dayStartText);
-        nightStart = TryParseTimeText(nightStartText);
-
-        DayNightSystem.onDayNightSystemStarted += OnDayNightSystemStarted;
-        DayNightSystem.onCycleChange += OnCycleChange;
+        DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
     }
 
     private void Update()
     {
-        var minuteChangeSpeed = Time.deltaTime;
-
-        minuteChangeSpeed *= currentCycle switch
-        {
-            DayNightSystem.Cycle.Day => dayMinuteDuration,
-            DayNightSystem.Cycle.Night => nightMinuteDuration,
-            _ => 0.0f,
-        };
+        var minuteChangeSpeed = currentPhaseMinuteDuration * Time.deltaTime;
 
         currentTime = currentTime.AddMinutes(minuteChangeSpeed);
 
         UpdateUI();
     }
 
-    private void OnDestroy()
+    private void OnDestroy() => DayNightSystem.Instance.OnPhaseChanged -= OnDayNightPhaseChanged;
+
+    private void OnDayNightPhaseChanged(object sender, DayNightSystemEventArgs args)
     {
-        DayNightSystem.onDayNightSystemStarted -= OnDayNightSystemStarted;
-        DayNightSystem.onCycleChange -= OnCycleChange;
-    }
+        var currentPhase = args.CurrentPhase;
 
-    private void OnDayNightSystemStarted(float dayDuration, float nightDuration, float transitionDuration)
-    {
-        var dayMinutes = (float)(nightStart - dayStart).TotalMinutes;
-        var nightMinutes = (float)(dayStart.AddDays(1) - nightStart).TotalMinutes;
-
-        dayMinuteDuration = 1.0f / (dayDuration / dayMinutes);
-        nightMinuteDuration = 1.0f / (nightDuration / nightMinutes);
-    }
-
-    private void OnCycleChange(DayNightSystem.Cycle cycle)
-    {
-        currentCycle = cycle;
-
-        switch (cycle)
+        if (dayPhases.Contains(currentPhase))
         {
-            case DayNightSystem.Cycle.Day:
+            if (IsDayPhase)
+            {
+                return;
+            }
 
-                currentTime = dayStart;
+            var dayStart = TryParseTimeText(dayStartText);
+            var dayEnd = TryParseTimeText(dayEndText);
 
-                break;
+            var dayMinutes = (float)(dayEnd - dayStart).TotalMinutes;
 
-            case DayNightSystem.Cycle.Night:
+            var dayPhasesDuration = dayPhases.Aggregate(0.0f, (acu, x) => acu += x.Duration);
 
-                currentTime = nightStart;
+            currentPhaseMinuteDuration = 1.0f / (dayPhasesDuration / dayMinutes);
+            currentTime = dayStart;
 
-                break;
+            IsDayPhase = true;
+
+            return;
         }
 
-        UpdateUI();
+        if (nightPhases.Contains(currentPhase))
+        {
+            if (!IsDayPhase)
+            {
+                return;
+            }
+
+            var nightStart = TryParseTimeText(nightStartText);
+            var nightEnd = TryParseTimeText(nightEndText);
+
+            var nightMinutes = (float)(nightEnd.AddDays(1) - nightStart).TotalMinutes;
+
+            var nightPhasesDuration = nightPhases.Aggregate(0.0f, (acu, x) => acu += x.Duration);
+
+            currentPhaseMinuteDuration = 1.0f / (nightPhasesDuration / nightMinutes);
+            currentTime = nightStart;
+
+            IsDayPhase = false;
+
+            return;
+        }
+
+        currentPhaseMinuteDuration = 0.0f;
     }
 
     private void UpdateUI()
@@ -109,5 +119,26 @@ public class DayNightClock : MonoBehaviour
         }
 
         return result;
+    }
+
+    private void AsserDesignerFields()
+    {
+        if (clockText == null)
+        {
+            Debug.LogError("Clock text is required for day night clock");
+            Destroy(this);
+        }
+
+        if (dayPhases.Count == 0)
+        {
+            Debug.LogError($"{name} has no {nameof(dayPhases)}. Please add at least one phase.");
+            Destroy(this);
+        }
+
+        if (nightPhases.Count == 0)
+        {
+            Debug.LogError($"{name} has no {nameof(nightPhases)}. Please add at least one phase.");
+            Destroy(this);
+        }
     }
 }

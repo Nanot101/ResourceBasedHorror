@@ -1532,6 +1532,7 @@ MonoBehaviour:
   runningSpeed: 10
   exhaustedSpeed: 2.5
   runningStaminaConsumption: 40
+  stopMovementPhase: {fileID: 0}
 --- !u!50 &1068700124
 Rigidbody2D:
   serializedVersion: 4
@@ -2261,20 +2262,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702445873}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad1cbe79442789b4e813cd36a9a5c918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  dayDuration: 10
-  dayColor: {r: 0.9150943, g: 0.9059103, b: 0.80718225, a: 1}
-  nightDuration: 10
-  nightColor: {r: 0.1938412, g: 0.1938412, b: 0.41509432, a: 1}
-  transitionDuration: 5
-  currentCycle: 0
-  debugMode: 0
-  worldLight: {fileID: 1597421064}
+  dayNightPhases: []
 --- !u!4 &1702445875
 Transform:
   m_ObjectHideFlags: 0

@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 4
   projectileSpeed: 20
+  projectileDestroyPhase: {fileID: 11400000, guid: 27299a03b6154c546bac6c6845a01fb3, type: 2}
 --- !u!61 &4693553345750444808
 BoxCollider2D:
   m_ObjectHideFlags: 0

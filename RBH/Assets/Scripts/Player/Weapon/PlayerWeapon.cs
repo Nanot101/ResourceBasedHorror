@@ -8,6 +8,10 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] Projectile projectilePrefab;
     [SerializeField] private float cooldown = 6f;
+
+    [SerializeField]
+    private DayNightPhase weaponDisablePhase;
+
     public bool canShoot = true;
     private float cooldownTimer;
 
@@ -15,7 +19,12 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (playerCollider == null)
             playerCollider = GetComponentInParent<Collider2D>();
+
+        DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
     }
+
+    private void OnDestroy() => DayNightSystem.Instance.OnPhaseChanged -= OnDayNightPhaseChanged;
+
     private void Update()
     {
         if (!canShoot)
@@ -41,5 +50,15 @@ public class PlayerWeapon : MonoBehaviour
     {
         currentCooldown = cooldownTimer;
         maxCooldown = cooldown;
+    }
+
+    private void OnDayNightPhaseChanged(object sender, DayNightSystemEventArgs args)
+    {
+        var currentPhase = args.CurrentPhase;
+
+        if (currentPhase == weaponDisablePhase)
+        {
+            canShoot = false;
+        }
     }
 }

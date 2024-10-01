@@ -3,18 +3,19 @@ using UnityEngine;
 
 public class DayNightCounter : Singleton<DayNightCounter>
 {
+    [Tooltip("Maximum number of cycles after which game ends. It must be greater than zero")]
     [SerializeField]
-    private PlayerRespawn playerRespawn;
+    private int maxCycles = 5;
 
-    [Tooltip("Maximum number of nights after which game ends. It must be greater than zero")]
     [SerializeField]
-    private int maxNights = 5;
+    private DayNightPhase dayStartPhase;
+
+    [SerializeField]
+    private DayNightPhase nightStartPhase;
 
     public int CurrentDay { get; private set; }
 
     public int CurrentNight { get; private set; }
-
-    public bool IsNight { get; private set; }
 
     public event EventHandler<OnNewDayArgs> OnNewDay;
 
@@ -23,81 +24,41 @@ public class DayNightCounter : Singleton<DayNightCounter>
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Assert(maxNights > 0, "Max days must be greater than zero");
+        Debug.Assert(maxCycles > 0, "Max days must be greater than zero");
 
-        TrySetPlayerRespawn();
-
-        DayNightSystem.onCycleChange += OnDayNightCycleChange;
+        DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
     }
 
-    private void OnDestroy() => DayNightSystem.onCycleChange -= OnDayNightCycleChange;
+    private void OnDestroy() => DayNightSystem.Instance.OnPhaseChanged -= OnDayNightPhaseChanged;
 
-    private void OnDayNightCycleChange(DayNightSystem.Cycle newCycle)
+    private void OnDayNightPhaseChanged(object sender, DayNightSystemEventArgs args)
     {
-        if (CurrentNight >= maxNights)
+        if (CurrentNight >= maxCycles)
         {
             ResetCounters();
-            TryRespawnPlayer();
         }
 
-        switch (newCycle)
+        var currentPhase = args.CurrentPhase;
+
+        if (currentPhase == dayStartPhase)
         {
-            case DayNightSystem.Cycle.Day:
+            CurrentDay++;
 
-                CurrentDay++;
+            OnNewDay?.Invoke(this, new OnNewDayArgs { NewDayNumber = CurrentDay });
+        }
+        else if (currentPhase == nightStartPhase)
+        {
+            CurrentNight++;
 
-                IsNight = false;
-
-                OnNewDay?.Invoke(this,
-                    new OnNewDayArgs
-                    {
-                        NewDayNumber = CurrentDay
-                    });
-
-                break;
-
-            case DayNightSystem.Cycle.Night:
-
-                CurrentNight++;
-
-                IsNight = true;
-
-                OnNewNight?.Invoke(this,
-                    new OnNewNightArgs
-                    {
-                        NewNightNumber = CurrentNight
-                    });
-
-                break;
+            OnNewNight?.Invoke(this, new OnNewNightArgs { NewNightNumber = CurrentNight });
         }
 
-        //Debug.Log($"Current day: {CurrentDay}, current night: {CurrentNight}, is night: {IsNight}");
+        //Debug.Log($"Current day: {CurrentDay}, current night: {CurrentNight}");
     }
 
     private void ResetCounters()
     {
         CurrentDay = 0;
         CurrentNight = 0;
-        IsNight = false;
-    }
-
-    private void TrySetPlayerRespawn()
-    {
-        if (playerRespawn != null)
-        {
-            return;
-        }
-
-        playerRespawn = FindFirstObjectByType<PlayerRespawn>();
-    }
-
-    private void TryRespawnPlayer()
-    {
-        if (playerRespawn == null)
-        {
-            return;
-        }
-
-        playerRespawn.RespawnPlayer();
     }
 }

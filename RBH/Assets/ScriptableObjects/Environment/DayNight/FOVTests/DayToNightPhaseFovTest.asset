@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86ef86445b0947a44a72b2762283b2c7, type: 3}
-  m_Name: DayToNightPhaseFovTest
+  m_Name: DayToNightPhaseFOVTest
   m_EditorClassIdentifier: 
-  <Duration>k__BackingField: 10
+  <Duration>k__BackingField: 5
   <BackgroundColor>k__BackingField: {r: 0.9137255, g: 0.90588236, b: 0.80784315, a: 1}
   <SecondBackgroundColor>k__BackingField: {r: 0.19215687, g: 0.19215687, b: 0.41568628, a: 1}

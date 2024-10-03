@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03aaba8d561cec847aeaaf0e8f75914c, type: 3}
   m_Name: NightPhaseFOVTest
   m_EditorClassIdentifier: 
-  <Duration>k__BackingField: 10
+  <Duration>k__BackingField: 5
   <BackgroundColor>k__BackingField: {r: 0.19215687, g: 0.19215687, b: 0.41568628, a: 1}

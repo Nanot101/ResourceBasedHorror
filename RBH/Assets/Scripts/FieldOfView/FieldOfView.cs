@@ -3,7 +3,7 @@ using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class PlayerFOV : MonoBehaviour
+public class FieldOfView : MonoBehaviour
 {
     /// <summary>
     /// There is one vertex per ray and we always have 1 vertex at the origin, 
@@ -18,9 +18,11 @@ public class PlayerFOV : MonoBehaviour
     private MeshFilter meshFilter;
 
     [SerializeField]
+    [Tooltip("Must be greater than zero")]
     private float fieldOfViewAngle = 90.0f;
 
     [SerializeField]
+    [Tooltip("Must be greater than zero")]
     private float viewDistance = 5.0f;
 
     [SerializeField]
@@ -89,19 +91,11 @@ public class PlayerFOV : MonoBehaviour
         return directions;
     }
 
-    private Vector3 GetVectorFromAngleDegrees(float angle)
-    {
-        var angleRadians = math.radians(angle);
-
-        // Something, something, trigonometry I guess.
-        return new Vector3(math.cos(angleRadians), math.sin(angleRadians));
-    }
-
     private float GetAngleDegreesFromVector(Vector3 vector)
     {
         vector.Normalize();
 
-        // Trigonometry again...
+        // Something, something, trigonometry I guess
         var angle = math.atan2(vector.y, vector.x) * Mathf.Rad2Deg;
 
         if (angle < 0)
@@ -110,5 +104,19 @@ public class PlayerFOV : MonoBehaviour
         }
 
         return angle;
+    }
+
+    private Vector3 GetVectorFromAngleDegrees(float angle)
+    {
+        var angleRadians = math.radians(angle);
+
+        // Trigonometry again...
+        return new Vector3(math.cos(angleRadians), math.sin(angleRadians));
+    }
+
+    private void AssertDesignerFileds()
+    {
+        Debug.Assert(fieldOfViewAngle > 0, $"{nameof(fieldOfViewAngle)} must be greater than zero");
+        Debug.Assert(viewDistance > 0, $"{nameof(viewDistance)} must be greater than zero");
     }
 }

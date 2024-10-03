@@ -1632,7 +1632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &803164348
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2222,6 +2222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DayNightSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 1530063302224984722, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: clearTexturePhase
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d3ca47558e2c8f4e914df7bc52d895d, type: 2}
     - target: {fileID: 3823005088360274153, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2333,10 +2337,6 @@ PrefabInstance:
     - target: {fileID: 8819161559872492601, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8819161559872492601, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
-      propertyPath: dayNightPhases.Array.size
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8819161559872492601, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: dayNightPhases.Array.data[0]
@@ -2655,6 +2655,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Test 4
+--- !u!1 &1673742239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1673742241}
+  - component: {fileID: 1673742240}
+  m_Layer: 0
+  m_Name: FieldOfViewManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1673742240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673742239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e40df127257a047984c5e3c2eb83f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invisibleAtNightRender: {fileID: 941625735953262540, guid: 5f1c24ddd1aee69478e7976f1107335e, type: 2}
+  phasesWithFOV:
+  - {fileID: 11400000, guid: 8fcba1ecad5ccc84d906b763a5908c76, type: 2}
+  - {fileID: 11400000, guid: 27299a03b6154c546bac6c6845a01fb3, type: 2}
+  - {fileID: 11400000, guid: 274edebd41b7f6a428f5312b49574b76, type: 2}
+  - {fileID: 11400000, guid: 617ae0065d14da04284b5337a37af514, type: 2}
+  fieldOfView: {fileID: 1944296396}
+--- !u!4 &1673742241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673742239}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1685966469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3311,7 +3362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1944296397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3468,6 +3519,10 @@ PrefabInstance:
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 121033081}
+    - target: {fileID: 6206257594817900122, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: respawnPhase
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d3ca47558e2c8f4e914df7bc52d895d, type: 2}
     - target: {fileID: 6206257594817900122, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
       propertyPath: respawnPoint
       value: 
@@ -4146,3 +4201,4 @@ SceneRoots:
   - {fileID: 171551824}
   - {fileID: 3822380}
   - {fileID: 803164350}
+  - {fileID: 1673742241}

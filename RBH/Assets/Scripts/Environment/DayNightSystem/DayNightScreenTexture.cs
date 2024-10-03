@@ -82,9 +82,15 @@ public class DayNightScreenTexture : MonoBehaviour
 
             currentPhaseTime = 0.0f;
 
-            if (phaseWithTextureFade.Direction == DayNightPhaseWithScreenTextureFade.FadeDirection.FadeIn)
+            switch (phaseWithTextureFade.Direction)
             {
-                SetTextureAlpha(0.0f);
+                case DayNightPhaseWithScreenTextureFade.FadeDirection.FadeIn:
+                    SetTextureAlpha(0.0f);
+                    break;
+
+                case DayNightPhaseWithScreenTextureFade.FadeDirection.FadeOut:
+                    SetTextureAlpha(1.0f);
+                    break;
             }
         }
         else if (currentPhase is DayNightPhaseWithScreenTexture phaseWithTexture)

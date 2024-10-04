@@ -38,6 +38,8 @@ public class FieldOfView : MonoBehaviour
 
     void Awake()
     {
+        AssertDesignerFileds();
+
         var mesh = new Mesh();
 
         meshFilter.mesh = mesh;
@@ -47,8 +49,8 @@ public class FieldOfView : MonoBehaviour
 
         // every triangle has 3 indexes,
         // first is always zero,
-        // second is previously added vertex
-        // and third is currently added vertex
+        // second is previously added vertex index
+        // and third is currently added vertex index
         var numberOfTrianglesIndexes = 3 * (RayCount - 1);
 
         meshBuilder = new(mesh, numberOfVertices, numberOfTrianglesIndexes);

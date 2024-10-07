@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class DialogueSystem : MonoBehaviour
 
     private bool endOfDialogue = false;
 
+    private Action onDialogEndedCallback;
+
     void Start()
     {
         currentPos = 0;
@@ -52,6 +55,19 @@ public class DialogueSystem : MonoBehaviour
                 NextLine();
         }
     }
+
+    private void OnDestroy()
+    {
+        onDialogEndedCallback = null;
+    }
+
+    public void StartDialogue(TextAsset dialogueFile, List<Texture> iconList, Action onDialogEndedCallback)
+    {
+        this.onDialogEndedCallback = onDialogEndedCallback;
+
+        StartDialogue(dialogueFile, iconList);
+    }
+
     public void StartDialogue(TextAsset dialogueFile, List<Texture> iconList)
     {
         dialogueScript = dialogueFile.text;
@@ -117,6 +133,21 @@ public class DialogueSystem : MonoBehaviour
         endOfDialogue = false;
         dialogueTriggered = false;
         dialogueScreen.SetActive(false);
+
+        InvokeCallback();
+
         //End dialogue
+    }
+
+    private void InvokeCallback()
+    {
+        if (onDialogEndedCallback == null)
+        {
+            return;
+        }
+
+        onDialogEndedCallback();
+
+        onDialogEndedCallback = null;
     }
 }

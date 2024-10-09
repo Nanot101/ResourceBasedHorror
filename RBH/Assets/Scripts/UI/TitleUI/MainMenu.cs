@@ -40,12 +40,16 @@ public class MainMenu : MonoBehaviour
         // Ensure full fade at the end
         mainCanvasGroup.alpha = 0;
         blackCanvasGroup.alpha = 1;
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 
     public void QuitGame() {
         Debug.Log("Quit game");
         Application.Quit();
+    }
+
+    public void CharSelect() {
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 
     // public void SetVolumeMusic(float sliderValue)

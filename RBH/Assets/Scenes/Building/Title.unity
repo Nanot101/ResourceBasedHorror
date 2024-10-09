@@ -887,7 +887,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 714911759}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayIntro
+        m_MethodName: CharSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
@@ -13,112 +11,119 @@ public class FieldOfView : MonoBehaviour
     /// </summary>
     private const int MinNumOfRays = 2;
 
+    private const int FrontViewRays = 200 + MinNumOfRays;
+    private const int AroundViewRays = 250 + MinNumOfRays;
+
     [SerializeField]
     [Tooltip("It will hold generated mesh")]
     private MeshFilter meshFilter;
 
     [SerializeField]
-    [Tooltip("Must be greater than zero")]
-    private float fieldOfViewAngle = 90.0f;
+    private LayerMask fieldOfViewCollisionLayer;
 
-    [SerializeField]
-    [Tooltip("Must be greater than zero")]
-    private float viewDistance = 5.0f;
-
-    [SerializeField]
-    [Tooltip("Additional rays used to generate the mesh. The higher the value, the more detailed the mesh, but also slower generation!")]
-    private int AdditionalRayCount = 2;
-
-    [SerializeField]
-    private LayerMask FieldOfViewCollisionLayer;
-
+    private readonly object lockObject = new();
     private FieldOfViewMeshBuilder meshBuilder;
 
-    private int RayCount => MinNumOfRays + AdditionalRayCount;
+    private FieldOfViewDistanceSettings currentSettings;
+    private FieldOfViewDistanceSettings nextSettings;
 
-    void Awake()
+    private int FrontRayCount => FrontViewRays + currentSettings.AdditionalFrontRayCount;
+    private int AroundRayCount => AroundViewRays + currentSettings.AdditionalAroundRayCount;
+
+    private void Awake()
     {
         AssertDesignerFileds();
 
         var mesh = new Mesh();
-
         meshFilter.mesh = mesh;
 
-        // one vertex per ray + origin vertex 
-        var numberOfVertices = RayCount + 1;
-
-        // every triangle has 3 indexes,
-        // first is always zero,
-        // second is previously added vertex index
-        // and third is currently added vertex index
-        var numberOfTrianglesIndexes = 3 * (RayCount - 1);
-
-        meshBuilder = new(mesh, numberOfVertices, numberOfTrianglesIndexes);
+        meshBuilder = new FieldOfViewMeshBuilder(mesh, transform);
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         // Late update because player movement and mouse aim must run before us
 
-        meshBuilder.Reset(transform);
+        SetCurrentSettings();
+
+        if (currentSettings == null)
+        {
+            return;
+        }
+
+        meshBuilder.Reset();
         meshBuilder.AddVertex(Vector3.zero);
 
-        foreach (var rayDirection in GetRayDirections())
+        AddFronView();
+        TryAddAroundView();
+
+        var buildSuccessful = meshBuilder.Build();
+
+        Debug.Assert(buildSuccessful);
+    }
+
+    public void SetNextSettings(FieldOfViewDistanceSettings settings)
+    {
+        lock (lockObject)
         {
-            var hit = Physics2D.Raycast(transform.position, rayDirection, viewDistance, FieldOfViewCollisionLayer);
+            nextSettings = settings;
+        }
+    }
 
-            if (hit.collider == null)
-            {
-                meshBuilder.AddVertex(rayDirection * viewDistance);
-                continue;
-            }
+    private void SetCurrentSettings()
+    {
+        lock (lockObject)
+        {
+            currentSettings = nextSettings;
+        }
+    }
 
-            meshBuilder.AddVertex((Vector3)hit.point - transform.position);
+    private void AddFronView()
+    {
+        var frontVertices = FieldOfViewVerticesProvider.GetFrontVertices(
+            FrontRayCount,
+            currentSettings.FrontViewDistance,
+            currentSettings.FrontViewAngle,
+            transform,
+            fieldOfViewCollisionLayer);
+
+        BuildView(frontVertices);
+    }
+
+    private void TryAddAroundView()
+    {
+        if (currentSettings.AroundViewDistance <= 0.0f)
+        {
+            return;
         }
 
-        Debug.Assert(meshBuilder.Build());
+        AddAroundView();
     }
 
-    private IEnumerable<Vector3> GetRayDirections()
+    private void AddAroundView()
     {
-        var initialAngle = GetAngleDegreesFromVector(transform.up);
-        initialAngle += fieldOfViewAngle / 2.0f;
+        var frontVertices = FieldOfViewVerticesProvider.GetAroundVertices(
+            AroundRayCount,
+            currentSettings.AroundViewDistance,
+            currentSettings.FrontViewAngle,
+            transform,
+            fieldOfViewCollisionLayer);
 
-        var angleIncrease = fieldOfViewAngle / (RayCount - 1);
-
-        var directions = Enumerable
-            .Range(0, RayCount)
-            .Select(i => GetVectorFromAngleDegrees(initialAngle - i * angleIncrease));
-
-        return directions;
+        BuildView(frontVertices);
     }
 
-    private float GetAngleDegreesFromVector(Vector3 vector)
+    private void BuildView(IReadOnlyList<Vector3> frontVertices)
     {
-        vector.Normalize();
+        meshBuilder.AddVertex(frontVertices[0]);
 
-        // Something, something, trigonometry I guess
-        var angle = math.atan2(vector.y, vector.x) * Mathf.Rad2Deg;
-
-        if (angle < 0)
+        for (var i = 1; i < frontVertices.Count; i++)
         {
-            angle += 360.0f;
+            meshBuilder.AddVertexAndTriangleIndexes(frontVertices[i]);
         }
-
-        return angle;
-    }
-
-    private Vector3 GetVectorFromAngleDegrees(float angle)
-    {
-        var angleRadians = math.radians(angle);
-
-        // Trigonometry again...
-        return new Vector3(math.cos(angleRadians), math.sin(angleRadians));
     }
 
     private void AssertDesignerFileds()
     {
-        Debug.Assert(fieldOfViewAngle > 0, $"{nameof(fieldOfViewAngle)} must be greater than zero");
-        Debug.Assert(viewDistance > 0, $"{nameof(viewDistance)} must be greater than zero");
+        Debug.Assert(meshFilter != null, $"{nameof(meshFilter)} is required");
     }
 }

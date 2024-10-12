@@ -237,7 +237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2852215525366958135
 Transform:
   m_ObjectHideFlags: 0
@@ -316,10 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshFilter: {fileID: 3518407612759876962}
-  fieldOfViewAngle: 70
-  viewDistance: 5
-  AdditionalRayCount: 200
-  FieldOfViewCollisionLayer:
+  fieldOfViewCollisionLayer:
     serializedVersion: 2
     m_Bits: 8
 --- !u!1 &9065289971253864303

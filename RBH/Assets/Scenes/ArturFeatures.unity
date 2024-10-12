@@ -2247,10 +2247,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 8819161559872492601, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3194,11 +3190,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1944296396 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8861619459731864912, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+--- !u!114 &1944296397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8168168768188559179, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
   m_PrefabInstance: {fileID: 1959655736}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455b72b27278da3459b024b2c3ef2297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1959655736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3295,6 +3297,18 @@ PrefabInstance:
       propertyPath: playerRespawnObserversComponents.Array.data[0]
       value: 
       objectReference: {fileID: 102643900}
+    - target: {fileID: 8168168768188559179, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: daySettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 09af428eb8c3d3046a034d20305acd05, type: 2}
+    - target: {fileID: 8168168768188559179, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: nightSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 09af428eb8c3d3046a034d20305acd05, type: 2}
+    - target: {fileID: 8861619459731864912, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9065289971253864303, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3927,7 +3941,7 @@ PrefabInstance:
     - target: {fileID: 4077974931778964191, guid: 2b1505f145fb399458a27c0577f6f387, type: 3}
       propertyPath: fieldOfView
       value: 
-      objectReference: {fileID: 1944296396}
+      objectReference: {fileID: 1944296397}
     - target: {fileID: 6837006380983935029, guid: 2b1505f145fb399458a27c0577f6f387, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -1,62 +1,102 @@
+using System;
 using UnityEngine;
 
 public class FieldOfViewMeshBuilder
 {
+    private const int VerticesInitilaLenght = 50;
+    private const int TrianglesVerticesIndexesInitilaLenght = 50;
+
     private readonly Mesh _mesh;
-    private readonly Vector3[] _vertices;
-    private readonly int[] _trianglesVerticesIndexes;
+    private readonly Transform _worldOrigin;
 
-    private Transform _worldOrigin;
-    private int _currentVertex = 0;
-    private int _currentTriangeIndex = 0;
+    private Vector3[] _vertices = new Vector3[VerticesInitilaLenght];
+    private int[] _trianglesVerticesIndexes = new int[TrianglesVerticesIndexesInitilaLenght];
 
-    public FieldOfViewMeshBuilder(Mesh mesh, int numberOfVertices, int numberOfTriangleIndexes)
+    private int _nextVertex = 0;
+    private int _nextTriangeIndex = 0;
+
+    public FieldOfViewMeshBuilder(Mesh mesh, Transform worldOrigin)
     {
         _mesh = mesh;
         _mesh.MarkDynamic();
 
-        _vertices = new Vector3[numberOfVertices];
-        _trianglesVerticesIndexes = new int[numberOfTriangleIndexes];
+        _worldOrigin = worldOrigin;
     }
 
-    public void Reset(Transform worldOrigin)
+    public void Reset()
     {
-        _worldOrigin = worldOrigin;
-        _currentVertex = 0;
-        _currentTriangeIndex = 0;
+        _nextVertex = 0;
+        _nextTriangeIndex = 0;
     }
 
     public void AddVertex(Vector3 vertexPosition)
     {
-        _vertices[_currentVertex] = vertexPosition;
+        _vertices[_nextVertex] = vertexPosition;
 
-        if (_currentVertex >= 2)
-        {
-            _trianglesVerticesIndexes[_currentTriangeIndex] = 0;
-            _trianglesVerticesIndexes[_currentTriangeIndex + 1] = _currentVertex - 1;
-            _trianglesVerticesIndexes[_currentTriangeIndex + 2] = _currentVertex;
+        IncreaseVertexIndexAndResize();
+    }
 
-            _currentTriangeIndex += 3;
-        }
+    public void AddVertexAndTriangleIndexes(Vector3 vertexPosition)
+    {
+        _vertices[_nextVertex] = vertexPosition;
 
-        _currentVertex++;
+        AddVertexIndexes();
+
+        IncreaseVertexIndexAndResize();
     }
 
     public bool Build()
     {
-        if (_currentTriangeIndex < 3)
+        if (_nextTriangeIndex < 3)
         {
             return false;
         }
 
-        // I don't know why, but I have to do it, otherwise the mesh rotates twice.
-        _worldOrigin.InverseTransformVectors(_vertices);
+        // I don't know why, but I have to do it, otherwise the mesh rotates twice
+        _worldOrigin.InverseTransformVectors(_vertices.AsSpan(0, _nextVertex));
 
-        _mesh.vertices = _vertices;
-        _mesh.triangles = _trianglesVerticesIndexes;
+        _mesh.Clear();
+
+        _mesh.SetVertices(_vertices, 0, _nextVertex);
+        _mesh.SetTriangles(_trianglesVerticesIndexes, 0, _nextTriangeIndex, 0);
 
         _mesh.MarkModified();
 
         return true;
+    }
+
+    private void AddVertexIndexes()
+    {
+        if (_nextVertex < 2)
+        {
+            return;
+        }
+
+        // The order is important because it determines the direction in which the mesh is rendered
+        _trianglesVerticesIndexes[_nextTriangeIndex] = 0;
+        _trianglesVerticesIndexes[_nextTriangeIndex + 1] = _nextVertex;
+        _trianglesVerticesIndexes[_nextTriangeIndex + 2] = _nextVertex - 1;
+
+        IncreaseTriangleVertexIndexesAndResize();
+    }
+
+    private void IncreaseVertexIndexAndResize()
+    {
+        _nextVertex++;
+
+        if (_vertices.Length <= _nextVertex)
+        {
+            Array.Resize(ref _vertices, _vertices.Length * 2);
+        }
+    }
+
+    private void IncreaseTriangleVertexIndexesAndResize()
+    {
+        _nextTriangeIndex += 3;
+
+        if (_trianglesVerticesIndexes.Length <= _nextTriangeIndex + 2)
+        {
+            Array.Resize(ref _trianglesVerticesIndexes, _trianglesVerticesIndexes.Length * 2);
+        }
     }
 }

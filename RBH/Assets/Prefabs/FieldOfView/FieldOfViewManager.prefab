@@ -44,10 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e40df127257a047984c5e3c2eb83f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invisibleAtNightRender: {fileID: 941625735953262540, guid: 5f1c24ddd1aee69478e7976f1107335e, type: 2}
-  phasesWithFOV:
-  - {fileID: 11400000, guid: 329d963565edaca46962f629f4f65eeb, type: 2}
-  - {fileID: 11400000, guid: 27299a03b6154c546bac6c6845a01fb3, type: 2}
-  - {fileID: 11400000, guid: 274edebd41b7f6a428f5312b49574b76, type: 2}
-  - {fileID: 11400000, guid: 617ae0065d14da04284b5337a37af514, type: 2}
+  visibleInFOVRender: {fileID: 941625735953262540, guid: 5f1c24ddd1aee69478e7976f1107335e, type: 2}
   fieldOfView: {fileID: 0}
+  settings:
+  - {fileID: 11400000, guid: 09af428eb8c3d3046a034d20305acd05, type: 2}
+  - {fileID: 11400000, guid: 52037ba01cfb7934c92006f0cbfba42c, type: 2}

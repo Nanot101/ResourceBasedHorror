@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbcee029bfe529a4699156ed281d992c, type: 3}
+  m_Name: DayFOVSettings
+  m_EditorClassIdentifier: 
+  <FrontViewAngle>k__BackingField: 80
+  <FrontViewDistance>k__BackingField: 8
+  <AdditionalFrontRayCount>k__BackingField: 0
+  <AroundViewDistance>k__BackingField: 2
+  <AdditionalAroundRayCount>k__BackingField: 0
+  <Phases>k__BackingField:
+  - {fileID: 11400000, guid: dbbffb46257d8c44781caccf95143d93, type: 2}
+  - {fileID: 11400000, guid: bac3fd524bbce1b46b74286eaf07755e, type: 2}
+  - {fileID: 11400000, guid: 617ae0065d14da04284b5337a37af514, type: 2}
+  - {fileID: 11400000, guid: 82a42f70eaa38824f8aae3aca893210f, type: 2}

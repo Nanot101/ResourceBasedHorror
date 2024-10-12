@@ -40,7 +40,7 @@ public class FieldOfViewMeshBuilder
     {
         _vertices[_nextVertex] = vertexPosition;
 
-        AddVertexIndexes();
+        AddTrianglesVerticesIndexes();
 
         IncreaseVertexIndexAndResize();
     }
@@ -65,7 +65,7 @@ public class FieldOfViewMeshBuilder
         return true;
     }
 
-    private void AddVertexIndexes()
+    private void AddTrianglesVerticesIndexes()
     {
         if (_nextVertex < 2)
         {

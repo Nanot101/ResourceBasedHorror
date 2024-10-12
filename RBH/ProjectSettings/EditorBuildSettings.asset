@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Building/Title.unity
     guid: cd2900ec930e3e141bd4fdad8ff2a457
   - enabled: 1
+    path: Assets/Scenes/Building/PlayerSelect.unity
+    guid: 339b60b03a7f43c4290375215e0b8486
+  - enabled: 1
     path: Assets/Scenes/Building/IntroCutscene.unity
     guid: a89ce7fcdb8db7044b3bcf68f3e0b8df
   - enabled: 1

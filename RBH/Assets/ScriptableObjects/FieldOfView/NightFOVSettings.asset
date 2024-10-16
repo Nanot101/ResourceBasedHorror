@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbcee029bfe529a4699156ed281d992c, type: 3}
   m_Name: NightFOVSettings
   m_EditorClassIdentifier: 
-  <FrontViewAngle>k__BackingField: 70
-  <FrontViewDistance>k__BackingField: 5
-  <AdditionalFrontRayCount>k__BackingField: 0
-  <AroundViewDistance>k__BackingField: 0
-  <AdditionalAroundRayCount>k__BackingField: 0
   <Phases>k__BackingField:
   - {fileID: 11400000, guid: 329d963565edaca46962f629f4f65eeb, type: 2}
   - {fileID: 11400000, guid: 27299a03b6154c546bac6c6845a01fb3, type: 2}
   - {fileID: 11400000, guid: 274edebd41b7f6a428f5312b49574b76, type: 2}
+  <FrontViewAngle>k__BackingField: 40
+  <FrontViewDistance>k__BackingField: 6
+  <AdditionalFrontRayCount>k__BackingField: 0
+  <AroundViewDistance>k__BackingField: 0
+  <AdditionalAroundRayCount>k__BackingField: 0

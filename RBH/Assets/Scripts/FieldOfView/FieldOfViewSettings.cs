@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MyFOVSettings", menuName = "Field Of View Settings")]
-public class FieldOfViewDistanceSettings : ScriptableObject
+[CreateAssetMenu(fileName = "MyFOVSettings", menuName = "Field Of View/Settings")]
+public class FieldOfViewSettings : FieldOfViewSettingsBase, IFieldOfViewSettings
 {
     [field: SerializeField]
     [field: Tooltip("Must be greater than zero")]
@@ -28,7 +27,5 @@ public class FieldOfViewDistanceSettings : ScriptableObject
         "Cannot be negative")]
     public int AdditionalAroundRayCount { get; set; } = 0;
 
-    [field: SerializeField]
-    [field: Tooltip("The phases of the day and night in which these settings are active")]
-    public List<DayNightPhase> Phases { get; set; } = new();
+    public override IFieldOfViewSettings CreateSettings() => this;
 }

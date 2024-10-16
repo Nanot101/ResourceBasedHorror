@@ -24,8 +24,8 @@ public class FieldOfView : MonoBehaviour
     private readonly object lockObject = new();
     private FieldOfViewMeshBuilder meshBuilder;
 
-    private FieldOfViewDistanceSettings currentSettings;
-    private FieldOfViewDistanceSettings nextSettings;
+    private IFieldOfViewSettings currentSettings;
+    private IFieldOfViewSettings nextSettings;
 
     private int FrontRayCount => FrontViewRays + currentSettings.AdditionalFrontRayCount;
     private int AroundRayCount => AroundViewRays + currentSettings.AdditionalAroundRayCount;
@@ -51,6 +51,8 @@ public class FieldOfView : MonoBehaviour
             return;
         }
 
+        currentSettings.Update();
+
         meshBuilder.Reset();
         meshBuilder.AddVertex(Vector3.zero);
 
@@ -62,7 +64,7 @@ public class FieldOfView : MonoBehaviour
         Debug.Assert(buildSuccessful);
     }
 
-    public void SetNextSettings(FieldOfViewDistanceSettings settings)
+    public void SetNextSettings(IFieldOfViewSettings settings)
     {
         lock (lockObject)
         {

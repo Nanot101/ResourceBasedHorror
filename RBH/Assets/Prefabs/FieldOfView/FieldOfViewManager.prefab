@@ -48,4 +48,5 @@ MonoBehaviour:
   fieldOfView: {fileID: 0}
   settings:
   - {fileID: 11400000, guid: 09af428eb8c3d3046a034d20305acd05, type: 2}
+  - {fileID: 11400000, guid: f04cc48d9e057ce4b987d4e868bd6623, type: 2}
   - {fileID: 11400000, guid: 52037ba01cfb7934c92006f0cbfba42c, type: 2}

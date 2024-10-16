@@ -14,7 +14,7 @@ public class FieldOfViewManager : Singleton<FieldOfViewManager>
     private FieldOfView fieldOfView;
 
     [SerializeField]
-    private List<FieldOfViewDistanceSettings> settings = new();
+    private List<FieldOfViewSettingsBase> settings = new();
 
     // Start is called before the first frame update
     void Start()
@@ -47,9 +47,11 @@ public class FieldOfViewManager : Singleton<FieldOfViewManager>
         var currentPhase = args.CurrentPhase;
 
         var settingsForThisPhase = settings
-            .FirstOrDefault(x =>
+            .Where(x =>
                 x.Phases
-                .Contains(currentPhase));
+                .Contains(currentPhase))
+            .Select(x => x.CreateSettings())
+            .FirstOrDefault();
 
         fieldOfView.SetNextSettings(settingsForThisPhase);
     }

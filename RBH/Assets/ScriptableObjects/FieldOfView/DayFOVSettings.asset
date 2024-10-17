@@ -19,5 +19,5 @@ MonoBehaviour:
   <FrontViewAngle>k__BackingField: 80
   <FrontViewDistance>k__BackingField: 8
   <AdditionalFrontRayCount>k__BackingField: 0
-  <AroundViewDistance>k__BackingField: 2
+  <AroundViewDistance>k__BackingField: 1.2
   <AdditionalAroundRayCount>k__BackingField: 0

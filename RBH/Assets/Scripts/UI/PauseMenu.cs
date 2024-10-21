@@ -37,6 +37,11 @@ public class PauseMenu : MonoBehaviour
         musicSlider.onValueChanged.RemoveListener(SetVolumeMusic);
         sfxSlider.onValueChanged.RemoveListener(SetVolumeSFX);
     }
+    private void OnDestroy()
+    {
+        ResumeGame();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -51,7 +56,6 @@ public class PauseMenu : MonoBehaviour
             }
         }
     }
-
     public void PauseGame()
     {
         pauseMenu.SetActive(true);

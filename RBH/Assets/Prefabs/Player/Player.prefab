@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5050251651467756063}
-  - component: {fileID: 6601156218098631653}
+  - component: {fileID: 8078655222360504797}
   - component: {fileID: 7496654748333850850}
   - component: {fileID: 2332075194105918399}
   - component: {fileID: 487708150151464056}
+  - component: {fileID: 8064536007263553353}
   m_Layer: 0
-  m_Name: PlayerSprite
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +38,7 @@ Transform:
   - {fileID: 2852215525366958135}
   m_Father: {fileID: 805150156218530174}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6601156218098631653
+--- !u!212 &8078655222360504797
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,8 +115,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spritesToFade:
-  - {fileID: 6601156218098631653}
   - {fileID: 7087995687798769848}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   fadeCycleTime: 0.35
   playerDamageReciver: {fileID: 8287974565075454170}
 --- !u!114 &487708150151464056
@@ -135,6 +138,19 @@ MonoBehaviour:
   cooldown: 6
   weaponDisablePhase: {fileID: 11400000, guid: 27299a03b6154c546bac6c6845a01fb3, type: 2}
   canShoot: 1
+--- !u!114 &8064536007263553353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033805069991406761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1a805843484974da3122c4813d4f4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 8078655222360504797}
 --- !u!1 &8479202090399757915
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +223,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0

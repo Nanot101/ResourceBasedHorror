@@ -9,6 +9,10 @@ public class PlayerMouseAim : MonoBehaviour
 
     void Update()
     {
+        if (PauseMenu.isPaused)
+        {
+            return;
+        }
         mouseX = Input.mousePosition.x - (Screen.width / 2);
         mouseY = Input.mousePosition.y - (Screen.height / 2);
 

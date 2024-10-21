@@ -27,6 +27,8 @@ public class PlayerWeapon : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenu.isPaused)
+            return;
         if (!canShoot)
             return;
         if (cooldownTimer < cooldown)

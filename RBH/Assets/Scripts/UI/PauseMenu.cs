@@ -76,7 +76,7 @@ public class PauseMenu : MonoBehaviour
     public void Menu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadScene(0);
     }
     //If we want to keep playing the audio when the game is paused like a menu music, we can use use audioSource.ignoreListenerPause = true;
     public void PauseAudio()

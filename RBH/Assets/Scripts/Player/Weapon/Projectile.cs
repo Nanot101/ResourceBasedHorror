@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
 
     private Collider2D playerCollider;
 
-    public void InitializeProjectile( Collider2D _playerCollider)
+    public void InitializeProjectile(Collider2D _playerCollider)
     {
         playerCollider = _playerCollider;
     }
@@ -30,8 +30,12 @@ public class Projectile : MonoBehaviour
 
     private void OnDestroy()
     {
-        DayNightSystem.Instance.OnPhaseChanged -= OnDayNightPhaseChanged;
+        if (DayNightSystem.TryGetInstance(out var dayNightSys))
+        {
+            dayNightSys.OnPhaseChanged -= OnDayNightPhaseChanged;
+        }
     }
+
     private void Update()
     {
         transform.Translate(Vector2.up * projectileSpeed * Time.deltaTime);

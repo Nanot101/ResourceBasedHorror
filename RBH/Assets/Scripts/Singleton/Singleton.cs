@@ -2,24 +2,44 @@ using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
-    private static T instance;
+    private static T _instance;
 
     public static T Instance
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = FindObjectOfType<T>();
+                _instance = FindObjectOfType<T>();
 
-                if (instance == null)
+                if (_instance == null)
                 {
                     Debug.LogError($"Failed to assign single instence of {nameof(T)}");
                 }
             }
 
-            return instance;
+            return _instance;
         }
+    }
+
+    public static bool TryGetInstance(out T instance)
+    {
+        if (_instance != null)
+        {
+            instance = _instance;
+            return true;
+        }
+
+        instance = FindObjectOfType<T>();
+
+        if (instance == null)
+        {
+            return false;
+        }
+
+        _instance = instance;
+
+        return true;
     }
 
     private void Awake()

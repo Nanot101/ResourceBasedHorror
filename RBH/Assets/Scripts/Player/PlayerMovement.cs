@@ -49,7 +49,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnDestroy()
     {
         PlayerHealthSystem.onPlayerDied -= StopMovement;
-        DayNightSystem.Instance.OnPhaseChanged -= OnDayNightPhaseChanged;
+
+        if (DayNightSystem.TryGetInstance(out var dayNightSys))
+        {
+            dayNightSys.OnPhaseChanged -= OnDayNightPhaseChanged;
+        }
     }
 
     void Update()

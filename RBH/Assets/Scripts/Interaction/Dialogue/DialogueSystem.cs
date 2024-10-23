@@ -30,7 +30,7 @@ public class DialogueSystem : MonoBehaviour
 
     private int currentPos = 0;
 
-    private bool dialogueTriggered = false;
+    public bool DialogueTriggered { get; private set; } = false;
 
     private bool endOfDialogue = false;
 
@@ -39,14 +39,14 @@ public class DialogueSystem : MonoBehaviour
     void Start()
     {
         currentPos = 0;
-        dialogueTriggered = false;
+        DialogueTriggered = false;
         endOfDialogue = false;
         dialogueScreen.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown("e") && dialogueTriggered)
+        if (Input.GetKeyDown("e") && DialogueTriggered)
         {
             //clickSound.Play();
             if (endOfDialogue)
@@ -70,6 +70,8 @@ public class DialogueSystem : MonoBehaviour
 
     public void StartDialogue(TextAsset dialogueFile, List<Texture> iconList)
     {
+        currentPos = 0;
+
         dialogueScript = dialogueFile.text;
         icons = iconList;
 
@@ -77,7 +79,7 @@ public class DialogueSystem : MonoBehaviour
 
         NextLine();
 
-        dialogueTriggered = true;
+        DialogueTriggered = true;
     }
     void NextLine()
     {
@@ -131,7 +133,7 @@ public class DialogueSystem : MonoBehaviour
         currentPos = 0;
 
         endOfDialogue = false;
-        dialogueTriggered = false;
+        DialogueTriggered = false;
         dialogueScreen.SetActive(false);
 
         InvokeCallback();

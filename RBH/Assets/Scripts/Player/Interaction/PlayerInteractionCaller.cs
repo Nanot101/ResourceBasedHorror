@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class PlayerInteractionCaller : MonoBehaviour, IInteractionCaller
 {
-    private List<Interactable> interactables = new();
+    [field: SerializeField]
+    public StoryPageStore StoryPages { get; private set; }
+
+    [field: SerializeField]
+
+    public RecipePageStore RecipePages { get; private set; }
+
+    private readonly List<Interactable> interactables = new();
 
     private Interactable selectedInteracteable = null;
 

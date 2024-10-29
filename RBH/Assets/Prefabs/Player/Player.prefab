@@ -352,6 +352,8 @@ GameObject:
   - component: {fileID: 8287974565075454170}
   - component: {fileID: 6206257594817900122}
   - component: {fileID: -3768524912040191805}
+  - component: {fileID: 5818715236183140842}
+  - component: {fileID: 5935669521737519630}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -532,5 +534,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a656de87863cc84cbb0598e829701fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <StoryPages>k__BackingField: {fileID: 5818715236183140842}
+  <RecipePages>k__BackingField: {fileID: 5935669521737519630}
+--- !u!114 &5818715236183140842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9065289971253864303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ee92b20654557488672855f7d8d158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5935669521737519630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9065289971253864303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3acf900d77107842a4d1ed5fc62469c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

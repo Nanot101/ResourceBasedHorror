@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -8,4 +6,8 @@ using UnityEngine;
 public interface IInteractionCaller
 {
     public GameObject GameObject { get; }
+
+    public StoryPageStore StoryPages { get; }
+
+    public RecipePageStore RecipePages { get; }
 }

@@ -1995,6 +1995,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponEnergyBarUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6584198293695377132, guid: 448d5f63412dd4846ad902812f671a34, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6607656823741051167, guid: 448d5f63412dd4846ad902812f671a34, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2083,6 +2087,11 @@ PrefabInstance:
 --- !u!224 &1535242495 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6607656823741051167, guid: 448d5f63412dd4846ad902812f671a34, type: 3}
+  m_PrefabInstance: {fileID: 1535242494}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1535242496 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2030712737451007250, guid: 448d5f63412dd4846ad902812f671a34, type: 3}
   m_PrefabInstance: {fileID: 1535242494}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1580952523
@@ -2272,6 +2281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 3919909712480360729, guid: 1bc152b98bafd1a449a07af5acc7b96c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4624155719048468069, guid: 1bc152b98bafd1a449a07af5acc7b96c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -2437,6 +2450,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 487708150151464056, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: WeaponIcon
+      value: 
+      objectReference: {fileID: 1535242496}
     - target: {fileID: 487708150151464056, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
       propertyPath: weaponDisablePhase
       value: 
@@ -3080,15 +3097,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1455892724761840724, guid: b4dc77ed5ef434a4eb5204a55bbf5ac1, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.621
       objectReference: {fileID: 0}
     - target: {fileID: 1455892724761840724, guid: b4dc77ed5ef434a4eb5204a55bbf5ac1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4054251745343966760, guid: b4dc77ed5ef434a4eb5204a55bbf5ac1, type: 3}
       propertyPath: m_Name
       value: PlayerStaminaBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054251745343966760, guid: b4dc77ed5ef434a4eb5204a55bbf5ac1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5432020650080890890, guid: b4dc77ed5ef434a4eb5204a55bbf5ac1, type: 3}
       propertyPath: playerStamina

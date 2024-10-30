@@ -6,6 +6,9 @@ public abstract class NotebookPage : ScriptableObject, IComparable<NotebookPage>
     [field: SerializeField]
     public int PageNumber { get; set; }
 
+    [field: SerializeField]
+    public Sprite Sprite { get; set; }
+
     public int CompareTo(NotebookPage other) => PageNumber.CompareTo(other.PageNumber);
 
     public bool Equals(NotebookPage other) => PageNumber.Equals(other.PageNumber);

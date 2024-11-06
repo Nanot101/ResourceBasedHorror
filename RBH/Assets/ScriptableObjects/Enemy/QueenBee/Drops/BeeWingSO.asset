@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99308583ce0979246be8d0ccbf310142, type: 3}
-  m_Name: LarvaeDropSO
+  m_Name: BeeWingSO
   m_EditorClassIdentifier: 
-  <DropName>k__BackingField: Larvae
-  <DropIcon>k__BackingField: {fileID: 0}
+  <DropName>k__BackingField: Bee Wing
+  <DropIcon>k__BackingField: {fileID: 21300000, guid: 0c58d3a65134db349952b3f860ed1d7a, type: 3}
   <MinQuantity>k__BackingField: 1
   <MaxQuantity>k__BackingField: 5

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FermentedHoneyDropSO
   m_EditorClassIdentifier: 
   <DropName>k__BackingField: Fermented Honey
-  <DropIcon>k__BackingField: {fileID: 0}
+  <DropIcon>k__BackingField: {fileID: 21300000, guid: fe874d47e86a5de458f8621d5354d818, type: 3}
   <MinQuantity>k__BackingField: 1
   <MaxQuantity>k__BackingField: 5

@@ -116,9 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spritesToFade:
   - {fileID: 7087995687798769848}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8078655222360504797}
   fadeCycleTime: 0.35
   playerDamageReciver: {fileID: 8287974565075454170}
 --- !u!114 &487708150151464056
@@ -136,6 +134,7 @@ MonoBehaviour:
   playerCollider: {fileID: 1335401080097150228}
   projectilePrefab: {fileID: 2289292700147475393, guid: a8107f295cdd02940ab29cc94541aa0f, type: 3}
   cooldown: 6
+  WeaponIcon: {fileID: 0}
   weaponDisablePhase: {fileID: 11400000, guid: 27299a03b6154c546bac6c6845a01fb3, type: 2}
   canShoot: 1
 --- !u!114 &8064536007263553353

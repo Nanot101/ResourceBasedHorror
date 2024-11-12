@@ -8,6 +8,9 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float projectileSpeed = 2f;
 
     [SerializeField]
+    private float projectileDamage = 20.0f;
+
+    [SerializeField]
     private DayNightPhase projectileDestroyPhase;
 
     private Collider2D playerCollider;
@@ -44,11 +47,20 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other == playerCollider)
-            return;
-        if (other.TryGetComponent<EnemyStun>(out var enemy))
         {
-            enemy.TryStun();
+            return;
         }
+
+        if (other.TryGetComponent<EnemyStun>(out var enemyStun))
+        {
+            enemyStun.TryStun();
+        }
+
+        if (other.TryGetComponent<EnemyHealth>(out var enemyHealth))
+        {
+            enemyHealth.DecreaseHealth(projectileDamage);
+        }
+
         Destroy(gameObject);
 
     }

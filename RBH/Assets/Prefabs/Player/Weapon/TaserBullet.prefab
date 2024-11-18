@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4693553345750444808}
   - component: {fileID: 3722043422740446255}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: TaserBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

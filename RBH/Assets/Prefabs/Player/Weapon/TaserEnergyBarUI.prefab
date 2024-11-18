@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 6607656823741051167}
   - component: {fileID: 8472530957908983572}
   m_Layer: 5
-  m_Name: WeaponEnergyBarUI
+  m_Name: TaserEnergyBarUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,8 +386,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f1037618f940540982c03483e5af59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerWeapon: {fileID: 0}
-  weaponEnergyBar: {fileID: 8666698576300680291}
+  taserWeapon: {fileID: 0}
+  taserEnergyBar: {fileID: 8666698576300680291}
+  weaponIcon: {fileID: 2030712737451007250}
 --- !u!1 &8859879648572387856
 GameObject:
   m_ObjectHideFlags: 0

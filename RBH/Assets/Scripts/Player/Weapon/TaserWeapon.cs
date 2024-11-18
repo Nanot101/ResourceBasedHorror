@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWeapon : MonoBehaviour
+public class TaserWeapon : MonoBehaviour
 {
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] Projectile projectilePrefab;
     [SerializeField] private float cooldown = 6f;
-    [SerializeField] private GameObject WeaponIcon;
 
     [SerializeField]
     private DayNightPhase weaponDisablePhase;
@@ -22,7 +21,6 @@ public class PlayerWeapon : MonoBehaviour
             playerCollider = GetComponentInParent<Collider2D>();
 
         DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
-        WeaponIcon.SetActive(false);
     }
 
     private void OnDestroy()
@@ -44,10 +42,7 @@ public class PlayerWeapon : MonoBehaviour
             cooldownTimer += Time.deltaTime;
             return;
         }
-        if (!WeaponIcon.activeSelf)
-        {
-            WeaponIcon.SetActive(true);
-        }
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Shoot();
@@ -58,7 +53,6 @@ public class PlayerWeapon : MonoBehaviour
     {
         Projectile instantiatedProjectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         instantiatedProjectile.InitializeProjectile(playerCollider);
-        WeaponIcon.SetActive(false);
     }
 
     public void GetCooldown(out float currentCooldown, out float maxCooldown)

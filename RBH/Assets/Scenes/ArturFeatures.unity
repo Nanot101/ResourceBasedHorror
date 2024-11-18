@@ -1297,7 +1297,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6584198293695377132, guid: 448d5f63412dd4846ad902812f671a34, type: 3}
       propertyPath: m_Name
-      value: WeaponEnergyBarUI
+      value: TaserEnergyBarUI
       objectReference: {fileID: 0}
     - target: {fileID: 6584198293695377132, guid: 448d5f63412dd4846ad902812f671a34, type: 3}
       propertyPath: m_IsActive

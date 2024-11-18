@@ -15,7 +15,7 @@ public class PlayerRespawn : MonoBehaviour
     private PlayerStamina stamina;
 
     [SerializeField]
-    private PlayerWeapon weapon;
+    private TaserWeapon weapon;
 
     [SerializeField]
     private DayNightPhase moveToRespawnPhase;

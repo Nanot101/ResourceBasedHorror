@@ -3,56 +3,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaserWeapon : MonoBehaviour
+public class TaserWeapon : PlayerProjectileWeapon
 {
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] Projectile projectilePrefab;
     [SerializeField] private float cooldown = 6f;
 
-    [SerializeField]
-    private DayNightPhase weaponDisablePhase;
-
-    public bool canShoot = true;
     private float cooldownTimer;
 
     private void Start()
     {
         if (playerCollider == null)
             playerCollider = GetComponentInParent<Collider2D>();
-
-        DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
-    }
-
-    private void OnDestroy()
-    {
-        if (DayNightSystem.TryGetInstance(out var dayNightSys))
-        {
-            dayNightSys.OnPhaseChanged -= OnDayNightPhaseChanged;
-        }
     }
 
     private void Update()
     {
-        if (PauseMenu.isPaused)
-            return;
-        if (!canShoot)
-            return;
         if (cooldownTimer < cooldown)
         {
             cooldownTimer += Time.deltaTime;
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Shoot();
-            cooldownTimer = 0;
         }
     }
-    private void Shoot()
+
+    public override bool TryShoot()
     {
-        Projectile instantiatedProjectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-        instantiatedProjectile.InitializeProjectile(playerCollider);
+        if (cooldownTimer < cooldown)
+        {
+            return false;
+        }
+
+        Shoot();
+
+        cooldownTimer = 0;
+
+        return true;
+    }
+
+    public override bool TryReload()
+    {
+        // NOOP
+        return false;
+    }
+
+    public override void Select()
+    {
+        // NOOP
+        return;
+    }
+
+    public override void Deselect()
+    {
+        // NOOP
+        return;
     }
 
     public void GetCooldown(out float currentCooldown, out float maxCooldown)
@@ -61,13 +63,9 @@ public class TaserWeapon : MonoBehaviour
         maxCooldown = cooldown;
     }
 
-    private void OnDayNightPhaseChanged(object sender, DayNightSystemEventArgs args)
+    private void Shoot()
     {
-        var currentPhase = args.CurrentPhase;
-
-        if (currentPhase == weaponDisablePhase)
-        {
-            canShoot = false;
-        }
+        Projectile instantiatedProjectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
+        instantiatedProjectile.InitializeProjectile(playerCollider);
     }
 }

@@ -15,7 +15,7 @@ public class PlayerRespawn : MonoBehaviour
     private PlayerStamina stamina;
 
     [SerializeField]
-    private TaserWeapon weapon;
+    private WeaponController weaponController;
 
     [SerializeField]
     private DayNightPhase moveToRespawnPhase;
@@ -64,7 +64,7 @@ public class PlayerRespawn : MonoBehaviour
 
         damageReceiver.OnPlayerRespawned();
         stamina.OnPlayerRespawned();
-        weapon.canShoot = true;
+        weaponController.WeaponsEnabled = true;
     }
 
     private void TryMovePlayerToRespawnPoint()
@@ -105,9 +105,9 @@ public class PlayerRespawn : MonoBehaviour
             Destroy(this);
         }
 
-        if (stamina == null)
+        if (weaponController == null)
         {
-            Debug.LogError("Player weapon is required for player respawn");
+            Debug.LogError("Player weapon controller is required for player respawn");
             Destroy(this);
         }
     }

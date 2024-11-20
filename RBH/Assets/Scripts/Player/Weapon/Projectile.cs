@@ -1,17 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] float lifeTime = 4f;
-    [SerializeField] private float projectileSpeed = 2f;
+    [SerializeField]
+    private float lifeTime = 4f;
 
     [SerializeField]
-    private float projectileDamage = 20.0f;
+    private float projectileSpeed = 2f;
 
     [SerializeField]
     private DayNightPhase projectileDestroyPhase;
+
+    [SerializeField]
+    private List<EnemyDamageEntry> enemyDamageTable = new();
 
     private Collider2D playerCollider;
 
@@ -51,18 +54,36 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        if (other.TryGetComponent<EnemyStun>(out var enemyStun))
+        TryDealDamage(other);
+
+        Destroy(gameObject);
+    }
+
+    private void TryDealDamage(Collider2D other)
+    {
+        if (!other.TryGetComponent<Enemy>(out var enemy))
+        {
+            return;
+        }
+
+        var enemyDamageEntry = enemyDamageTable.SingleOrDefault(x => x.Equals(enemy.Attributes));
+
+        if (enemyDamageEntry.Equals((EnemyDamageEntry)default))
+        {
+            return;
+        }
+
+        if (enemyDamageEntry.CanStun
+            && enemy.TryGetComponent<EnemyStun>(out var enemyStun))
         {
             enemyStun.TryStun();
         }
 
-        if (other.TryGetComponent<EnemyHealth>(out var enemyHealth))
+        if (enemyDamageEntry.Damage > 0.0f
+            && enemy.TryGetComponent<EnemyHealth>(out var enemyHealth))
         {
-            enemyHealth.DecreaseHealth(projectileDamage);
+            enemyHealth.DecreaseHealth(enemyDamageEntry.Damage);
         }
-
-        Destroy(gameObject);
-
     }
 
     private void OnDayNightPhaseChanged(object sender, DayNightSystemEventArgs args)

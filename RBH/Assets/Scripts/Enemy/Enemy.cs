@@ -9,17 +9,17 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private EnemyDropSystem dropSystem;
 
-    [SerializeField]
-    private EnemySO attributes;
+    [field: SerializeField]
+    public EnemySO Attributes { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Assert(attributes != null, $"{nameof(attributes)} are required for {nameof(Enemy)}", this);
+        Debug.Assert(Attributes != null, $"{nameof(Attributes)} are required for {nameof(Enemy)}", this);
         Debug.Assert(health != null, $"{nameof(health)} is required for {nameof(Enemy)}", this);
         Debug.Assert(dropSystem != null, $"{nameof(dropSystem)} is required for {nameof(Enemy)}", this);
 
-        health.SetHealth(attributes.HealthPoints);
-        dropSystem.SetDrops(attributes.Drops);
+        health.SetHealth(Attributes.HealthPoints);
+        dropSystem.SetDrops(Attributes.Drops);
     }
 }

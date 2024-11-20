@@ -118,6 +118,46 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2289292700147475393, guid: acc03e53573956d4b9b501c65524713a, type: 3}
+      propertyPath: enemyDamageTable.Array.data[0].<Damage>k__BackingField
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289292700147475393, guid: acc03e53573956d4b9b501c65524713a, type: 3}
+      propertyPath: enemyDamageTable.Array.data[1].<Damage>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289292700147475393, guid: acc03e53573956d4b9b501c65524713a, type: 3}
+      propertyPath: enemyDamageTable.Array.data[2].<Damage>k__BackingField
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289292700147475393, guid: acc03e53573956d4b9b501c65524713a, type: 3}
+      propertyPath: enemyDamageTable.Array.data[3].<Damage>k__BackingField
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289292700147475393, guid: acc03e53573956d4b9b501c65524713a, type: 3}
+      propertyPath: enemyDamageTable.Array.data[4].<Damage>k__BackingField
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289292700147475393, guid: acc03e53573956d4b9b501c65524713a, type: 3}
+      propertyPath: enemyDamageTable.Array.data[0].<CanStun>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289292700147475393, guid: acc03e53573956d4b9b501c65524713a, type: 3}
+      propertyPath: enemyDamageTable.Array.data[1].<CanStun>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289292700147475393, guid: acc03e53573956d4b9b501c65524713a, type: 3}
+      propertyPath: enemyDamageTable.Array.data[2].<CanStun>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289292700147475393, guid: acc03e53573956d4b9b501c65524713a, type: 3}
+      propertyPath: enemyDamageTable.Array.data[3].<CanStun>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289292700147475393, guid: acc03e53573956d4b9b501c65524713a, type: 3}
+      propertyPath: enemyDamageTable.Array.data[4].<CanStun>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3216082282147295117, guid: acc03e53573956d4b9b501c65524713a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.05
@@ -160,7 +200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4282348914888738280, guid: acc03e53573956d4b9b501c65524713a, type: 3}
       propertyPath: m_Name
-      value: TaserBullet Variant
+      value: PistolBullet
       objectReference: {fileID: 0}
     - target: {fileID: 4693553345750444808, guid: acc03e53573956d4b9b501c65524713a, type: 3}
       propertyPath: m_Size.x

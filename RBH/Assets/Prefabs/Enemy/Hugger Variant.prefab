@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2284266328218931727
+--- !u!1001 &7405224276128198753
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,23 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2812366528398320801, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.8490566
       objectReference: {fileID: 0}
     - target: {fileID: 2812366528398320801, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_Color.g
-      value: 0.6302396
+      value: 0.540064
       objectReference: {fileID: 0}
     - target: {fileID: 2812366528398320801, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.06728367
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.11
+      value: -0.62
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: -1.48
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.z
@@ -61,16 +61,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7748986277421513399, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
-      propertyPath: attributes
-      value: 
-      objectReference: {fileID: 11400000, guid: 8e61b6b7a8f82c94d81101156f106742, type: 2}
-    - target: {fileID: 7748986277421513399, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: <Attributes>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 8e61b6b7a8f82c94d81101156f106742, type: 2}
+      objectReference: {fileID: 11400000, guid: 94694e7948fac324ca1c851fbb57dc14, type: 2}
     - target: {fileID: 8645464370514058995, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_Name
-      value: QueenBee Variant
+      value: Hugger Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8078655222360504797}
   - component: {fileID: 7496654748333850850}
   - component: {fileID: 2332075194105918399}
-  - component: {fileID: 487708150151464056}
   - component: {fileID: 8064536007263553353}
+  - component: {fileID: 487708150151464056}
   - component: {fileID: 1364752541414751352}
   m_Layer: 0
   m_Name: Visual
@@ -120,21 +120,6 @@ MonoBehaviour:
   - {fileID: 8078655222360504797}
   fadeCycleTime: 0.35
   playerDamageReciver: {fileID: 8287974565075454170}
---- !u!114 &487708150151464056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3033805069991406761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ac3844a19ef73049b1a231877d40730, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCollider: {fileID: 1335401080097150228}
-  projectilePrefab: {fileID: 2289292700147475393, guid: a8107f295cdd02940ab29cc94541aa0f, type: 3}
-  cooldown: 6
 --- !u!114 &8064536007263553353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +133,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8078655222360504797}
+--- !u!114 &487708150151464056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033805069991406761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac3844a19ef73049b1a231877d40730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 1335401080097150228}
+  projectilePrefab: {fileID: 6785678445432073186, guid: f6b1a37ddbd9b704abcc9b6d9d392efb, type: 3}
+  cooldown: 6
 --- !u!114 &1364752541414751352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 1335401080097150228}
-  projectilePrefab: {fileID: 2289292700147475393, guid: a8107f295cdd02940ab29cc94541aa0f, type: 3}
+  projectilePrefab: {fileID: 6785678445432073186, guid: a03facad5c571c54f9c981c17d2f02f3, type: 3}
   <CooldownBetweenShots>k__BackingField: 1
   <ReloadCooldown>k__BackingField: 5
   <MagazineSize>k__BackingField: 5

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PistolWeapon : PlayerProjectileWeapon
@@ -21,7 +22,11 @@ public class PistolWeapon : PlayerProjectileWeapon
 
     public float CooldownTimer { get; private set; }
 
-    public State CurrentState { get; private set; }
+    public State CurrentState { get; private set; } = State.Deselected;
+
+    public event EventHandler OnPistolSelected;
+
+    public event EventHandler OnPistolDeselected;
 
     // Start is called before the first frame update
     void Start()
@@ -92,14 +97,20 @@ public class PistolWeapon : PlayerProjectileWeapon
 
     public override void Select()
     {
-        // NOOP
-        return;
+        CurrentState = State.Idle;
+
+        OnPistolSelected?.Invoke(this, EventArgs.Empty);
+
+        if (CurrentBulletsInMagazine == 0)
+        {
+            TryReload();
+        }
     }
 
     public override void Deselect()
     {
-        // NOOP
-        return;
+        CurrentState = State.Deselected;
+        OnPistolDeselected?.Invoke(this, EventArgs.Empty);
     }
 
     private void SpawnProjectile()
@@ -155,6 +166,7 @@ public class PistolWeapon : PlayerProjectileWeapon
     {
         Idle,
         ShootCooldown,
-        ReloadCooldown
+        ReloadCooldown,
+        Deselected
     }
 }

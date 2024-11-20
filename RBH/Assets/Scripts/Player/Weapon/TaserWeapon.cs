@@ -5,11 +5,20 @@ using UnityEngine;
 
 public class TaserWeapon : PlayerProjectileWeapon
 {
-    [SerializeField] private Collider2D playerCollider;
-    [SerializeField] Projectile projectilePrefab;
-    [SerializeField] private float cooldown = 6f;
+    [SerializeField]
+    private Collider2D playerCollider;
+
+    [SerializeField]
+    Projectile projectilePrefab;
+
+    [SerializeField]
+    private float cooldown = 6f;
 
     private float cooldownTimer;
+
+    public event EventHandler OnTaserSelected;
+
+    public event EventHandler OnTaserDeselected;
 
     private void Start()
     {
@@ -45,17 +54,9 @@ public class TaserWeapon : PlayerProjectileWeapon
         return false;
     }
 
-    public override void Select()
-    {
-        // NOOP
-        return;
-    }
+    public override void Select() => OnTaserSelected?.Invoke(this, EventArgs.Empty);
 
-    public override void Deselect()
-    {
-        // NOOP
-        return;
-    }
+    public override void Deselect() => OnTaserDeselected?.Invoke(this, EventArgs.Empty);
 
     public void GetCooldown(out float currentCooldown, out float maxCooldown)
     {

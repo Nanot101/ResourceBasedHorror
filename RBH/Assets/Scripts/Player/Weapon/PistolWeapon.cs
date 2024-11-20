@@ -70,7 +70,7 @@ public class PistolWeapon : PlayerProjectileWeapon
         CurrentBulletsInMagazine--;
         CurrentState = State.ShootCooldown;
 
-        Debug.Log($"Pistol fire!, current ammo: {CurrentBulletsInMagazine}", this);
+        //Debug.Log($"Pistol fire!, current ammo: {CurrentBulletsInMagazine}", this);
 
         return true;
     }
@@ -90,7 +90,7 @@ public class PistolWeapon : PlayerProjectileWeapon
         CooldownTimer = 0;
         CurrentState = State.ReloadCooldown;
 
-        Debug.Log("Pistol reload!", this);
+        //Debug.Log("Pistol reload!", this);
 
         return true;
     }
@@ -130,7 +130,7 @@ public class PistolWeapon : PlayerProjectileWeapon
 
         CurrentState = State.Idle;
 
-        Debug.Log("Shoot cooldown end!", this);
+        //Debug.Log("Shoot cooldown end!", this);
 
         if (CurrentBulletsInMagazine == 0)
         {
@@ -150,7 +150,7 @@ public class PistolWeapon : PlayerProjectileWeapon
         CurrentBulletsInMagazine = MagazineSize;
         CurrentState = State.Idle;
 
-        Debug.Log("Reload cooldown end!", this);
+        //Debug.Log("Reload cooldown end!", this);
     }
 
     private void AsserDesignerFields()

@@ -87,7 +87,7 @@ public class WeaponController : MonoBehaviour
 
         playerProjectileWeapons[currentWeaponIndex].Select();
 
-        Debug.Log($"Next weapon index: {currentWeaponIndex}, next weapon name: {playerProjectileWeapons[currentWeaponIndex].GetType().Name}", this);
+        //Debug.Log($"Next weapon index: {currentWeaponIndex}, next weapon name: {playerProjectileWeapons[currentWeaponIndex].GetType().Name}", this);
     }
 
     private void HandleWeaponInput()

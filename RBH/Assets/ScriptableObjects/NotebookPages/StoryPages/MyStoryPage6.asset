@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2630db5affd51a44c812caba0cd17c90, type: 3}
-  m_Name: MyStoryPage3
+  m_Name: MyStoryPage6
   m_EditorClassIdentifier: 
-  <PageNumber>k__BackingField: 3
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 0ab483a1c885ebc4fbb435842e0e19ec, type: 3}
-  <DialogueScript>k__BackingField: {fileID: 4900000, guid: df6adc51129a6ea45bc94a809ec55cac, type: 3}
+  <PageNumber>k__BackingField: 6
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 7e4207fa624656449bfc211bc07b261e, type: 3}
+  <DialogueScript>k__BackingField: {fileID: 4900000, guid: db3a156cd41916244b6eb1636ce048d1, type: 3}
   <IconList>k__BackingField: []

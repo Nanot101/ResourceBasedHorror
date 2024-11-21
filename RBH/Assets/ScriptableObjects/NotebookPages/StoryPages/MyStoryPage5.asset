@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: MyStoryPage5
   m_EditorClassIdentifier: 
   <PageNumber>k__BackingField: 5
-  <DialogueScript>k__BackingField: {fileID: 4900000, guid: 4b3e0864ab202974595e8693d6b6738f, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: d280dde372ef388458a33c36b2a74051, type: 3}
+  <DialogueScript>k__BackingField: {fileID: 4900000, guid: 16a2abed3341c9945b3e599e32878595, type: 3}
   <IconList>k__BackingField: []

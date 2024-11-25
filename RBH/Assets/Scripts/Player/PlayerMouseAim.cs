@@ -9,7 +9,7 @@ public class PlayerMouseAim : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.isPaused)
+        if (GamePause.IsPaused)
         {
             return;
         }

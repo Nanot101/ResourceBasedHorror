@@ -61,7 +61,7 @@ public class PlayerStamina : MonoBehaviour
     private void Update()
     {
         //DebugHandleInput();
-        if (PauseMenu.isPaused)
+        if (GamePause.IsPaused)
         {
             return;
         }

@@ -9,8 +9,6 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject optionsMenu;
-    //Use this to check if game is paused or not
-    public static bool isPaused;
 
     public AudioMixer mainMixer;
 
@@ -44,9 +42,15 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+        if (GamePause.IsPaused && !GamePause.IsPauseRequested<PauseMenu>())
+        {
+            // The game is paused, but not by us, so our pause request is not processed.
+            return;
+        }
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
+            if (GamePause.IsPauseRequested<PauseMenu>())
             {
                 ResumeGame();
             }
@@ -61,7 +65,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         PauseAudio();
-        isPaused = true;
+        
+        GamePause.RequestPause<PauseMenu>();
     }
 
     public void ResumeGame()
@@ -70,7 +75,8 @@ public class PauseMenu : MonoBehaviour
         optionsMenu.SetActive(false);
         Time.timeScale = 1f;
         ResumeAudio();
-        isPaused = false;
+        
+        GamePause.RequestResume<PauseMenu>();
     }
 
     public void Menu()

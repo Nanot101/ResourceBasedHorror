@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.isPaused)
+        if (GamePause.IsPaused)
         {
             return;
         }

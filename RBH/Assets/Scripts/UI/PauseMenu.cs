@@ -17,6 +17,8 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] AudioSource menuMusic;
 
+    private static bool IsPauseMenuActive => GamePause.IsPauseRequested<PauseMenu>();
+    
     private void Start()
     {
         menuMusic.ignoreListenerPause = true;
@@ -42,7 +44,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (GamePause.IsPaused && !GamePause.IsPauseRequested<PauseMenu>())
+        if (GamePause.IsPaused && !IsPauseMenuActive)
         {
             // The game is paused, but not by us, so our pause request is not processed.
             return;
@@ -50,7 +52,7 @@ public class PauseMenu : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GamePause.IsPauseRequested<PauseMenu>())
+            if (IsPauseMenuActive)
             {
                 ResumeGame();
             }

@@ -3,21 +3,16 @@ using UnityEngine.UI;
 
 public class NotebookUI : MonoBehaviour
 {
-    [SerializeField]
-    private Button moveToStoryBtn;
+    [SerializeField] private Button moveToStoryBtn;
 
-    [SerializeField]
-    private Button moveToRecipeBtn;
+    [SerializeField] private Button moveToRecipeBtn;
 
-    [SerializeField]
-    private StoryPageUI storyPageUI;
+    [SerializeField] private StoryPageUI storyPageUI;
 
-    [SerializeField]
-    private RecipePageUI recipePageUI;
+    [SerializeField] private RecipePageUI recipePageUI;
 
     private bool storyPageUISelected = true;
-
-    private bool noteBookSelected = false;
+    private static bool NoteBookSelected => GamePause.IsPauseRequested<NotebookUI>();
 
     private void Start()
     {
@@ -32,12 +27,18 @@ public class NotebookUI : MonoBehaviour
 
     private void Update()
     {
+        if (GamePause.IsPaused && !NoteBookSelected)
+        {
+            // The game is paused, but not by us.
+            return;
+        }
+
         if (!Input.GetKeyDown(KeyCode.N))
         {
             return;
         }
 
-        if (noteBookSelected)
+        if (NoteBookSelected)
         {
             HideAll();
 
@@ -88,7 +89,7 @@ public class NotebookUI : MonoBehaviour
             recipePageUI.Show();
         }
 
-        noteBookSelected = true;
+        GamePause.RequestPause<NotebookUI>();
     }
 
     private void HideAll()
@@ -99,7 +100,7 @@ public class NotebookUI : MonoBehaviour
         storyPageUI.Hide();
         recipePageUI.Hide();
 
-        noteBookSelected = false;
+        GamePause.RequestResume<NotebookUI>();
     }
 
     private void SetButtons()

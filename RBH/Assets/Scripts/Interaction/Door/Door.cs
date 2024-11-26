@@ -15,41 +15,32 @@ public class Door : MonoBehaviour
     private Quaternion closedRotation;
     private Quaternion openRotationTarget;
 
-    private void Awake()
-    {
-        if (pivot == null)
-        {
+    private void Awake() {
+        if (pivot == null) {
             Debug.LogError("Pivot reference is missing!");
         }
         closedRotation = pivot.rotation; // Use the pivot's rotation
         openRotationTarget = Quaternion.Euler(pivot.eulerAngles + new Vector3(0, 0, openRotation));
     }
 
-    public void ToggleState()
-    {
+    public void ToggleState() {
         if (isAnimating) return; // Do nothing if the door is animating
-        if (isOpen)
-        {
+        if (isOpen) {
             StartCoroutine(AnimateDoor(closedRotation));
         }
-        else
-        {
+        else {
             StartCoroutine(AnimateDoor(openRotationTarget));
         }
-
         isOpen = !isOpen;
     }
 
-    private System.Collections.IEnumerator AnimateDoor(Quaternion targetRotation)
-    {
+    private System.Collections.IEnumerator AnimateDoor(Quaternion targetRotation) {
         isAnimating = true;
-        while (Quaternion.Angle(pivot.rotation, targetRotation) > 0.01f)
-        {
+        while (Quaternion.Angle(pivot.rotation, targetRotation) > 0.01f) {
             pivot.rotation = Quaternion.Slerp(pivot.rotation, targetRotation, Time.deltaTime * animationSpeed);
             yield return null;
         }
-
-        pivot.rotation = targetRotation; // Snap to the final rotation to avoid small misalignments.
+        pivot.rotation = targetRotation; // Snap to final rotation
         isAnimating = false;
     }
 }

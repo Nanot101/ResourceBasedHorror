@@ -89,6 +89,7 @@ public class NotebookUI : MonoBehaviour
             recipePageUI.Show();
         }
 
+        Time.timeScale = 0f;
         GamePause.RequestPause<NotebookUI>();
     }
 
@@ -100,6 +101,7 @@ public class NotebookUI : MonoBehaviour
         storyPageUI.Hide();
         recipePageUI.Hide();
 
+        Time.timeScale = 1f;
         GamePause.RequestResume<NotebookUI>();
     }
 

@@ -1,26 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DoorInteraction : InteractionBase
 {
     [SerializeField]
-    private Door door;
+    private DoorRotationController doorRotationController;
 
-    private void Awake() {
-        if (door == null) {
-            Debug.LogError("Door reference is missing!");
-        }
+    private void Start()
+    {
+        Debug.Assert(doorRotationController,
+            $"{nameof(doorRotationController)} reference is missing!", this);
     }
 
-    public override bool CanInteract(IInteractionCaller caller) {
-        return door != null;
-    }
+    public override bool CanInteract(IInteractionCaller caller) => doorRotationController.CanToggleState;
 
-    public override void Interact(IInteractionCaller caller) {
-        Debug.Log("Interact triggered for door: " + door.name);
-        if (door != null) {
-            door.ToggleState();
+    public override void Interact(IInteractionCaller caller)
+    {
+        if (!doorRotationController.CanToggleState)
+        {
+            return;
         }
+
+        // Debug.Log($"Interact triggered for door: {doorRotationController.name}");
+
+        doorRotationController.ToggleState(caller.GameObject.transform.position);
     }
 }

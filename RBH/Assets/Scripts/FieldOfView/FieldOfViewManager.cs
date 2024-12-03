@@ -30,7 +30,11 @@ public class FieldOfViewManager : Singleton<FieldOfViewManager>
     private void OnDestroy()
     {
         DisableFOVSystem();
-        DayNightSystem.Instance.OnPhaseChanged -= OnDayNightPhaseChanged;
+
+        if (DayNightSystem.TryGetInstance(out var dayNightSys))
+        {
+            dayNightSys.OnPhaseChanged -= OnDayNightPhaseChanged;
+        }
     }
 
     private void OnEnable() => EnabeFOVSystem();

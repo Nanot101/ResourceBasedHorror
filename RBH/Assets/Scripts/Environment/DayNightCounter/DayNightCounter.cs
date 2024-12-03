@@ -29,7 +29,13 @@ public class DayNightCounter : Singleton<DayNightCounter>
         DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
     }
 
-    private void OnDestroy() => DayNightSystem.Instance.OnPhaseChanged -= OnDayNightPhaseChanged;
+    private void OnDestroy()
+    {
+        if (DayNightSystem.TryGetInstance(out var dayNightSys))
+        {
+            dayNightSys.OnPhaseChanged -= OnDayNightPhaseChanged;
+        }
+    }
 
     private void OnDayNightPhaseChanged(object sender, DayNightSystemEventArgs args)
     {

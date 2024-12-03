@@ -3,22 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pauseMenu;
-    public GameObject optionsMenu;
-    // Making this a global var just in case you need this.
-    public static bool isPaused;
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject optionsMenu;
 
     public AudioMixer mainMixer;
 
-    // Update is called once per frame
+    [SerializeField] Slider musicSlider;
+    [SerializeField] Slider sfxSlider;
+
+    [SerializeField] AudioSource menuMusic;
+
+    private static bool IsPauseMenuActive => GamePause.IsPauseRequested<PauseMenu>();
+    
+    private void Start()
+    {
+        menuMusic.ignoreListenerPause = true;
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume",.5f);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume",0.8f);
+    }
+
+    private void OnEnable()
+    {
+        musicSlider.onValueChanged.AddListener(SetVolumeMusic);
+        sfxSlider.onValueChanged.AddListener(SetVolumeSFX);
+    }
+
+    private void OnDisable()
+    {
+        musicSlider.onValueChanged.RemoveListener(SetVolumeMusic);
+        sfxSlider.onValueChanged.RemoveListener(SetVolumeSFX);
+    }
+    private void OnDestroy()
+    {
+        ResumeGame();
+    }
+
     void Update()
     {
+        if (GamePause.IsPaused && !IsPauseMenuActive)
+        {
+            // The game is paused, but not by us, so our pause request is not processed.
+            return;
+        }
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
+            if (IsPauseMenuActive)
             {
                 ResumeGame();
             }
@@ -28,12 +62,13 @@ public class PauseMenu : MonoBehaviour
             }
         }
     }
-
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
-        isPaused = true;
+        PauseAudio();
+        
+        GamePause.RequestPause<PauseMenu>();
     }
 
     public void ResumeGame()
@@ -41,22 +76,48 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
         Time.timeScale = 1f;
-        isPaused = false;
+        ResumeAudio();
+        
+        GamePause.RequestResume<PauseMenu>();
     }
 
     public void Menu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadScene(0);
+    }
+    //If we want to keep playing the audio when the game is paused like a menu music, we can use use audioSource.ignoreListenerPause = true;
+    public void PauseAudio()
+    {
+        AudioListener.pause = true;
+        menuMusic.Play();
+    }
+
+    public void ResumeAudio()
+    {
+        menuMusic.Pause();
+        AudioListener.pause = false;
     }
 
     public void SetVolumeMusic(float sliderValue)
     {
-        //mainMixer.SetFloat("Music", sliderValue);
+        PlayerPrefs.SetFloat("MusicVolume", sliderValue);
+        float dB = 20 * Mathf.Log10(sliderValue);
+        if (sliderValue <= 0)
+        {
+            dB = -80;
+        }
+        mainMixer.SetFloat("MusicVolume", dB);
     }
 
     public void SetVolumeSFX(float sliderValue)
     {
-        //mainMixer.SetFloat("SFX", sliderValue);
+        PlayerPrefs.SetFloat("SFXVolume", sliderValue);
+        float dB = 20 * Mathf.Log10(sliderValue);
+        if (sliderValue <= 0)
+        {
+            dB = -80;
+        }
+        mainMixer.SetFloat("SFXVolume", dB);
     }
 }

@@ -13,6 +13,7 @@ public class InteractionDialog : InteractionBase
     [SerializeField]
     private List<Texture> iconList = new();
 
+    [SerializeField]
     private float dialogueRestartDelay = 1.0f;
 
     private bool dialogStarted;
@@ -21,17 +22,15 @@ public class InteractionDialog : InteractionBase
     {
         Debug.Assert(dialogueSystem != null, $"{nameof(dialogueSystem)} is required for {gameObject.name}");
         Debug.Assert(dialogueScript != null, $"{nameof(dialogueScript)} is required for {gameObject.name}");
-        Debug.Assert(dialogueRestartDelay > 0.0f, $"{nameof(dialogueRestartDelay)} imust be greater than 0");
+        Debug.Assert(dialogueRestartDelay > 0.0f, $"{nameof(dialogueRestartDelay)} must be greater than 0");
     }
 
     public override bool CanInteract(IInteractionCaller caller)
-    {
-        return base.CanInteract(caller) && !dialogStarted;
-    }
+        => base.CanInteract(caller) && !dialogStarted && !dialogueSystem.DialogueTriggered;
 
     public override void Interact(IInteractionCaller caller)
     {
-        if (dialogStarted)
+        if (dialogStarted || dialogueSystem.DialogueTriggered)
         {
             return;
         }

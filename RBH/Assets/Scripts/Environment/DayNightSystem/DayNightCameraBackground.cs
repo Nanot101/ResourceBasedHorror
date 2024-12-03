@@ -16,7 +16,13 @@ public class DayNightCameraBackground : MonoBehaviour
         DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
     }
 
-    private void OnDestroy() => DayNightSystem.Instance.OnPhaseChanged -= OnDayNightPhaseChanged;
+    private void OnDestroy()
+    {
+        if (DayNightSystem.TryGetInstance(out var dayNightSys))
+        {
+            dayNightSys.OnPhaseChanged -= OnDayNightPhaseChanged;
+        }
+    }
 
     // Update is called once per frame
     void Update()

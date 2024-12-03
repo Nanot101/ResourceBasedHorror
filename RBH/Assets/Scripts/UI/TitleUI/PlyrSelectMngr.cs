@@ -1,18 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlyrSelectMngr : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private int mainLevelIndex = 3;
+
+    public PlayerVisual SelectedPlayerVisual { get; set; }
+
+    private void Awake()
     {
-        
+        DontDestroyOnLoad(gameObject);
+
+        SceneManager.sceneLoaded += SceneLoaded;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        SceneManager.sceneLoaded -= SceneLoaded;
+    }
+
+    private void SceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex != mainLevelIndex
+            || SelectedPlayerVisual == null)
+        {
+            return;
+        }
+
+        var playerVisualSelector = FindFirstObjectByType<PlayerVisualSetter>();
+
+        if (playerVisualSelector != null)
+        {
+            playerVisualSelector.SetVisual(SelectedPlayerVisual);
+        }
     }
 }

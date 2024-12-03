@@ -9,12 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5050251651467756063}
-  - component: {fileID: 6601156218098631653}
+  - component: {fileID: 8078655222360504797}
   - component: {fileID: 7496654748333850850}
   - component: {fileID: 2332075194105918399}
+  - component: {fileID: 8064536007263553353}
   - component: {fileID: 487708150151464056}
+  - component: {fileID: 1364752541414751352}
   m_Layer: 0
-  m_Name: PlayerSprite
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +39,7 @@ Transform:
   - {fileID: 2852215525366958135}
   m_Father: {fileID: 805150156218530174}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6601156218098631653
+--- !u!212 &8078655222360504797
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,10 +116,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spritesToFade:
-  - {fileID: 6601156218098631653}
   - {fileID: 7087995687798769848}
+  - {fileID: 8078655222360504797}
   fadeCycleTime: 0.35
   playerDamageReciver: {fileID: 8287974565075454170}
+--- !u!114 &8064536007263553353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033805069991406761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1a805843484974da3122c4813d4f4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 8078655222360504797}
 --- !u!114 &487708150151464056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,10 +146,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 1335401080097150228}
-  projectilePrefab: {fileID: 2289292700147475393, guid: a8107f295cdd02940ab29cc94541aa0f, type: 3}
+  projectilePrefab: {fileID: 6785678445432073186, guid: f6b1a37ddbd9b704abcc9b6d9d392efb, type: 3}
   cooldown: 6
-  weaponDisablePhase: {fileID: 11400000, guid: 27299a03b6154c546bac6c6845a01fb3, type: 2}
-  canShoot: 1
+--- !u!114 &1364752541414751352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033805069991406761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3474a9c53c1509846bec7a4ff5db6dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 1335401080097150228}
+  projectilePrefab: {fileID: 6785678445432073186, guid: a03facad5c571c54f9c981c17d2f02f3, type: 3}
+  <CooldownBetweenShots>k__BackingField: 1
+  <ReloadCooldown>k__BackingField: 5
+  <MagazineSize>k__BackingField: 5
 --- !u!1 &8479202090399757915
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +237,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -336,6 +366,9 @@ GameObject:
   - component: {fileID: 8287974565075454170}
   - component: {fileID: 6206257594817900122}
   - component: {fileID: -3768524912040191805}
+  - component: {fileID: 5818715236183140842}
+  - component: {fileID: 5935669521737519630}
+  - component: {fileID: 5863169801935298924}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -503,7 +536,7 @@ MonoBehaviour:
   healthSystem: {fileID: 584156333593417796}
   damageReceiver: {fileID: 8287974565075454170}
   stamina: {fileID: 1164421808771507386}
-  weapon: {fileID: 487708150151464056}
+  weaponController: {fileID: 0}
   moveToRespawnPhase: {fileID: 11400000, guid: 274edebd41b7f6a428f5312b49574b76, type: 2}
   respawnPhase: {fileID: 11400000, guid: dbbffb46257d8c44781caccf95143d93, type: 2}
 --- !u!114 &-3768524912040191805
@@ -518,3 +551,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a656de87863cc84cbb0598e829701fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <StoryPages>k__BackingField: {fileID: 5818715236183140842}
+  <RecipePages>k__BackingField: {fileID: 5935669521737519630}
+--- !u!114 &5818715236183140842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9065289971253864303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ee92b20654557488672855f7d8d158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5935669521737519630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9065289971253864303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3acf900d77107842a4d1ed5fc62469c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5863169801935298924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9065289971253864303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ba609b6e5a84c46a9380f8785c22c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDisablePhase: {fileID: 11400000, guid: 274edebd41b7f6a428f5312b49574b76, type: 2}
+  playerProjectileWeapons:
+  - {fileID: 487708150151464056}
+  - {fileID: 1364752541414751352}

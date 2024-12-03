@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class PlayerInteractionCaller : MonoBehaviour, IInteractionCaller
 {
-    private List<Interactable> interactables = new();
+    [field: SerializeField]
+    public StoryPageStore StoryPages { get; private set; }
 
-    private Interactable selectedInteracteable = null;
+    [field: SerializeField]
+
+    public RecipePageStore RecipePages { get; private set; }
+
+    private readonly List<Interactable> interactables = new();
+
+    private Interactable selectedInteractable = null;
 
     public GameObject GameObject => gameObject;
 
@@ -25,27 +32,27 @@ public class PlayerInteractionCaller : MonoBehaviour, IInteractionCaller
 
     private void SetInteractable(Interactable interactable)
     {
-        if (selectedInteracteable == interactable)
+        if (selectedInteractable == interactable)
         {
             return;
         }
 
-        if (selectedInteracteable != null)
+        if (selectedInteractable != null)
         {
-            selectedInteracteable.HideUI();
+            selectedInteractable.HideUI();
         }
 
-        selectedInteracteable = interactable;
+        selectedInteractable = interactable;
 
-        if (selectedInteracteable != null)
+        if (selectedInteractable != null)
         {
-            selectedInteracteable.ShowUI();
+            selectedInteractable.ShowUI();
         }
     }
 
     private void TryInteract()
     {
-        if (selectedInteracteable == null)
+        if (selectedInteractable == null)
         {
             return;
         }
@@ -55,7 +62,7 @@ public class PlayerInteractionCaller : MonoBehaviour, IInteractionCaller
             return;
         }
 
-        selectedInteracteable.Interaction.Interact(this);
+        selectedInteractable.Interaction.Interact(this);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

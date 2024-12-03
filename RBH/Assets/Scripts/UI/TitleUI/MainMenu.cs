@@ -12,13 +12,26 @@ public class MainMenu : MonoBehaviour
     public CanvasGroup blackCanvasGroup; // For fading in the black screen
     public float fadeDuration = 1.0f;
 
-     private void Start()
+    private void Start()
     {
         blackCanvasGroup.alpha = 0;
         mainCanvasGroup.alpha = 1;
     }
 
-    public void PlayIntro() {
+    public void SelectCharacter(PlayerVisual characterVisual)
+    {
+        var plyrSelectMngr = FindFirstObjectByType<PlyrSelectMngr>();
+
+        if (plyrSelectMngr != null)
+        {
+            plyrSelectMngr.SelectedPlayerVisual = characterVisual;
+        }
+
+        PlayIntro();
+    }
+
+    public void PlayIntro()
+    {
         StartCoroutine(FadeOutAndStartGame());
     }
 
@@ -33,7 +46,7 @@ public class MainMenu : MonoBehaviour
             // Fade out
             mainCanvasGroup.alpha = 1 - fadeAmount;
             // Fade in
-            blackCanvasGroup.alpha = fadeAmount ;
+            blackCanvasGroup.alpha = fadeAmount;
             yield return null;
         }
 
@@ -43,12 +56,14 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 
-    public void QuitGame() {
+    public void QuitGame()
+    {
         Debug.Log("Quit game");
         Application.Quit();
     }
 
-    public void CharSelect() {
+    public void CharSelect()
+    {
         SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 

@@ -60,13 +60,11 @@ public class DayNightTransitionUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (DayNightCounter.Instance == null)
+        if (DayNightCounter.TryGetInstance(out var dayNightCounter))
         {
-            return;
+            dayNightCounter.OnNewDay -= OnNewDay;
+            dayNightCounter.OnNewNight -= OnNewNight;
         }
-
-        DayNightCounter.Instance.OnNewDay -= OnNewDay;
-        DayNightCounter.Instance.OnNewNight -= OnNewNight;
     }
 
     private void OnNewDay(object sender, OnNewDayArgs args)

@@ -13,8 +13,8 @@ TagManager:
   - UI
   - VisibleInFieldOfView
   - FieldOfViewMask
-  - 
-  - 
+  - EnemyDrop
+  - Player
   - 
   - 
   - 

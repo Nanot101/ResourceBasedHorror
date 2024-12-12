@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4a058a6c7236d479c52a9c23fc7f17, type: 3}
+  m_Name: Macete
+  m_EditorClassIdentifier: 
+  id: f4a0bb26-eb1e-4d46-9926-405b1727dfcd
+  itemName: Macete
+  description: It's sharp but a bit rusty
+  itemSprite: {fileID: 21300000, guid: 1995fb4c89ed6614db701d9108f373a5, type: 3}
+  size: {x: 2, y: 3}
+  maxStackSize: 1
+  tags: []
+  itemType: []
+  references:
+    version: 2
+    RefIds: []

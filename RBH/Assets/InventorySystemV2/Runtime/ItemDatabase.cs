@@ -8,5 +8,7 @@ namespace InventorySystem
     public class ItemDatabase : ScriptableObject
     {
         public List<ItemData> items = new List<ItemData>();
+        [FolderPath]
+        public string itemsFolder = "Assets/Items";
     }
 }

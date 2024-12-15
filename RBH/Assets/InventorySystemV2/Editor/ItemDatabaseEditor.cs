@@ -12,7 +12,7 @@ namespace InventorySystem.Editor
 {
     public class ItemDatabaseEditor : OdinEditorWindow
     {
-        private const string ItemsFolderKey = "ItemDatabaseEditor.itemsFolder";
+        //private const string ItemsFolderKey = "ItemDatabaseEditor.itemsFolder";
         private const string DatabasePathKey = "ItemDatabaseEditor.databasePath";
 
         [MenuItem("Tools/Item Database Editor")]
@@ -31,7 +31,7 @@ namespace InventorySystem.Editor
 
         private void SaveEditorState()
         {
-            EditorPrefs.SetString(ItemsFolderKey, itemsFolder);
+            //EditorPrefs.SetString(ItemsFolderKey, itemsFolder);
 
             if (database != null)
             {
@@ -42,7 +42,7 @@ namespace InventorySystem.Editor
 
         private void LoadEditorState()
         {
-            itemsFolder = EditorPrefs.GetString(ItemsFolderKey, "Assets/Items");
+            //itemsFolder = EditorPrefs.GetString(ItemsFolderKey, "Assets/Items");
 
             string databasePath = EditorPrefs.GetString(DatabasePathKey, null);
             if (!string.IsNullOrEmpty(databasePath))
@@ -50,24 +50,29 @@ namespace InventorySystem.Editor
                 database = AssetDatabase.LoadAssetAtPath<ItemDatabase>(databasePath);
                 if (database != null)
                 {
+                    itemsFolder = database.itemsFolder;
                     LoadItems();
                 }
             }
         }
 
+        [TabGroup("Tabs", "Settings")]
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout,Expanded = true)]
         [SerializeField]
         private ItemDatabase database;
 
-        [FolderPath]
-        public string itemsFolder = "Assets/Items";
+        private string itemsFolder = "Assets/Items";
 
+        [TabGroup("Tabs","Item Database")]
         [ShowIf("@UnityEngine.Application.isPlaying")]
+        [GUIColor("@targetContainerHandler == null ? Color.red : Color.white")]
         public ContainerHandler targetContainerHandler;
 
         private void OnValidate()
         {
             if (database != null)
             {
+                itemsFolder = database.itemsFolder;
                 LoadItems();
             }
         }
@@ -86,6 +91,7 @@ namespace InventorySystem.Editor
         private List<ItemData> items;
 
         [Button("Create New Item")]
+        [TabGroup("Tabs", "Item Database")]
         private void AddNewItem()
         {
             if (database == null)
@@ -137,7 +143,7 @@ namespace InventorySystem.Editor
 
         private void CloneItem(ItemData item)
         {
-               if (item == null || !items.Contains(item)) return;
+            if (item == null || !items.Contains(item)) return;
 
             ItemData newItem = Instantiate(item);
             newItem.name = item.name + " (Clone)";
@@ -169,10 +175,12 @@ namespace InventorySystem.Editor
 
         // Display each item inline with Edit and Remove buttons in a layout
         [ShowInInspector]
+        [TabGroup("Tabs", "Item Database")]
         private List<ItemData> ItemsWithButtons => items;
 
         // Custom item drawer to display edit and remove buttons
         [OnInspectorGUI]
+        [TabGroup("Tabs", "Item Database")]
         private void DrawItems()
         {
             ItemData wantsToClone = null;
@@ -190,12 +198,12 @@ namespace InventorySystem.Editor
                     {
                         GenericMenu menu = new GenericMenu();
                         //menu.AddItem(new GUIContent("Edit"), false, () => ItemEditorWindow.OpenWindow(item));
-                       // menu.AddItem(new GUIContent("Remove"), false, () => RemoveItem(item));
+                        // menu.AddItem(new GUIContent("Remove"), false, () => RemoveItem(item));
                         menu.AddItem(new GUIContent("Duplicate"), false, () => CloneItem(item));
                         menu.AddItem(new GUIContent("Select"), false, () => Selection.activeObject = item);
                         if (EditorApplication.isPlaying)
                         {
-                            menu.AddItem(new GUIContent("Add to Selected Container"), false, () => AddItemToSelectedContainer(new ItemStack(item, false,1)));
+                            menu.AddItem(new GUIContent("Add to Selected Container"), false, () => AddItemToSelectedContainer(new ItemStack(item, false, 1)));
                         }
                         menu.ShowAsContext();
                         evt.Use();
@@ -220,13 +228,13 @@ namespace InventorySystem.Editor
                         //Selection.activeObject = item;
                         ItemEditorWindow.OpenWindow(item);
                     }
-                    
+
                     // Add the Remove button to delete this item
                     if (GUILayout.Button("Remove", GUILayout.Width(80)))
                     {
                         bool confirm = EditorUtility.DisplayDialog("Remove Item", $"Are you sure you want to remove {item.name}?", "Yes", "No");
                         if (confirm) RemoveItem(item);
-                        break;  
+                        break;
                     }
                     if (Application.isPlaying)
                     {
@@ -238,7 +246,7 @@ namespace InventorySystem.Editor
                     if (string.IsNullOrEmpty(item.Id))
                     {
                         GUI.backgroundColor = Color.red;
-                        if (GUILayout.Button("Generate Id",GUILayout.Width(80)))
+                        if (GUILayout.Button("Generate Id", GUILayout.Width(80)))
                         {
                             item.GenerateUniqueId();
                         }
@@ -256,11 +264,11 @@ namespace InventorySystem.Editor
                     EditorGUILayout.EndHorizontal();
                 }
                 SirenixEditorGUI.EndBox();
-                
+
             }
-            
+
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Refresh",GUILayout.Width(80)))
+            if (GUILayout.Button("Refresh", GUILayout.Width(80)))
             {
                 LoadItems();
             }

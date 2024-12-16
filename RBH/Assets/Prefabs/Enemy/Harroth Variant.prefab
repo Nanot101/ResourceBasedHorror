@@ -22,11 +22,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.49
+      value: -4.93
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.11
+      value: 10.85
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.z
@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: <Attributes>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: 80a7322940014004f85c1ddc48e523da, type: 2}
+    - target: {fileID: 7960337288591370644, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      propertyPath: damage
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8645464370514058995, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_Name
       value: Harroth Variant

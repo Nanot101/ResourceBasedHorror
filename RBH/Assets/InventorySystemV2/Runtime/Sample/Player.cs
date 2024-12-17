@@ -11,7 +11,6 @@ namespace InventorySystem
         [SerializeField] private ContainerHandler myInventoryContainer;
         [SerializeField] private ContainerView containerView;
         [SerializeField] private GraphicRaycaster graphicRaycaster;
-        [SerializeField] private EventSystem eventSystem;
         [SerializeField] private Menu menuPrefab;
         private Menu menuInstance;
         private SlotView currentSlotView;
@@ -27,7 +26,7 @@ namespace InventorySystem
                 else
                     containerView.ShowContainer(myInventoryContainer.Container);
             }
-            PointerEventData pointerData = new PointerEventData(eventSystem)
+            PointerEventData pointerData = new PointerEventData(EventSystem.current)
             {
                 position = Input.mousePosition
             };

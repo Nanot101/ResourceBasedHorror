@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace InventorySystem
 {
-    public class SlotView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class SlotView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private GridContainerView gridContainerView;
         private Container container;
@@ -201,13 +201,7 @@ namespace InventorySystem
             imageRectTransform.anchorMax = pivotAndAnchor;
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (eventData.button == PointerEventData.InputButton.Right)
-            {
-                RemoveItemInSlot();
-            }
-        }
+        
 
         private void ResetImage()
         {
@@ -215,15 +209,27 @@ namespace InventorySystem
             imageRectTransform.rect.Set(0, 0, slotSize, slotSize);
         }
 
-        private void UpdatePreviewHighlight(Vector2Int gridPos, Vector2Int itemSize)
+        private void UpdatePreviewHighlight(Vector2Int gridPos, Vector2Int itemSize,Container targetContainer,GridContainerView targetContainerView)
         {
-            gridContainerView.ClearHighlight();
+            targetContainerView.ClearHighlight();
 
-            bool canPlace = container.CanPlaceItemAt(gridPos.x, gridPos.y, itemSize, itemSlot);
+            bool canPlace = targetContainer.CanPlaceItemAt(gridPos.x, gridPos.y, itemSize, itemSlot);
 
-            gridContainerView.HighlightSlots(gridPos, itemSize, canPlace);
+            targetContainerView.HighlightSlots(gridPos, itemSize, canPlace);
         }
-
+        private void UpdateCurrentPreviewHighlight(SlotView targetSlot)
+        {
+            if (wantsRotate)
+            {
+                Vector2Int itemSize;
+                itemSize = itemSlot.GetItemStack().IsRotated ? itemSlot.ItemData.Size : InvertedSize(itemSlot.ItemData.Size);
+                UpdatePreviewHighlight(targetSlot.itemSlot.ContainerPosition, itemSize, targetSlot.container, targetSlot.gridContainerView);
+            }
+            else
+            {
+                UpdatePreviewHighlight(targetSlot.itemSlot.ContainerPosition, itemSlot.ItemSize, targetSlot.container, targetSlot.gridContainerView);
+            }
+        }
 
         public void SetHighlight(Color highlightColor)
         {
@@ -328,7 +334,7 @@ namespace InventorySystem
             tempPreviewImage.sprite = itemSlot.ItemData.ItemSprite;
             tempPreviewImage.rectTransform.sizeDelta = rootSlotView.imageRectTransform.sizeDelta;
             //SetPivot(tempPreviewImage.rectTransform, new Vector2(0, 1));
-            tempPreviewImage.rectTransform.SetParent(transform.parent);
+            tempPreviewImage.rectTransform.SetParent(transform.parent.parent);
             tempPreviewImage.rectTransform.SetAsLastSibling();
             tempPreviewImage.rectTransform.localScale = Vector2.one;
 
@@ -349,37 +355,30 @@ namespace InventorySystem
             {
                 return;
             }
-            tempPreviewImage.rectTransform.position = Input.mousePosition;
+            //offset to look better when moving item around
+            Vector3 offset = new(10,-10,0);
 
-            //rootSlotView.imageRectTransform.position = Input.mousePosition;
-
-
+            tempPreviewImage.rectTransform.position = Input.mousePosition + offset;
 
             GameObject targetUnderCursor = eventData.pointerCurrentRaycast.gameObject;
 
             if (targetUnderCursor == null)
+            {
+                gridContainerView.ClearHighlight();
                 return;
+            }
             SlotView targetSlot = targetUnderCursor.GetComponent<SlotView>();
             currentTargetSlot = targetSlot;
 
             if (targetSlot == null)
+            {
+                gridContainerView.ClearHighlight();
                 return;
+            }
             UpdateCurrentPreviewHighlight(targetSlot);
         }
 
-        private void UpdateCurrentPreviewHighlight(SlotView targetSlot)
-        {
-            if (wantsRotate)
-            {
-                Vector2Int itemSize;
-                itemSize = itemSlot.GetItemStack().IsRotated ? itemSlot.ItemData.Size : InvertedSize(itemSlot.ItemData.Size);
-                UpdatePreviewHighlight(targetSlot.itemSlot.ContainerPosition, itemSize);
-            }
-            else
-            {
-                UpdatePreviewHighlight(targetSlot.itemSlot.ContainerPosition, itemSlot.ItemSize);
-            }
-        }
+       
 
         public void OnEndDrag(PointerEventData eventData)
         {

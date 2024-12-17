@@ -18,6 +18,7 @@ namespace InventorySystem
         {
             base.ShowContainer(_container);
             container = _container;
+            gridLayoutGroup.constraintCount = _container.containerWidth;
             Initialize(_container);
         }
 

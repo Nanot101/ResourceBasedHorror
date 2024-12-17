@@ -8,6 +8,8 @@ namespace InventorySystem
         [SerializeField] private SlotView slotViewPrefab;
         [SerializeField] private Transform slotContent;
 
+        public Transform SlotContent { get; }
+
         protected readonly List<SlotView> slots = new List<SlotView>();
 
         public bool IsVisible { get; private set; }

@@ -319,6 +319,7 @@ namespace InventorySystem
     {
 
     }
+
     [Serializable]
     public class ItemType
     {

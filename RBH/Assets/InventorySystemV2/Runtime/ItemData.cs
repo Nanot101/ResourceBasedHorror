@@ -22,6 +22,8 @@ namespace InventorySystem
 
         [SerializeReference]
         private ItemType[] itemType;
+        [SerializeReference]
+        private ItemAction[] action;
 
         public string Id => id;
         public string ItemName => itemName;
@@ -32,6 +34,8 @@ namespace InventorySystem
         public string[] Tags => tags;
         public bool IsStackable => maxStackSize > 1;
         public ItemType[] ItemType => itemType;
+
+        public ItemAction[] ItemAction => action;
 
         [HorizontalGroup("RowId",Width = 130),Button("Generate New Id")]
         public void GenerateUniqueId()

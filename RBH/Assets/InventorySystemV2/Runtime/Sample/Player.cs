@@ -17,10 +17,10 @@ namespace InventorySystem
         private SlotView currentSlotView;
         private SlotView targetSlotView;
         [SerializeField] bool isMouseOverMenuInstance;
-
+        public KeyCode keyToOpenInventory = KeyCode.Tab;
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(keyToOpenInventory))
             {
                 if (containerView.IsVisible)
                     containerView.HideContainer();

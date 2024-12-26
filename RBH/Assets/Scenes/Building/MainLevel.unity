@@ -144269,7 +144269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueSystem: {fileID: 538728988}
-  dialogueScript: {fileID: 4900000, guid: 5d48540b995cf6646898633b827f6a7b, type: 3}
+  dialogueScript: {fileID: 4900000, guid: cb77ff077e2f2fe4aa046c72287c4a29, type: 3}
   iconList: []
   dialogueRestartDelay: 1
 --- !u!58 &2858603241205660846

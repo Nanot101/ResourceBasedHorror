@@ -8009,6 +8009,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7888654926560434357, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: dayStartPhase
+      value: 
+      objectReference: {fileID: 11400000, guid: dbbffb46257d8c44781caccf95143d93, type: 2}
+    - target: {fileID: 7888654926560434357, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: playerRespawn
       value: 
       objectReference: {fileID: 1616968772}
@@ -15084,7 +15088,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainLevelAudioSource: {fileID: 1433099134}
-  dayClips: []
+  dayClips:
+  - {fileID: 11400000, guid: e1d979f1e57c53943bf209f7d027a489, type: 2}
   nightClips:
   - {fileID: 11400000, guid: 28fe6fbc804d6ec2e86c5cc3d9746692, type: 2}
 --- !u!82 &1433099134

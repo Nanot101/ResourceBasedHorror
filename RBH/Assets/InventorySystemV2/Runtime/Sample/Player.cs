@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,26 +5,31 @@ using UnityEngine.UI;
 
 namespace InventorySystem
 {
+    [RequireComponent(typeof(ContainerHandler))]
     public class Player : MonoBehaviour, IPointerClickHandler
     {
+        [SerializeField] private InventorySystem system;
         [SerializeField] private ContainerHandler myInventoryContainer;
-        [SerializeField] private ContainerView containerView;
+        [SerializeField] private GridContainerView containerView;
         [SerializeField] private GraphicRaycaster graphicRaycaster;
-        [SerializeField] private Menu menuPrefab;
-        private Menu menuInstance;
+        [SerializeField] private ContextMenu menuPrefab;
+        private ContextMenu menuInstance;
         private SlotView currentSlotView;
         private SlotView targetSlotView;
         [SerializeField] bool isMouseOverMenuInstance;
         public KeyCode keyToOpenInventory = KeyCode.Tab;
+        private void Start()
+        {
+            containerView = system.CreateOrGetContainerGridInPosition(myInventoryContainer.Container,InventorySystem.InventoryPositionType.PlayerInventory);
+        }
         private void Update()
         {
             if (Input.GetKeyDown(keyToOpenInventory))
             {
-                if (containerView.IsVisible)
-                    containerView.HideContainer();
-                else
-                    containerView.ShowContainer(myInventoryContainer.Container);
+                containerView.ToggleContainer(myInventoryContainer.Container);
             }
+            if (!containerView.IsVisible)
+                return;
             PointerEventData pointerData = new PointerEventData(EventSystem.current)
             {
                 position = Input.mousePosition
@@ -35,7 +39,7 @@ namespace InventorySystem
             bool currentLoopHasMenu = false;
             foreach (var result in results)
             {
-                if (result.gameObject.GetComponent<Menu>() || result.gameObject.GetComponent<MenuButton>())
+                if (result.gameObject.CompareTag("ContextMenu"))
                 {
                     currentLoopHasMenu = true;
                 }
@@ -95,7 +99,7 @@ namespace InventorySystem
                     SlotView slotview = clickedObject.GetComponent<SlotView>();
                     if (slotview != null)
                     {
-                        Menu menuInstance = Instantiate(menuPrefab, containerView.SlotContent.parent);
+                        ContextMenu menuInstance = Instantiate(menuPrefab, containerView.SlotContent.parent);
                         menuInstance.transform.position = Input.mousePosition;
                         menuInstance.Initialize(slotview.itemSlot);
                         Debug.Log("Welcome");

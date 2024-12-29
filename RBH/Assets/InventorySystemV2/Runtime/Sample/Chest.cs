@@ -1,13 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace InventorySystem
 {
+    [RequireComponent(typeof(ContainerHandler))]
     public class Chest : MonoBehaviour
     {
         public ContainerHandler containerHandler;
         public GridContainerView gridContainerView;
+        public InventorySystem.InventoryPositionType positionType = InventorySystem.InventoryPositionType.ChestInventory;
+
+        public KeyCode openChestKeycode;
+
+        [SerializeField] private InventorySystem system;
 
         private void Awake()
         {
@@ -15,14 +19,18 @@ namespace InventorySystem
 
         }
 
+        private void Start()
+        {
+            containerHandler = GetComponent<ContainerHandler>();
+            //gridContainerView = system.CreateOrGetContainerGridInPosition(containerHandler.Container,InventorySystem.InventoryPositionType.ChestInventory);
+            gridContainerView = system.CreateOrGetContainerGridInPosition(containerHandler.Container,positionType);
+        }
+
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(openChestKeycode))
             {
-                if (gridContainerView.IsVisible)
-                    gridContainerView.HideContainer();
-                else
-                    gridContainerView.ShowContainer(containerHandler.Container);
+                gridContainerView.ToggleContainer(containerHandler.Container);
             }
         }
 

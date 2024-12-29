@@ -1,11 +1,10 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace InventorySystem
 {
-    public class MenuButton : MonoBehaviour, IPointerClickHandler
+    public class ContextMenuButton : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] TextMeshProUGUI buttonText;
         ItemSlot itemSlot;

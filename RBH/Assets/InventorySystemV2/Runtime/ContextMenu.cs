@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace InventorySystem
 {
-    public class Menu : MonoBehaviour
+    public class ContextMenu : MonoBehaviour
     {
-        private List<MenuButton> buttons = new List<MenuButton>();
+        private List<ContextMenuButton> buttons = new List<ContextMenuButton>();
 
-        [SerializeField] private MenuButton menuButtonPrefab;
+        [SerializeField] private ContextMenuButton menuButtonPrefab;
 
         private void OnEnable()
         {
@@ -29,7 +29,7 @@ namespace InventorySystem
             ItemAction[] itemActions = targetSlot.ItemData.ItemAction;
             for (int i = 0; i < itemActions.Length; i++)
             {
-                MenuButton button = Instantiate(menuButtonPrefab, transform);
+                ContextMenuButton button = Instantiate(menuButtonPrefab, transform);
                 button.Initialize(itemActions[i],targetSlot);
                 buttons.Add(button);
             }
@@ -37,11 +37,11 @@ namespace InventorySystem
 
         public void Close()
         {
-            for(int i = 0;i < buttons.Count; i++)
-            {
-                Destroy(buttons[i].gameObject);   
-            }
-            buttons.Clear();
+            //for(int i = 0;i < buttons.Count; i++)
+            //{
+            //    Destroy(buttons[i].gameObject);   
+            //}
+            //buttons.Clear();
             Destroy(transform.gameObject);
         }
     }

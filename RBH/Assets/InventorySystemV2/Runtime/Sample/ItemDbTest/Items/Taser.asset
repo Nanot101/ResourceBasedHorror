@@ -21,10 +21,10 @@ MonoBehaviour:
   tags: []
   itemType: []
   action:
-  - rid: 5915267367623458820
+  - rid: 5915267378853183497
   references:
     version: 2
     RefIds:
-    - rid: 5915267367623458820
-      type: {class: UseAction, ns: InventorySystem, asm: InventorySystem}
+    - rid: 5915267378853183497
+      type: {class: RemoveAction, ns: InventorySystem, asm: InventorySystem}
       data: 

@@ -3,20 +3,19 @@ using UnityEngine;
 
 public class PistolWeapon : PlayerProjectileWeapon
 {
-    [SerializeField]
-    private Collider2D playerCollider;
+    [SerializeField] private GunAudio gunAudio;
 
-    [SerializeField]
-    private Projectile projectilePrefab;
+    [SerializeField] private Collider2D playerCollider;
 
-    [field: SerializeField]
-    public float CooldownBetweenShots { get; private set; } = 1f;
+    [SerializeField] private Projectile projectilePrefab;
 
-    [field: SerializeField]
-    public float ReloadCooldown { get; private set; } = 5f;
+    [field: SerializeField] public float CooldownBetweenShots { get; private set; } = 1f;
 
-    [field: SerializeField]
-    public int MagazineSize { get; private set; } = 5;
+    [field: SerializeField] public float ReloadCooldown { get; private set; } = 5f;
+
+    [field: SerializeField] public int MagazineSize { get; private set; } = 5;
+
+    [field: SerializeField] public AudioClip FireAudioClip { get; private set; }
 
     public int CurrentBulletsInMagazine { get; private set; } = 0;
 
@@ -65,6 +64,7 @@ public class PistolWeapon : PlayerProjectileWeapon
         }
 
         SpawnProjectile();
+        PlayAudio();
 
         CooldownTimer = 0;
         CurrentBulletsInMagazine--;
@@ -119,6 +119,8 @@ public class PistolWeapon : PlayerProjectileWeapon
         instantiatedProjectile.InitializeProjectile(playerCollider);
     }
 
+    private void PlayAudio() => gunAudio.PlayPrimaryAudio(FireAudioClip);
+
     private void HandleShootCooldownState()
     {
         CooldownTimer += Time.deltaTime;
@@ -155,11 +157,18 @@ public class PistolWeapon : PlayerProjectileWeapon
 
     private void AsserDesignerFields()
     {
+        Debug.Assert(gunAudio != null, $"{nameof(gunAudio)} is required for {nameof(PistolWeapon)}", this);
         Debug.Assert(playerCollider != null, $"{nameof(playerCollider)} is required for {nameof(PistolWeapon)}", this);
-        Debug.Assert(projectilePrefab != null, $"{nameof(projectilePrefab)} is required for {nameof(PistolWeapon)}", this);
-        Debug.Assert(CooldownBetweenShots > 0.0f, $"{nameof(CooldownBetweenShots)} must be greater than zero in {nameof(PistolWeapon)}", this);
-        Debug.Assert(ReloadCooldown > 0.0f, $"{nameof(ReloadCooldown)} must be greater than zero in {nameof(PistolWeapon)}", this);
-        Debug.Assert(MagazineSize > 0.0f, $"{nameof(MagazineSize)} must be greater than zero in {nameof(PistolWeapon)}", this);
+        Debug.Assert(projectilePrefab != null, $"{nameof(projectilePrefab)} is required for {nameof(PistolWeapon)}",
+            this);
+        Debug.Assert(FireAudioClip != null, $"{nameof(FireAudioClip)} is required for {nameof(PistolWeapon)}",
+            this);
+        Debug.Assert(CooldownBetweenShots > 0.0f,
+            $"{nameof(CooldownBetweenShots)} must be greater than zero in {nameof(PistolWeapon)}", this);
+        Debug.Assert(ReloadCooldown > 0.0f,
+            $"{nameof(ReloadCooldown)} must be greater than zero in {nameof(PistolWeapon)}", this);
+        Debug.Assert(MagazineSize > 0.0f, $"{nameof(MagazineSize)} must be greater than zero in {nameof(PistolWeapon)}",
+            this);
     }
 
     public enum State

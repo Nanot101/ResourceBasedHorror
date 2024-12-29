@@ -20,6 +20,11 @@ MonoBehaviour:
   maxStackSize: 1
   tags: []
   itemType: []
+  action:
+  - rid: 5915267378853183489
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5915267378853183489
+      type: {class: RemoveAction, ns: InventorySystem, asm: InventorySystem}
+      data: 

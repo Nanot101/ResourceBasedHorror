@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 namespace InventorySystem
 {
     public class ContainerView : MonoBehaviour
     {
-        [SerializeField] private SlotView slotViewPrefab;
-        [SerializeField] private Transform slotContent;
+        [SerializeField] protected SlotView slotViewPrefab;
+        [SerializeField] protected Transform slotContent;
+
+        public Transform SlotContent { get; }
 
         protected readonly List<SlotView> slots = new List<SlotView>();
 

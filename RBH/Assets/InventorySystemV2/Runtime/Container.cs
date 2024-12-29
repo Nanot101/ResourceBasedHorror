@@ -1,10 +1,7 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Graphs;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace InventorySystem
 {
@@ -23,9 +20,8 @@ namespace InventorySystem
         public int SlotCount => containerSlots;
         public int RemainingSpace => containerSlots - itemSlots.Count;
 
-        public Container(int _containerSlots, int _containerWidth, IEnumerable<ItemStack> _initialItems = null)
+        public Container(string _containerName,int _containerSlots, int _containerWidth, IEnumerable<ItemStack> _initialItems = null)
         {
-            //temp
             containerWidth = _containerWidth;
             containerSlots = _containerSlots;
             int initialItemCount = _initialItems != null ? _initialItems.Count() : 0;
@@ -319,6 +315,7 @@ namespace InventorySystem
     {
 
     }
+
     [Serializable]
     public class ItemType
     {
@@ -344,7 +341,7 @@ namespace InventorySystem
     }
     public class ItemSlot
     {
-        //this doesn't seem a good solution
+        //this doesn't seem a good solution but it sure is working well
         public int rootIndex;
         private ItemStack itemStack;
         public Container Container { get; private set; }

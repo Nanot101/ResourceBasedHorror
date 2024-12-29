@@ -74,8 +74,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 1be01ba2116a58e4ba3675a919858cdf, type: 3}
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 21300000, guid: 04b0ca0a84fc64f4ba3b15e223ab086a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -399,6 +399,26 @@ PrefabInstance:
     - target: {fileID: 8645464370514058995, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_Name
       value: QueenBee Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150082429961911144, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150082429961911144, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      propertyPath: MaxDistance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150082429961911144, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      propertyPath: MinDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150082429961911144, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c6dd537a101f97720817bbff22e03811, type: 3}
+    - target: {fileID: 9150082429961911144, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1408579522922004094, guid: cb7b953b2e2d49348bef496699632c12, type: 3}

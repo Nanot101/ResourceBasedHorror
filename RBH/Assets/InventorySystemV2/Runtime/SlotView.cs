@@ -1,13 +1,11 @@
 ﻿using Sirenix.OdinInspector;
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace InventorySystem
 {
-    public class SlotView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class SlotView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private GridContainerView gridContainerView;
         private Container container;
@@ -48,15 +46,6 @@ namespace InventorySystem
                 RotateTempImage(rotate);
                 UpdateCurrentPreviewHighlight(currentTargetSlot);
             }
-            //if (Input.GetKeyDown(KeyCode.R))
-            //{
-            //    if (itemSlot.GetItemStack() != null&&isDragging)
-            //    {
-            //        itemSlot.GetItemStack().Rotate();
-            //        RotateTempImage(itemSlot.GetItemStack().IsRotated);
-            //        Debug.Log(itemSlot.GetItemStack().IsRotated);
-            //    }
-            //}
         }
         private void OnDestroy()
         {
@@ -70,6 +59,14 @@ namespace InventorySystem
         private void OnDisable()
         {
             itemImage.gameObject.SetActive(false);
+            if (tempPreviewImage)
+            {
+                Destroy(tempPreviewImage);
+                if (currentTargetSlot != null)
+                {
+                    currentTargetSlot.gridContainerView.ClearHighlight();
+                }
+            }
         }
         public void Initialize(ItemSlot _itemSlot, int _slotSize, Container _container, GridContainerView _gridContainerView)
         {
@@ -128,8 +125,8 @@ namespace InventorySystem
                 itemImage.sprite = itemStack.ItemData.ItemSprite;
 
                 ResizeItemImage(slotRectTransform, imageRectTransform);
-                RotateImage(imageRectTransform,itemStack.IsRotated);
-                SetPositionItemImage(imageRectTransform,itemStack.IsRotated);
+                RotateImage(imageRectTransform, itemStack.IsRotated);
+                SetPositionItemImage(imageRectTransform, itemStack.IsRotated);
 
                 itemImage.gameObject.SetActive(true);
 
@@ -162,7 +159,7 @@ namespace InventorySystem
             imageRectTransform.sizeDelta = itemSize;
         }
 
-        void SetPositionItemImage(RectTransform imageRectTransform,bool isRotated)
+        void SetPositionItemImage(RectTransform imageRectTransform, bool isRotated)
         {
 
             Vector2 itemPosition = new Vector2(slotSize * itemSlot.ContainerPosition.x, -slotSize * itemSlot.ContainerPosition.y);
@@ -201,13 +198,7 @@ namespace InventorySystem
             imageRectTransform.anchorMax = pivotAndAnchor;
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (eventData.button == PointerEventData.InputButton.Right)
-            {
-                RemoveItemInSlot();
-            }
-        }
+
 
         private void ResetImage()
         {
@@ -215,15 +206,27 @@ namespace InventorySystem
             imageRectTransform.rect.Set(0, 0, slotSize, slotSize);
         }
 
-        private void UpdatePreviewHighlight(Vector2Int gridPos, Vector2Int itemSize)
+        private void UpdatePreviewHighlight(Vector2Int gridPos, Vector2Int itemSize, Container targetContainer, GridContainerView targetContainerView)
         {
-            gridContainerView.ClearHighlight();
+            targetContainerView.ClearHighlight();
 
-            bool canPlace = container.CanPlaceItemAt(gridPos.x, gridPos.y, itemSize, itemSlot);
+            bool canPlace = targetContainer.CanPlaceItemAt(gridPos.x, gridPos.y, itemSize, itemSlot);
 
-            gridContainerView.HighlightSlots(gridPos, itemSize, canPlace);
+            targetContainerView.HighlightSlots(gridPos, itemSize, canPlace);
         }
-
+        private void UpdateCurrentPreviewHighlight(SlotView targetSlot)
+        {
+            if (wantsRotate)
+            {
+                Vector2Int itemSize;
+                itemSize = itemSlot.GetItemStack().IsRotated ? itemSlot.ItemData.Size : InvertedSize(itemSlot.ItemData.Size);
+                UpdatePreviewHighlight(targetSlot.itemSlot.ContainerPosition, itemSize, targetSlot.container, targetSlot.gridContainerView);
+            }
+            else
+            {
+                UpdatePreviewHighlight(targetSlot.itemSlot.ContainerPosition, itemSlot.ItemSize, targetSlot.container, targetSlot.gridContainerView);
+            }
+        }
 
         public void SetHighlight(Color highlightColor)
         {
@@ -258,7 +261,7 @@ namespace InventorySystem
         bool wantsRotate;
 
 
-        public void RotateImage(RectTransform imageRectTransform,bool isRotated)
+        public void RotateImage(RectTransform imageRectTransform, bool isRotated)
         {
             if (isRotated)
             {
@@ -328,7 +331,7 @@ namespace InventorySystem
             tempPreviewImage.sprite = itemSlot.ItemData.ItemSprite;
             tempPreviewImage.rectTransform.sizeDelta = rootSlotView.imageRectTransform.sizeDelta;
             //SetPivot(tempPreviewImage.rectTransform, new Vector2(0, 1));
-            tempPreviewImage.rectTransform.SetParent(transform.parent);
+            tempPreviewImage.rectTransform.SetParent(transform.parent.parent);
             tempPreviewImage.rectTransform.SetAsLastSibling();
             tempPreviewImage.rectTransform.localScale = Vector2.one;
 
@@ -349,37 +352,38 @@ namespace InventorySystem
             {
                 return;
             }
-            tempPreviewImage.rectTransform.position = Input.mousePosition;
+            //offset to look better when moving item around
+            Vector3 offset = new(10, -10, 0);
 
-            //rootSlotView.imageRectTransform.position = Input.mousePosition;
-
-
+            tempPreviewImage.rectTransform.position = Input.mousePosition + offset;
 
             GameObject targetUnderCursor = eventData.pointerCurrentRaycast.gameObject;
 
+            if (currentTargetSlot != null)
+            {
+                if (currentTargetSlot.container != container)
+                {
+                    gridContainerView.ClearHighlight();
+                    currentTargetSlot.gridContainerView.ClearHighlight();
+                }
+            }
             if (targetUnderCursor == null)
+            {
+                gridContainerView.ClearHighlight();
                 return;
+            }
             SlotView targetSlot = targetUnderCursor.GetComponent<SlotView>();
             currentTargetSlot = targetSlot;
 
             if (targetSlot == null)
+            {
+                gridContainerView.ClearHighlight();
                 return;
+            }
             UpdateCurrentPreviewHighlight(targetSlot);
         }
 
-        private void UpdateCurrentPreviewHighlight(SlotView targetSlot)
-        {
-            if (wantsRotate)
-            {
-                Vector2Int itemSize;
-                itemSize = itemSlot.GetItemStack().IsRotated ? itemSlot.ItemData.Size : InvertedSize(itemSlot.ItemData.Size);
-                UpdatePreviewHighlight(targetSlot.itemSlot.ContainerPosition, itemSize);
-            }
-            else
-            {
-                UpdatePreviewHighlight(targetSlot.itemSlot.ContainerPosition, itemSlot.ItemSize);
-            }
-        }
+
 
         public void OnEndDrag(PointerEventData eventData)
         {
@@ -402,21 +406,34 @@ namespace InventorySystem
                 Debug.Log("Drop target slot is null");
                 return;
             }
-            else
+            if (dropTargetSlot.container == container)
             {
-                if (dropTargetSlot.itemSlot.Index == itemSlot.rootIndex&&!wantsRotate)
+                if (dropTargetSlot.itemSlot.Index == itemSlot.rootIndex && !wantsRotate)
                 {
                     Debug.Log("Dropped on the same slot");
                     ReturnSlotState();
                     return;
                 }
             }
+
+            if (!dropTargetSlot.isEmpty)
+            {
+                ReturnSlotState();
+                return;
+            }
             ItemStack itemStack = itemSlot.GetItemStack();
             container.RemoveItem(itemSlot.rootIndex);
             if (dropTargetSlot.itemSlot.HasItemStack)
             {
                 //for now return later make a way to swap if there is 1 item in the required slots
-                container.AddItemAt(itemStack, rootSlotView.itemSlot.ContainerPosition.x, rootSlotView.itemSlot.ContainerPosition.y);
+                if (dropTargetSlot.container != container)
+                {
+                    dropTargetSlot.container.AddItemAt(itemStack, rootSlotView.itemSlot.ContainerPosition.x, rootSlotView.itemSlot.ContainerPosition.y);
+                }
+                else
+                {
+                    container.AddItemAt(itemStack, rootSlotView.itemSlot.ContainerPosition.x, rootSlotView.itemSlot.ContainerPosition.y);
+                }
                 ReturnSlotState();
                 Debug.Log("There is already an item here and i can't swap yet");
                 return;
@@ -429,11 +446,26 @@ namespace InventorySystem
                 {
                     itemStack.Rotate();
                 }
-                bool success = container.AddItemAt(itemStack, dropSlotPos.x, dropSlotPos.y);
+                bool success;
+                if (dropTargetSlot.container == container)
+                {
+                    success = container.AddItemAt(itemStack, dropSlotPos.x, dropSlotPos.y);
+                }
+                else
+                {
+                    success = dropTargetSlot.container.AddItemAt(itemStack, dropSlotPos.x, dropSlotPos.y);
+                }
                 if (success)
                 {
                     wantsRotate = false;
-                    gridContainerView.ClearHighlight();
+                    if (currentTargetSlot != null)
+                    {
+                        currentTargetSlot.gridContainerView.ClearHighlight();
+                    }
+                    else
+                    {
+                        gridContainerView.ClearHighlight();
+                    }
                     Debug.Log("Sucessfully added");
                     Debug.Log(itemStack.IsRotated);
                 }
@@ -455,6 +487,10 @@ namespace InventorySystem
         {
             wantsRotate = false;
             gridContainerView.ClearHighlight();
+            if (currentTargetSlot != null)
+            {
+                currentTargetSlot.gridContainerView.ClearHighlight();
+            }
             rootSlotView.imageRectTransform.gameObject.SetActive(true);
             rootSlotView.imageRectTransform.localPosition = originalImagePosition;
         }

@@ -1,18 +1,17 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TaserWeapon : PlayerProjectileWeapon
 {
-    [SerializeField]
-    private Collider2D playerCollider;
+    [SerializeField] private GunAudio gunAudio;
 
-    [SerializeField]
-    Projectile projectilePrefab;
+    [SerializeField] private Collider2D playerCollider;
 
-    [SerializeField]
-    private float cooldown = 6f;
+    [SerializeField] Projectile projectilePrefab;
+
+    [SerializeField] private float cooldown = 6f;
+
+    [field: SerializeField] public AudioClip FireAudioClip { get; private set; }
 
     private float cooldownTimer;
 
@@ -24,6 +23,9 @@ public class TaserWeapon : PlayerProjectileWeapon
     {
         if (playerCollider == null)
             playerCollider = GetComponentInParent<Collider2D>();
+
+        Debug.Assert(gunAudio != null, $"{nameof(gunAudio)} is required for {nameof(TaserWeapon)}", this);
+        Debug.Assert(FireAudioClip != null, $"{nameof(FireAudioClip)} is required for {nameof(TaserWeapon)}", this);
     }
 
     private void Update()
@@ -41,7 +43,8 @@ public class TaserWeapon : PlayerProjectileWeapon
             return false;
         }
 
-        Shoot();
+        SpawnProjectile();
+        PlayAudio();
 
         cooldownTimer = 0;
 
@@ -64,9 +67,11 @@ public class TaserWeapon : PlayerProjectileWeapon
         maxCooldown = cooldown;
     }
 
-    private void Shoot()
+    private void SpawnProjectile()
     {
         Projectile instantiatedProjectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         instantiatedProjectile.InitializeProjectile(playerCollider);
     }
+
+    private void PlayAudio() => gunAudio.PlayPrimaryAudio(FireAudioClip);
 }

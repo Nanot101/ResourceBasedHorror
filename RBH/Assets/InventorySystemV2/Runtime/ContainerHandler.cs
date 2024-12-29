@@ -4,6 +4,8 @@ namespace InventorySystem
 {
     public class ContainerHandler : MonoBehaviour
     {
+        //Used for identification, container names can be: Player Chest MonsterBody etc
+        [SerializeField] private string containerName;
         [SerializeField] private int initialSlotAmount;
         public ItemStack[] initialItems;
         [SerializeField] private int containerWidth;
@@ -20,7 +22,7 @@ namespace InventorySystem
         public void Initialize()
         {
             if (IsInitialized) return;
-            Container = new Container(initialSlotAmount, containerWidth, initialItems);
+            Container = new Container(containerName,initialSlotAmount, containerWidth, initialItems);
             container = Container;
             IsInitialized = true;
         }

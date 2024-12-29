@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 namespace InventorySystem
@@ -8,31 +7,75 @@ namespace InventorySystem
     public class GridContainerView : ContainerView
     {
         private GridLayoutGroup gridLayoutGroup;
-        private Container container;
+        [ReadOnly] public Container container;
+
+        private InventorySystem.InventoryPositionType inventoryPositionType;
+
+        public InventorySystem.InventoryPositionType InventoryPositionType { get => inventoryPositionType; }
 
         private void Awake()
         {
             gridLayoutGroup = GetComponent<GridLayoutGroup>();
         }
+
+        public void ToggleContainer(Container _container)
+        {
+            if (IsVisible)
+            {
+                if (container != null)
+                {
+                    if (container != _container)
+                    {
+                        ShowContainer(_container);
+                        return;
+                    }
+                }
+
+
+                HideContainer();
+            }
+            else
+                ShowContainer(_container);
+        }
+
         public override void ShowContainer(Container _container)
         {
             base.ShowContainer(_container);
             container = _container;
+            gridLayoutGroup.constraintCount = _container.containerWidth;
             Initialize(_container);
+        }
+        //Makes me able to create and initialize it entirely from code
+        public void ShowContainer(Container _container, SlotView _slotViewPrefab)
+        {
+            slotViewPrefab = _slotViewPrefab;
+            slotContent = transform;
+            base.ShowContainer(_container);
+            container = _container;
+            gridLayoutGroup.constraintCount = _container.containerWidth;
+            Initialize(_container);
+        }
+        //I think i can make it more clear but the inventory system should simplify setting up inventories
+        //Essentially i'm automatizing what would be done manually
+        public void Setup(Container _container, InventorySystem.InventoryPositionType _positionType)
+        {
+            container = _container;
+            slotContent = transform;
+            inventoryPositionType = _positionType;
         }
 
         private void Initialize(Container _container)
         {
             for (int i = 0; i < slots.Count; i++)
             {
-                slots[i].Initialize(_container.itemSlots[i],(int)gridLayoutGroup.cellSize.x,_container,this);
+                slots[i].Initialize(_container.itemSlots[i], (int)gridLayoutGroup.cellSize.x, _container, this);
             }
         }
         public Vector2Int GetGridPos(int index)
         {
             int column = (index % gridLayoutGroup.constraintCount);
             int row = Mathf.FloorToInt(index / gridLayoutGroup.constraintCount);
-            return new Vector2Int(column,row);
+            return new Vector2Int(column, row);
         }
 
         public SlotView GetSlotViewByPos(Vector2Int gridPos)

@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class DoorRotationController : MonoBehaviour
 {
+    [SerializeField] private DoorAudio doorAudio;
+
     public bool IsLocked { get; private set; } = false;
 
     public bool IsOpen => currentRotation && currentRotation.IsOpen;
@@ -14,6 +17,12 @@ public class DoorRotationController : MonoBehaviour
 
     private DoorRotation currentRotation;
 
+    private void Start()
+    {
+        Debug.Assert(doorAudio != null, $"{nameof(doorAudio)} is required for {nameof(DoorRotationController)}",
+            this);
+    }
+
     public void ToggleState(Vector3 callerPosition)
     {
         if (!CanToggleState)
@@ -24,15 +33,20 @@ public class DoorRotationController : MonoBehaviour
         if (currentRotation && currentRotation.IsOpen)
         {
             currentRotation.CloseDoor();
+            doorAudio.PlayCloseAudio();
             return;
         }
 
         SetCurrentRotation(callerPosition);
 
-        if (currentRotation)
+        if (!currentRotation)
         {
-            currentRotation.OpenDoor();
+            Debug.LogWarning("You should never be able to read me!");
+            return;
         }
+
+        currentRotation.OpenDoor();
+        doorAudio.PlayOpenAudio();
     }
 
     private void SetCurrentRotation(Vector3 callerPosition)

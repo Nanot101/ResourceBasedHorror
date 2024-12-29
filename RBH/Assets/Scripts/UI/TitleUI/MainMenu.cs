@@ -11,11 +11,17 @@ public class MainMenu : MonoBehaviour
     public CanvasGroup mainCanvasGroup; // For fading out the main panel with buttons
     public CanvasGroup blackCanvasGroup; // For fading in the black screen
     public float fadeDuration = 1.0f;
+    public static bool isMale;
 
     private void Start()
     {
         blackCanvasGroup.alpha = 0;
         mainCanvasGroup.alpha = 1;
+    }
+
+    public void SetCharacter(bool male)
+    {
+        isMale = male;
     }
 
     public void SelectCharacter(PlayerVisual characterVisual)

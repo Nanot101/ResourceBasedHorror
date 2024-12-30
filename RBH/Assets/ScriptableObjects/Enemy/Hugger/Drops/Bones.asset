@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99308583ce0979246be8d0ccbf310142, type: 3}
   m_Name: Bones
   m_EditorClassIdentifier: 
-  <DropName>k__BackingField: 
+  <DropName>k__BackingField: Hugger Bone
   <DropIcon>k__BackingField: {fileID: 21300000, guid: 921ee4e8e22008f4ca30ef68bd07dc48, type: 3}
   <MinQuantity>k__BackingField: 1
   <MaxQuantity>k__BackingField: 5

@@ -1,15 +1,15 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyDropItem : MonoBehaviour
 {
-    [SerializeField]
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
-    [SerializeField]
-    private new Rigidbody2D rigidbody;
+    [SerializeField] private new Rigidbody2D rigidbody;
 
-    private EnemyDropSO dropSO;
+    [field: FormerlySerializedAs("dropSO")]
+    public EnemyDropSO DropSO { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +20,10 @@ public class EnemyDropItem : MonoBehaviour
 
     public void SetDropSO(EnemyDropSO dropSO)
     {
-        this.dropSO = dropSO;
-        spriteRenderer.sprite = this.dropSO.DropIcon;
+        this.DropSO = dropSO;
+        spriteRenderer.sprite = this.DropSO.DropIcon;
 
-        AddDropNameToGameObjectName(this.dropSO.DropName);
+        AddDropNameToGameObjectName(this.DropSO.DropName);
     }
 
     public void AddDropForce(Vector2 dropForce) => rigidbody.AddForce(dropForce);

@@ -162,7 +162,7 @@ PrefabInstance:
     - target: {fileID: 1011473411903841087, guid: 28468865c4df2c24baf413be8871f7bc, type: 3}
       propertyPath: <Interaction>k__BackingField
       value: 
-      objectReference: {fileID: 3615527809731569927}
+      objectReference: {fileID: 8015450826072957461}
     - target: {fileID: 3245239141865047461, guid: 28468865c4df2c24baf413be8871f7bc, type: 3}
       propertyPath: m_Name
       value: EnemyDropInteractable Variant
@@ -222,10 +222,10 @@ PrefabInstance:
       addedObject: {fileID: 6926379576904676627}
     - targetCorrespondingSourceObject: {fileID: 3245239141865047461, guid: 28468865c4df2c24baf413be8871f7bc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3615527809731569927}
+      addedObject: {fileID: 8048286684163067510}
     - targetCorrespondingSourceObject: {fileID: 3245239141865047461, guid: 28468865c4df2c24baf413be8871f7bc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8048286684163067510}
+      addedObject: {fileID: 8015450826072957461}
   m_SourcePrefab: {fileID: 100100000, guid: 28468865c4df2c24baf413be8871f7bc, type: 3}
 --- !u!1 &5801982478542139369 stripped
 GameObject:
@@ -259,19 +259,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3615527809731569927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5801982478542139369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff3e900086c5ea745864660dd297eee8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: Drop Interaction Test
 --- !u!114 &8048286684163067510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +273,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8281756971121632867}
   rigidbody: {fileID: 6926379576904676627}
+--- !u!114 &8015450826072957461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5801982478542139369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7c6dc88a1ca0299b72abce26319590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropItem: {fileID: 8048286684163067510}
 --- !u!4 &6008954180032252575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3380435724903899347, guid: 28468865c4df2c24baf413be8871f7bc, type: 3}

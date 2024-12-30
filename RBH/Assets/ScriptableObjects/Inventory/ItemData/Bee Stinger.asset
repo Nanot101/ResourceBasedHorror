@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4a058a6c7236d479c52a9c23fc7f17, type: 3}
+  m_Name: Bee Stinger
+  m_EditorClassIdentifier: 
+  id: 4891e846-f9ba-426a-a9fb-b52cb2f62b6d
+  itemName: Bee Stinger
+  description: 
+  itemSprite: {fileID: 21300000, guid: 0601db791be6e584f961796301139b0c, type: 3}
+  size: {x: 1, y: 1}
+  maxStackSize: 2
+  tags: []
+  itemType: []
+  action:
+  - rid: 3937299060923826180
+  - rid: 3937299060923826181
+  references:
+    version: 2
+    RefIds:
+    - rid: 3937299060923826180
+      type: {class: UseAction, ns: InventorySystem, asm: InventorySystem}
+      data: 
+    - rid: 3937299060923826181
+      type: {class: RemoveAction, ns: InventorySystem, asm: InventorySystem}
+      data: 

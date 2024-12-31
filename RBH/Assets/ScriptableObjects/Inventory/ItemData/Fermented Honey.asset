@@ -22,13 +22,13 @@ MonoBehaviour:
   itemType: []
   action:
   - rid: 3937299060923826178
-  - rid: 3937299060923826179
+  - rid: 3937299064809062400
   references:
     version: 2
     RefIds:
     - rid: 3937299060923826178
       type: {class: UseAction, ns: InventorySystem, asm: InventorySystem}
       data: 
-    - rid: 3937299060923826179
-      type: {class: UseAction, ns: InventorySystem, asm: InventorySystem}
+    - rid: 3937299064809062400
+      type: {class: RemoveAction, ns: InventorySystem, asm: InventorySystem}
       data: 

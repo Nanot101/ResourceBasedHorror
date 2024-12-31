@@ -27,11 +27,17 @@ public class InteractionDropItem : InteractionBase
 
         if (TrySimpleAddItem(caller.InventoryContainer.Container))
         {
+            Destroy(gameObject);
             return;
         }
 
-        // Start complex item add
-        // Jesus Christ, this is going to be one hell of a challenge!
+        if (!EnemyDropComplexInventoryController.TryGetInstance(out var complexController))
+        {
+            Debug.LogError("Unable to find complex controller. Aborting interaction.");
+            return;
+        }
+
+        complexController.StartDropComplexInventory(caller.GameObject.transform);
     }
 
     private bool TrySimpleAddItem(Container inventoryContainer)
@@ -75,14 +81,13 @@ public class InteractionDropItem : InteractionBase
             }
         }
 
-        Destroy(gameObject);
         return true;
     }
 
     private List<ItemStack> CreateInitialItemStacks()
     {
         var itemMaxStack = dropItem.DropSO.DropItemData.MaxStackSize;
-        var itemAmount = Random.Range(dropItem.DropSO.MinQuantity, dropItem.DropSO.MaxQuantity);
+        var itemAmount = Random.Range(dropItem.DropSO.MinQuantity, dropItem.DropSO.MaxQuantity + 1);
 
         var result = new List<ItemStack>();
 

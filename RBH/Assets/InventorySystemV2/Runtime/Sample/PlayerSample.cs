@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace InventorySystem
 {
     [RequireComponent(typeof(ContainerHandler))]
-    public class Player : MonoBehaviour, IPointerClickHandler
+    public class PlayerSample : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private InventorySystem system;
         [SerializeField] private ContainerHandler myInventoryContainer;

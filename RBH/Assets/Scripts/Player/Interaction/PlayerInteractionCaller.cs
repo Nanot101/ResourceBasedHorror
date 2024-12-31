@@ -19,6 +19,12 @@ public class PlayerInteractionCaller : MonoBehaviour, IInteractionCaller
 
     private void Update()
     {
+        if (GamePause.IsPaused)
+        {
+            SetInteractable(null);
+            return;
+        }
+
         SetInteractable(GetClosestPossibleInteractable());
 
         TryInteract();

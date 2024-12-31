@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed4a058a6c7236d479c52a9c23fc7f17, type: 3}
-  m_Name: Bee Stinger
+  m_Name: Blight Vine
   m_EditorClassIdentifier: 
-  id: 4891e846-f9ba-426a-a9fb-b52cb2f62b6d
-  itemName: Bee Stinger
+  id: 659df3a5-5e61-4254-9dcc-af88d303ae45
+  itemName: Blight Vine
   description: 
-  itemSprite: {fileID: 21300000, guid: 4c4612292f0b21c44aca6a09eb1ebe77, type: 3}
+  itemSprite: {fileID: 21300000, guid: e174eed995a4ba14e8813b6441a6421b, type: 3}
   size: {x: 1, y: 1}
   maxStackSize: 2
   tags: []
   itemType: []
   action:
-  - rid: 3937299060923826180
-  - rid: 3937299060923826181
+  - rid: 3937299082938679296
+  - rid: 3937299082938679297
   references:
     version: 2
     RefIds:
-    - rid: 3937299060923826180
+    - rid: 3937299082938679296
       type: {class: UseAction, ns: InventorySystem, asm: InventorySystem}
       data: 
-    - rid: 3937299060923826181
+    - rid: 3937299082938679297
       type: {class: RemoveAction, ns: InventorySystem, asm: InventorySystem}
       data: 

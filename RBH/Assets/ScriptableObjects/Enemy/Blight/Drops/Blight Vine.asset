@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99308583ce0979246be8d0ccbf310142, type: 3}
-  m_Name: QueenBeeStingerDropSO
+  m_Name: Blight Vine
   m_EditorClassIdentifier: 
-  <DropName>k__BackingField: Queen Bee Stinger
-  <DropIcon>k__BackingField: {fileID: 21300000, guid: 4c4612292f0b21c44aca6a09eb1ebe77, type: 3}
+  <DropName>k__BackingField: Blight Vine
+  <DropIcon>k__BackingField: {fileID: 21300000, guid: e174eed995a4ba14e8813b6441a6421b, type: 3}
   <MinQuantity>k__BackingField: 1
   <MaxQuantity>k__BackingField: 5
-  <DropItemData>k__BackingField: {fileID: 11400000, guid: b6a8e640546e54e1d86073f9d83b4fdd, type: 2}

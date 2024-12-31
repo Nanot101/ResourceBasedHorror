@@ -1,7 +1,7 @@
-Unknown:Welcome to the warehouse. Hope you're ready for it.
-Unknown:You are tasked to explore the warehouse and figure out what's going on.
-Unknown:For some reason, men and women have been missing around here. One of them being a recent hired floor manager.
-Unknown:I've given you a taser and weapon (1) in case something happens.
-Unknown:You also have a backpack (tab) and a binder (N) to keep track of things.
-Unknown:If you do find the cause of the missing people and take care of it, you will be rewarded for your troubles.
-Unknown:We wish you luck, you have 5 days.
+Unknown:This is the warehouse that you are assigned to watch.
+Unknown:It’d be best to explore the place throughly.
+Character:A bit creepy...good thing I came prepared.
+Unknown:(1) for taser / weapon
+Unknown:(Tab) for backpack inventory
+Unknown:(N) for notebook
+Character: It's just 5 days, it cant be that bad.

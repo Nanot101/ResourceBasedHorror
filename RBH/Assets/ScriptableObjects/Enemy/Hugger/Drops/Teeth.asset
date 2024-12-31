@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99308583ce0979246be8d0ccbf310142, type: 3}
   m_Name: Teeth
   m_EditorClassIdentifier: 
-  <DropName>k__BackingField: Teeth
+  <DropName>k__BackingField: Hugger Teeth
   <DropIcon>k__BackingField: {fileID: 21300000, guid: c2cc45b3fd667ec4db8b2e02173b49ed, type: 3}
   <MinQuantity>k__BackingField: 1
   <MaxQuantity>k__BackingField: 5
-  <DropItemData>k__BackingField: {fileID: 11400000, guid: 6f48a15d51bb26452a8266de497ee126, type: 2}

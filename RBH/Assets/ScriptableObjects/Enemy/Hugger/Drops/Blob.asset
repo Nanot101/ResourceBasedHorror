@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99308583ce0979246be8d0ccbf310142, type: 3}
   m_Name: Blob
   m_EditorClassIdentifier: 
-  <DropName>k__BackingField: Blob
+  <DropName>k__BackingField: Hugger Blob
   <DropIcon>k__BackingField: {fileID: 21300000, guid: 8cb34ca243c65dc41a2550ade6b13a14, type: 3}
   <MinQuantity>k__BackingField: 1
   <MaxQuantity>k__BackingField: 5
-  <DropItemData>k__BackingField: {fileID: 11400000, guid: 8436e5e882cfb473eb653eff309f3b98, type: 2}

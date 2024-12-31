@@ -16,4 +16,7 @@ MonoBehaviour:
   <WalkSpeed>k__BackingField: 2
   <RunSpeed>k__BackingField: 4
   <OnNight>k__BackingField: 5
-  <Drops>k__BackingField: []
+  <Drops>k__BackingField:
+  - {fileID: 11400000, guid: f052b180e0ad5b44c88a945829adc62f, type: 2}
+  - {fileID: 11400000, guid: f393cbaae70c2cf419a67a1751e8898a, type: 2}
+  - {fileID: 11400000, guid: c1aa51fed8a58f14499908b276b80c02, type: 2}

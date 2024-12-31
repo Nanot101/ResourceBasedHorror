@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlaceholderEnemBehavior : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlaceholderEnemBehavior : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
 
     private float currentHealth;
+    private bool isStopped = false; // To handle collision pause
 
     private void Start()
     {
@@ -21,6 +23,13 @@ public class PlaceholderEnemBehavior : MonoBehaviour
         if (currentHealth <= 0)
         {
             // Stop moving when health is 0
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
+        if (isStopped)
+        {
+            // Stop movement temporarily on collision
             rb.velocity = Vector2.zero;
             return;
         }
@@ -85,10 +94,25 @@ public class PlaceholderEnemBehavior : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            StartCoroutine(StopMovementTemporarily());
+        }
+    }
+
+    private IEnumerator StopMovementTemporarily()
+    {
+        isStopped = true;
+        yield return new WaitForSeconds(0.5f);
+        isStopped = false;
+    }
+
     private void OnDrawGizmosSelected()
     {
         // Draw detection radius in the editor for visualization
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
         // Draw a ray to show the detection direction and wall blocking
@@ -111,6 +135,12 @@ public class PlaceholderEnemBehavior : MonoBehaviour
                     {
                         Gizmos.color = Color.green; // Player detected
                         Gizmos.DrawLine(transform.position, player.position);
+
+                        // Draw a blue debug sphere on the detection radius
+                        Gizmos.color = Color.blue;
+                        // Project the sphere onto the edge of the detection radius, in the direction of the player
+                        Vector3 detectionEdgePosition = transform.position + (Vector3)(directionToPlayer * detectionRadius);
+                        Gizmos.DrawSphere(detectionEdgePosition, 0.2f);
                         break;
                     }
                 }

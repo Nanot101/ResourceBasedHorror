@@ -5603,12 +5603,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 450278014}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 450278014}
+  m_maskType: 0
 --- !u!23 &450278014
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5669,7 +5669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 8e61b6b7a8f82c94d81101156f106742, type: 2}
-  detectionRadius: 5
+  detectionRadius: 10
   player: {fileID: 1616968780}
   rb: {fileID: 457851291}
   wallLayer:
@@ -6006,11 +6006,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 990630538960631309, guid: 413a8a4efbc37ad4bb29bfa9acb4472c, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2253484922979133728, guid: 413a8a4efbc37ad4bb29bfa9acb4472c, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2727357782609894458, guid: 413a8a4efbc37ad4bb29bfa9acb4472c, type: 3}
       propertyPath: m_LocalScale.x
@@ -6066,11 +6066,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2906553310854316898, guid: 413a8a4efbc37ad4bb29bfa9acb4472c, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3296315606751430870, guid: 413a8a4efbc37ad4bb29bfa9acb4472c, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7514682680771431676, guid: 413a8a4efbc37ad4bb29bfa9acb4472c, type: 3}
       propertyPath: m_Name
@@ -6078,7 +6078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7514682680771431676, guid: 413a8a4efbc37ad4bb29bfa9acb4472c, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7936,12 +7936,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 661921310}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 661921310}
+  m_maskType: 0
 --- !u!23 &661921310
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15248,12 +15248,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 1337530316}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1337530316}
+  m_maskType: 0
 --- !u!23 &1337530316
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18217,6 +18217,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9065289971253864303, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19196,12 +19200,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 1651193864}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1651193864}
+  m_maskType: 0
 --- !u!23 &1651193864
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -141440,12 +141444,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 1754535828}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1754535828}
+  m_maskType: 0
 --- !u!23 &1754535828
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -143780,12 +143784,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 1962026998}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1962026998}
+  m_maskType: 0
 --- !u!23 &1962026998
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -144427,12 +144431,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 2014020425}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 2014020425}
+  m_maskType: 0
 --- !u!23 &2014020425
 MeshRenderer:
   m_ObjectHideFlags: 0

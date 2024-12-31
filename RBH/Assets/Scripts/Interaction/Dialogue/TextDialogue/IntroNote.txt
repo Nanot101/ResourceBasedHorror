@@ -2,6 +2,6 @@ Unknown:This is the warehouse that you are assigned to watch.
 Unknown:It’d be best to explore the place throughly.
 Character:A bit creepy...good thing I came prepared.
 Unknown:(1) for taser / weapon
-Unknown:(Tab) for backpack inventory
+Unknown:(B) for backpack inventory
 Unknown:(N) for notebook
 Character: It's just 5 days, it cant be that bad.

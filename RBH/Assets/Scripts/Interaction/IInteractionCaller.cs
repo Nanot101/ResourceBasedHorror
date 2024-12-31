@@ -1,3 +1,4 @@
+using InventorySystem;
 using UnityEngine;
 
 /// <summary>
@@ -10,4 +11,6 @@ public interface IInteractionCaller
     public StoryPageStore StoryPages { get; }
 
     public RecipePageStore RecipePages { get; }
+
+    public ContainerHandler InventoryContainer { get; }
 }

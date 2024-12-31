@@ -69,7 +69,7 @@ namespace InventorySystem
                 if (slot.HasItemStack && slot.GetItemStack().ItemData == itemStack.ItemData && !slot.IsFull)
                 {
                     int spaceLeft = slot.GetItemStack().ItemData.MaxStackSize - slot.GetItemStack().Amount;
-                    int amountToAdd = Mathf.Min(spaceLeft, itemStack.Amount);
+                    int amountToAdd = Mathf.Min(spaceLeft, remainingAmount);
                     slot.AddAmount(amountToAdd);
                     remainingAmount -= amountToAdd;
 
@@ -90,7 +90,7 @@ namespace InventorySystem
                 {
                     if (itemSlots[index].IsEmpty)
                     {
-                        int amountToAdd = Mathf.Min(itemStack.Amount, itemStack.ItemData.MaxStackSize);
+                        int amountToAdd = Mathf.Min(remainingAmount, itemStack.ItemData.MaxStackSize);
                         ItemStack newStack = new ItemStack(itemStack.ItemData, itemStack.IsRotated, amountToAdd);
                         itemSlots[index].SetItemStack(newStack, Vector2Int.zero, Vector2Int.one, index);
                         remainingAmount -= amountToAdd;

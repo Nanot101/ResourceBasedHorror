@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4a058a6c7236d479c52a9c23fc7f17, type: 3}
+  m_Name: Hugger Blob
+  m_EditorClassIdentifier: 
+  id: 2ed5f261-ffd1-4823-886a-cebff2d1cf70
+  itemName: Hugger Blob
+  description: 
+  itemSprite: {fileID: 21300000, guid: 8cb34ca243c65dc41a2550ade6b13a14, type: 3}
+  size: {x: 1, y: 1}
+  maxStackSize: 2
+  tags: []
+  itemType: []
+  action:
+  - rid: 3937299082938679313
+  - rid: 3937299082938679314
+  references:
+    version: 2
+    RefIds:
+    - rid: 3937299082938679313
+      type: {class: UseAction, ns: InventorySystem, asm: InventorySystem}
+      data: 
+    - rid: 3937299082938679314
+      type: {class: RemoveAction, ns: InventorySystem, asm: InventorySystem}
+      data: 

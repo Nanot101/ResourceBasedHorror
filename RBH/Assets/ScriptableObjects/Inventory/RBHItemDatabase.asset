@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c7bc18dd4dc0b41ac515924ee52230, type: 3}
+  m_Name: RBHItemDatabase
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 11400000, guid: c8cadd402f1ee4899a0f9cea9fd2dd11, type: 2}
+  - {fileID: 11400000, guid: b6a8e640546e54e1d86073f9d83b4fdd, type: 2}
+  - {fileID: 11400000, guid: cbfd6ab744a1632d29f2912c79d9128a, type: 2}
+  - {fileID: 11400000, guid: 6f48a15d51bb26452a8266de497ee126, type: 2}
+  - {fileID: 11400000, guid: 7b3ba4bbc77fffa33bbbec309b4718a9, type: 2}
+  - {fileID: 11400000, guid: 8436e5e882cfb473eb653eff309f3b98, type: 2}
+  itemsFolder: Assets/ScriptableObjects/Inventory/ItemData

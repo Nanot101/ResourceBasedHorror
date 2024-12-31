@@ -16,3 +16,4 @@ MonoBehaviour:
   <DropIcon>k__BackingField: {fileID: 21300000, guid: 5b4a1fc83533ab846ba817a6838557aa, type: 3}
   <MinQuantity>k__BackingField: 1
   <MaxQuantity>k__BackingField: 5
+  <DropItemData>k__BackingField: {fileID: 11400000, guid: bcfed889fa845cc5099885ff4a436f77, type: 2}

@@ -25,9 +25,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7569110010643093355}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.015558527, y: 0.015558527, z: 0.015558527}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2517942522632970234}
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.19999999, g: 0.52424157, b: 0.83137256, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ca67b490fb1f99f44952175994a14600, type: 3}
+  m_Color: {r: 0.9433962, g: 0.9090542, b: 0.6541474, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 4182680636612194034}
     - target: {fileID: 3245239141865047461, guid: 28468865c4df2c24baf413be8871f7bc, type: 3}
       propertyPath: m_Name
-      value: StoryPageInteractable1 Variant
+      value: StoryPageInteractable Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3380435724903899347, guid: 28468865c4df2c24baf413be8871f7bc, type: 3}
       propertyPath: m_LocalPosition.x

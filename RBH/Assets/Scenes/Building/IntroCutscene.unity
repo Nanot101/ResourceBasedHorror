@@ -305,7 +305,7 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -313,7 +313,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: 
+  m_Url: file:///MintAdditionalData/Unity/Projects/ResourceBasedHorror/RBH/Assets/Audio/FCutSceneFinalSFX.mov
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -441,7 +441,7 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -449,7 +449,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: 
+  m_Url: file:///MintAdditionalData/Unity/Projects/ResourceBasedHorror/RBH/Assets/Audio/MCutsceneFinalSFX.mov
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -506,6 +506,8 @@ MonoBehaviour:
   maleVideoPlayer: {fileID: 1084254104}
   femaleVideoPlayer: {fileID: 581286662}
   nextScene: {fileID: 1935963241}
+  maleVideoFileName: MCutsceneFinalSFX.mov
+  femaleVideoFileName: FCutSceneFinalSFX.mov
 --- !u!4 &1186101354
 Transform:
   m_ObjectHideFlags: 0

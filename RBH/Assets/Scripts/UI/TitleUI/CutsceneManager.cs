@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -8,7 +6,9 @@ public class CutsceneManager : MonoBehaviour
     public GameObject maleVideoPlayer; // Assign the male video player GameObject
     public GameObject femaleVideoPlayer; // Assign the female video player GameObject
     public GameObject nextScene;
-    
+
+    public string maleVideoFileName;
+    public string femaleVideoFileName;
 
     private void Start()
     {
@@ -25,20 +25,27 @@ public class CutsceneManager : MonoBehaviour
         if (MainMenu.isMale)
         {
             maleVideoPlayer.SetActive(true);
-            PlayVideo(maleVideoPlayer);
+            PlayVideo(maleVideoPlayer, maleVideoFileName);
         }
         else
         {
             femaleVideoPlayer.SetActive(true);
-            PlayVideo(femaleVideoPlayer);
+            PlayVideo(femaleVideoPlayer, femaleVideoFileName);
         }
     }
 
-    private void PlayVideo(GameObject videoPlayer)
+    private void PlayVideo(GameObject videoPlayer, string videoFileName)
     {
+        Debug.Assert(!string.IsNullOrWhiteSpace(videoFileName), "Please provide valid file name", this);
+
+        //this assert should be a regex
+        Debug.Assert(videoFileName.Contains('.'), "Please provide valid file name with extension",
+            this);
+
         VideoPlayer vp = videoPlayer.GetComponent<VideoPlayer>();
         if (vp != null)
         {
+            vp.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoFileName);
             vp.loopPointReached += OnVideoFinished; // Subscribe to the video end event
             vp.Play();
         }

@@ -1,5 +1,6 @@
+using System.Collections.Generic;
+using InventorySystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyDropItem : MonoBehaviour
@@ -8,8 +9,9 @@ public class EnemyDropItem : MonoBehaviour
 
     [SerializeField] private new Rigidbody2D rigidbody;
 
-    [field: FormerlySerializedAs("dropSO")]
-    public EnemyDropSO DropSO { get; private set; }
+    public ItemData ItemData { get; private set; }
+
+    public List<ItemStack> ItemStacks { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -18,20 +20,21 @@ public class EnemyDropItem : MonoBehaviour
         Debug.Assert(rigidbody != null, $"{nameof(rigidbody)} is required for {nameof(EnemyDropItem)}", this);
     }
 
-    public void SetDropSO(EnemyDropSO dropSO)
+    public void Init(ItemData itemData, List<ItemStack> itemStacks)
     {
-        this.DropSO = dropSO;
-        spriteRenderer.sprite = this.DropSO.DropIcon;
+        ItemData = itemData;
+        ItemStacks = itemStacks;
 
-        AddDropNameToGameObjectName(this.DropSO.DropName);
+        SetDropNameAndSprite();
     }
 
     public void AddDropForce(Vector2 dropForce) => rigidbody.AddForce(dropForce);
 
-    private void AddDropNameToGameObjectName(string dropName)
+    private void SetDropNameAndSprite()
     {
         var currentGameObjectName = gameObject.name;
+        gameObject.name = currentGameObjectName + " (" + ItemData.name + ")";
 
-        gameObject.name = currentGameObjectName + " (" + dropName + ")";
+        spriteRenderer.sprite = ItemData.ItemSprite;
     }
 }

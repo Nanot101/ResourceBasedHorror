@@ -1,14 +1,19 @@
+using System.Linq;
 using InventorySystem;
 using UnityEngine;
 
 public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInventoryController>
 {
     [SerializeField] private InventoryViewController viewController;
+    [SerializeField] private EnemyDropComplexInteractionCaller interactionCaller;
+    [SerializeField] private InventoryDropSystem dropSystem;
 
     [SerializeField] private int tempContainerSlots = 32;
     [SerializeField] private int tempContainerWidth = 4;
 
-    private Container tempContainer;
+    private Container temporaryInventoryContainer;
+    private bool itemsPickUpStarted = false;
+    private Transform playerTransform;
 
     private void Start()
     {
@@ -37,23 +42,50 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
 
     public void StartDropComplexInventory(Transform playerTransform)
     {
-        PickUpItemsAroundPlayer();
+        if (itemsPickUpStarted)
+        {
+            Debug.LogWarning(
+                "You can't start another complex item pickup until the previous one is finished. " +
+                "This problem can occur when the temporary inventory of items from the ground is not " +
+                "able to hold all the items from the ground. " +
+                "This results in another start of a complex item pickup.",
+                this);
+            return;
+        }
+
+        itemsPickUpStarted = true;
+
+        this.playerTransform = playerTransform;
+
+        temporaryInventoryContainer = new Container("Temporary Container", tempContainerSlots, tempContainerWidth);
+
+        interactionCaller.PickUpItemsAroundPlayer(this.playerTransform.position, temporaryInventoryContainer);
+
+        itemsPickUpStarted = false;
 
         ShowInventory();
     }
 
-    private void PickUpItemsAroundPlayer()
-    {
-    }
-
     private void DropItemsInTempContainer()
     {
-        tempContainer = null;
+        var itemsToDropGroupedByItemData = temporaryInventoryContainer.itemSlots
+            .Where(x => x.HasItemStack)
+            .Select(x => x.GetItemStack())
+            .OrderBy(x => x.Amount)
+            .GroupBy(x => x.ItemData);
+
+        foreach (var itemDataGroup in itemsToDropGroupedByItemData)
+        {
+            dropSystem.DropItem(itemDataGroup.Key, itemDataGroup.ToList(), playerTransform.position);
+        }
+
+        temporaryInventoryContainer.Clear();
+        temporaryInventoryContainer = null;
     }
 
     private void ShowInventory()
     {
-        viewController.ShowPlayerAndTempInventory(tempContainer);
+        viewController.ShowPlayerAndTempInventory(temporaryInventoryContainer);
 
         GamePause.RequestPause<EnemyDropComplexInventoryController>();
 

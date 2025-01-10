@@ -273,6 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8281756971121632867}
   rigidbody: {fileID: 6926379576904676627}
+  LifeTimeInSeconds: 60
 --- !u!114 &8015450826072957461
 MonoBehaviour:
   m_ObjectHideFlags: 0

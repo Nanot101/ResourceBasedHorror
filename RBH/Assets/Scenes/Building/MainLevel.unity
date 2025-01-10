@@ -2092,14 +2092,6 @@ PrefabInstance:
       value: InventorySystem
       objectReference: {fileID: 0}
     - target: {fileID: 7231256160886598876, guid: 7b40134c00e207b4faff72b87640f6d0, type: 3}
-      propertyPath: containerWidth
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7231256160886598876, guid: 7b40134c00e207b4faff72b87640f6d0, type: 3}
-      propertyPath: initialSlotAmount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7231256160886598876, guid: 7b40134c00e207b4faff72b87640f6d0, type: 3}
       propertyPath: initialItems.Array.size
       value: 0
       objectReference: {fileID: 0}

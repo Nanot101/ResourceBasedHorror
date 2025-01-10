@@ -28,7 +28,21 @@ public class EnemyDropItem : MonoBehaviour
         SetDropNameAndSprite();
     }
 
-    public void AddDropForce(Vector2 dropForce) => rigidbody.AddForce(dropForce);
+    public void AddDropForce(Vector2 dropForce)
+    {
+        if (Time.timeScale > 0.0f)
+        {
+            rigidbody.AddForce(dropForce);
+            return;
+        }
+
+        //TODO: If we make a change to the stopping of the game that does not involve a change to the time scale, then remove it.
+
+        var positionOffset = new Vector3(dropForce.x, dropForce.y, 0.0f);
+        positionOffset *= 0.005f;
+
+        transform.position += positionOffset;
+    }
 
     private void SetDropNameAndSprite()
     {

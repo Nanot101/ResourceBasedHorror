@@ -32,7 +32,7 @@ public class InteractionDropItem : InteractionBase
             return;
         }
 
-        complexController.StartDropComplexInventory(caller.GameObject.transform);
+        complexController.TriggerDropComplexInventory(caller.GameObject.transform);
     }
 
     private bool TrySimpleAddItem(Container inventoryContainer)

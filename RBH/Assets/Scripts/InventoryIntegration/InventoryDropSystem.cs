@@ -14,13 +14,15 @@ public class InventoryDropSystem : MonoBehaviour
             this);
     }
 
-    public void DropItem(ItemData itemData, List<ItemStack> itemStacks, Vector3 position)
+    public EnemyDropItem DropItem(ItemData itemData, List<ItemStack> itemStacks, Vector3 position)
     {
         var dropItem = Instantiate(dropItemPrefab, position, Quaternion.identity);
 
         dropItem.Init(itemData, itemStacks);
 
         dropItem.AddDropForce(GetRandomDropForce());
+
+        return dropItem;
     }
 
     private Vector2 GetRandomDropForce()

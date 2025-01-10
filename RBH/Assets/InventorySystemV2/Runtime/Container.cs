@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace InventorySystem
 {
-
     public class Container
     {
         private int containerSlots;
@@ -20,7 +19,12 @@ namespace InventorySystem
         public int SlotCount => containerSlots;
         public int RemainingSpace => containerSlots - itemSlots.Count;
 
-        public Container(string _containerName,int _containerSlots, int _containerWidth, IEnumerable<ItemStack> _initialItems = null)
+        public event EventHandler<ItemRootRemovedEventArgs> OnItemRootRemoved;
+
+        public event EventHandler<ItemPlacedAtEventArgs> OnItemPlacedAt;
+
+        public Container(string _containerName, int _containerSlots, int _containerWidth,
+            IEnumerable<ItemStack> _initialItems = null)
         {
             containerWidth = _containerWidth;
             containerSlots = _containerSlots;
@@ -29,6 +33,7 @@ namespace InventorySystem
             {
                 itemSlots.Add(new ItemSlot(this, i, GetGridPos(i)));
             }
+
             Debug.Log($"Initial item count: {initialItemCount}");
             for (int i = 0; i < initialItemCount; i++)
             {
@@ -52,6 +57,7 @@ namespace InventorySystem
                     count += slot.Amount;
                 }
             }
+
             return count;
         }
 
@@ -73,7 +79,8 @@ namespace InventorySystem
                     slot.AddAmount(amountToAdd);
                     remainingAmount -= amountToAdd;
 
-                    Debug.Log($"Added {amountToAdd} to existing stack in slot {slot.Index}. Remaining amount: {remainingAmount}");
+                    Debug.Log(
+                        $"Added {amountToAdd} to existing stack in slot {slot.Index}. Remaining amount: {remainingAmount}");
 
                     if (remainingAmount <= 0)
                     {
@@ -82,6 +89,7 @@ namespace InventorySystem
                     }
                 }
             }
+
             //If the item is stackable and has size 1
             if (itemStack.ItemData.Size == Vector2Int.one)
             {
@@ -95,7 +103,8 @@ namespace InventorySystem
                         itemSlots[index].SetItemStack(newStack, Vector2Int.zero, Vector2Int.one, index);
                         remainingAmount -= amountToAdd;
 
-                        Debug.Log($"Created new stack in slot {index}. Amount added: {amountToAdd}. Remaining amount: {remainingAmount}");
+                        Debug.Log(
+                            $"Created new stack in slot {index}. Amount added: {amountToAdd}. Remaining amount: {remainingAmount}");
 
                         if (remainingAmount <= 0)
                         {
@@ -116,6 +125,7 @@ namespace InventorySystem
                     remainingAmount = itemStack.Amount - 1;
                     itemStack.SetAmount(1);
                 }
+
                 Vector2Int itemSize;
                 if (!itemStack.IsRotated)
                 {
@@ -148,6 +158,7 @@ namespace InventorySystem
                     }
                 }
             }
+
             Debug.LogError($"Couldn't add item: {itemStack.ItemData.ItemName}");
             return false;
         }
@@ -166,10 +177,12 @@ namespace InventorySystem
             {
                 if (CanPlaceItemAt(startX, startY, new Vector2(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x)))
                 {
-                    PlaceItemAt(itemStack, startX, startY, new Vector2Int(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x));
+                    PlaceItemAt(itemStack, startX, startY,
+                        new Vector2Int(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x));
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -188,7 +201,14 @@ namespace InventorySystem
                     itemSlots[index].SetItemStack(itemStack, positionInItem, itemSize, rootIndex);
                 }
             }
+
+            OnItemPlacedAt?.Invoke(this, new ItemPlacedAtEventArgs
+            {
+                ItemStack = itemStack,
+                RootIndex = rootIndex
+            });
         }
+
         //Ignored slots can be a list later
         public bool CanPlaceItemAt(int startX, int startY, Vector2 itemSize, ItemSlot ignoredSlot = null)
         {
@@ -219,6 +239,7 @@ namespace InventorySystem
                     }
                 }
             }
+
             return true;
         }
 
@@ -243,14 +264,17 @@ namespace InventorySystem
                     {
                         slot.Clear();
                     }
+
                     if (amountToRemove <= 0)
                     {
                         return true;
                     }
                 }
             }
+
             return amountToRemove <= 0;
         }
+
         public bool RemoveItem(int rootIndex)
         {
             ItemSlot rootSlot = itemSlots[rootIndex];
@@ -284,6 +308,12 @@ namespace InventorySystem
                 }
             }
 
+            OnItemRootRemoved?.Invoke(this, new ItemRootRemovedEventArgs
+            {
+                ItemStack = itemStack,
+                RootIndex = rootIndex
+            });
+
             return true;
         }
 
@@ -297,7 +327,6 @@ namespace InventorySystem
 
         public void Sort()
         {
-
         }
 
         public Vector2Int GetGridPos(int index)
@@ -306,14 +335,15 @@ namespace InventorySystem
             int row = Mathf.FloorToInt(index / containerWidth);
             return new Vector2Int(column, row);
         }
+
         public int GetIndexFromGridPos(int x, int y)
         {
             return y * containerWidth + x;
         }
     }
+
     public class Item : MonoBehaviour
     {
-
     }
 
     [Serializable]
@@ -326,7 +356,7 @@ namespace InventorySystem
     public class EquippableItemType : ItemType
     {
         public GameObject EquippableItemPrefab; //Should i put all the info inside the prefab?
-                                                //Instead of Gameobject should be something like EquippableItem?
+        //Instead of Gameobject should be something like EquippableItem?
     }
 
     public class ConsumableItemType : ItemType
@@ -339,6 +369,7 @@ namespace InventorySystem
         public GameObject DeployablePrefab;
         public float timeToDeploy;
     }
+
     public class ItemSlot
     {
         //this doesn't seem a good solution but it sure is working well
@@ -358,9 +389,29 @@ namespace InventorySystem
         public event Action<ItemSlot> OnItemRemoved;
 
         public Vector2Int ItemPositionInGrid { get; private set; }
-        public Vector2Int ItemSize { get { if (itemStack != null) { if (itemStack.IsRotated) { return new Vector2Int(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x); } else { return itemStack.ItemData.Size; } } return Vector2Int.zero; } }
 
-        public ItemSlot(Container _container, int index, Vector2Int slotPositionOnContainer, ItemStack _itemStack = null)
+        public Vector2Int ItemSize
+        {
+            get
+            {
+                if (itemStack != null)
+                {
+                    if (itemStack.IsRotated)
+                    {
+                        return new Vector2Int(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x);
+                    }
+                    else
+                    {
+                        return itemStack.ItemData.Size;
+                    }
+                }
+
+                return Vector2Int.zero;
+            }
+        }
+
+        public ItemSlot(Container _container, int index, Vector2Int slotPositionOnContainer,
+            ItemStack _itemStack = null)
         {
             Container = _container;
             itemStack = _itemStack;
@@ -370,41 +421,49 @@ namespace InventorySystem
 
         public void SetAmount(int value)
         {
-
         }
+
         public void AddAmount(int value)
         {
             itemStack.AddAmount(value);
             OnItemChanged?.Invoke(this);
         }
+
         public void RemoveAmount(int value)
         {
             itemStack.RemoveAmount(value);
             OnItemRemoved?.Invoke(this);
         }
+
         public bool CanAcceptItem(ItemStack itemStack)
         {
             return false;
         }
+
         public bool CanSwap()
         {
             return false;
         }
+
         public ItemSlot Clone()
         {
             return null;
         }
-        public void SetItemStack(ItemStack _itemStack, Vector2Int itemPositionInGrid, Vector2Int itemSize, int _rootIndex)
+
+        public void SetItemStack(ItemStack _itemStack, Vector2Int itemPositionInGrid, Vector2Int itemSize,
+            int _rootIndex)
         {
             rootIndex = _rootIndex;
             itemStack = _itemStack;
             ItemPositionInGrid = itemPositionInGrid;
             OnItemChanged?.Invoke(this);
         }
+
         public ItemStack GetItemStack()
         {
             return itemStack;
         }
+
         public void Clear()
         {
             itemStack = null;
@@ -412,15 +471,14 @@ namespace InventorySystem
             rootIndex = 0;
             OnItemChanged?.Invoke(this);
         }
-
     }
+
     [System.Serializable]
     public class ItemStack
     {
         [SerializeField] private ItemData itemData;
         private bool isRotated = false;
-        [Min(1)]
-        [SerializeField] private int amount = 1;
+        [Min(1)] [SerializeField] private int amount = 1;
 
         public ItemData ItemData => itemData;
         public int Amount => amount;

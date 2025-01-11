@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4a058a6c7236d479c52a9c23fc7f17, type: 3}
+  m_Name: Game Controller
+  m_EditorClassIdentifier: 
+  id: 5035dacb-8a62-4506-85a2-d0e7f4a82142
+  itemName: Game Controller
+  description: 
+  itemSprite: {fileID: 21300000, guid: fb4818f7a03806840bb2864bf226fa95, type: 3}
+  size: {x: 2, y: 2}
+  maxStackSize: 0
+  tags: []
+  itemType: []
+  action:
+  - rid: 8876430099645202434
+  - rid: 8876430099645202435
+  references:
+    version: 2
+    RefIds:
+    - rid: 8876430099645202434
+      type: {class: UseAction, ns: InventorySystem, asm: InventorySystem}
+      data: 
+    - rid: 8876430099645202435
+      type: {class: RemoveAction, ns: InventorySystem, asm: InventorySystem}
+      data: 

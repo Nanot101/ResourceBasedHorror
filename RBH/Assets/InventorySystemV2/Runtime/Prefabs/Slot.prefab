@@ -298,7 +298,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a63afdfd50db36d41b89fb85408f3ae0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 28d6a94ff5bebf94582d99a6828588eb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -323,3 +323,4 @@ MonoBehaviour:
   isEmpty: 0
   stackAmountText: {fileID: 4615132340422966829}
   itemImage: {fileID: 5120679777785787468}
+  highlightImagePrefab: {fileID: 2473970527944492235, guid: f7bd2b71ed48cdd49aafc916089e529c, type: 3}

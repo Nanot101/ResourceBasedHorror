@@ -1,11 +1,10 @@
-﻿using Sirenix.OdinInspector;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace InventorySystem
 {
-    public class SlotView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class SlotView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private GridContainerView gridContainerView;
         private Container container;
@@ -28,16 +27,25 @@ namespace InventorySystem
         bool isDragging;
 
         private SlotView currentTargetSlot;
+
+        private Transform imageHolderTransform;
+
+
+        #region Properties
+        public GridContainerView GridContainerView { get { return gridContainerView; } }
+        #endregion
+
         private void Update()
         {
             if (itemSlot == null)
             {
+                isEmpty = true;
                 return;
             }
             isEmpty = itemSlot.IsEmpty;
             if (currentTargetSlot == null)
                 return;
-            if (Input.GetKeyDown(KeyCode.R) && isDragging)
+            if (Input.GetKeyDown(KeyCode.R) && rootSlotView.isDragging)
             {
                 wantsRotate = !wantsRotate;
                 if (tempPreviewImage == null)
@@ -49,7 +57,10 @@ namespace InventorySystem
         }
         private void OnDestroy()
         {
-            Destroy(itemImage.gameObject);
+            if (itemImage)
+                Destroy(itemImage.gameObject);
+            if (itemHighlightImageInstance != null)
+                Destroy(itemHighlightImageInstance);
             if (itemSlot != null)
             {
                 itemSlot.OnItemChanged -= OnItemChanged;
@@ -58,7 +69,8 @@ namespace InventorySystem
         }
         private void OnDisable()
         {
-            itemImage.gameObject.SetActive(false);
+            if (itemImage)
+                itemImage.gameObject.SetActive(false);
             if (tempPreviewImage)
             {
                 Destroy(tempPreviewImage);
@@ -82,24 +94,55 @@ namespace InventorySystem
             imageRectTransform = itemImage.GetComponent<RectTransform>();
             slotRectTransform.sizeDelta = new Vector2(slotSize, slotSize);
             imageRectTransform.sizeDelta = new Vector2(slotSize, slotSize);
-            imageRectTransform.transform.SetParent(transform.parent);
+            Transform tempImageHolder = GetImageHolderInParent();
+            if (tempImageHolder == null)
+            {
+                GameObject imageHolder = new GameObject();
+                imageHolder.name = "TempImageHolder";
+                imageHolder.AddComponent<LayoutElement>().ignoreLayout = true;
+                imageHolder.transform.SetParent(transform.parent);
+                RectTransform imageHolderRectTransform = imageHolder.GetComponent<RectTransform>();
+                imageHolderRectTransform.sizeDelta = transform.parent.GetComponent<RectTransform>().sizeDelta;
+                imageHolderRectTransform.pivot = new Vector2(0, 1);
+                imageHolder.transform.localScale = Vector3.one;
+                imageHolder.transform.position = transform.parent.position;
+                tempImageHolder = imageHolder.transform;
+                imageHolderTransform = imageHolder.transform;
+            }
+            imageHolderTransform = tempImageHolder.transform;
+            imageRectTransform.transform.SetParent(imageHolderTransform);
             SetPivotAndAnchor(slotRectTransform, imageRectTransform);
             imageRectTransform.pivot = new Vector2(0.5f, 0.5f);
 
             UpdateView();
+            if (tempImageHolder != null)
+            {
+
+                tempImageHolder.transform.SetAsLastSibling();
+            }
         }
 
         private void OnItemChanged(ItemSlot slot)
         {
             UpdateView();
         }
-
+        private Transform GetImageHolderInParent()
+        {
+            for (int i = 0; i < transform.parent.childCount; i++)
+            {
+                if (transform.parent.GetChild(i).name == "TempImageHolder")
+                {
+                    return transform.parent.GetChild(i).transform;
+                }
+            }
+            return null;
+        }
         private void OnItemRemoved(ItemSlot slot)
         {
             UpdateView();
         }
 
-        [Button]
+
         private void RemoveItemInSlot()
         {
             if (!itemSlot.HasItemStack)
@@ -110,7 +153,7 @@ namespace InventorySystem
             container.RemoveItem(itemSlot.rootIndex);
         }
 
-        [Button]
+
         private void UpdateView()
         {
             if (itemSlot == null || itemSlot.IsEmpty)
@@ -127,26 +170,34 @@ namespace InventorySystem
                 ResizeItemImage(slotRectTransform, imageRectTransform);
                 RotateImage(imageRectTransform, itemStack.IsRotated);
                 SetPositionItemImage(imageRectTransform, itemStack.IsRotated);
+                //imageRectTransform.transform.SetParent(imageHolderTransform);
 
                 itemImage.gameObject.SetActive(true);
 
+                if (itemSlot.ItemData.IsStackable)
+                {
+                    stackAmountText.gameObject.SetActive(true);
+                }
+                else
+                {
+                    stackAmountText.gameObject.SetActive(false);
+                }
+
                 //itemSlot.ItemData.Icon
+                rootSlotView = this;
 
             }
             else
             {
                 itemImage.gameObject.SetActive(false);
                 stackAmountText.gameObject.SetActive(false);
+                rootSlotView = gridContainerView.GetSlotViewByIndex(itemSlot.rootIndex);
             }
             if (itemSlot.ItemData.IsStackable)
             {
-                stackAmountText.gameObject.SetActive(true);
-                stackAmountText.text = itemSlot.GetItemStack().Amount.ToString();
+                rootSlotView.stackAmountText.text = itemSlot.GetItemStack().Amount.ToString();
             }
-            else
-            {
-                stackAmountText.gameObject.SetActive(false);
-            }
+
         }
 
         private void ResizeItemImage(RectTransform slotRectTransform, RectTransform imageRectTransform)
@@ -206,20 +257,26 @@ namespace InventorySystem
             imageRectTransform.rect.Set(0, 0, slotSize, slotSize);
         }
 
-        private void UpdatePreviewHighlight(Vector2Int gridPos, Vector2Int itemSize, Container targetContainer, GridContainerView targetContainerView)
+        private void UpdatePreviewHighlight(Vector2Int gridPos, Vector2Int itemSize, Container targetContainer,
+            GridContainerView targetContainerView)
         {
             targetContainerView.ClearHighlight();
 
-            bool canPlace = targetContainer.CanPlaceItemAt(gridPos.x, gridPos.y, itemSize, itemSlot);
+            bool canPlace = targetContainer.CanPlaceItemAt(gridPos.x, gridPos.y, itemSize, itemSlot, itemSlot);
 
             targetContainerView.HighlightSlots(gridPos, itemSize, canPlace);
         }
         private void UpdateCurrentPreviewHighlight(SlotView targetSlot)
         {
+
+            Vector2Int itemSize = itemSlot.GetItemStack().IsRotated ? itemSlot.ItemData.Size : InvertedSize(itemSlot.ItemData.Size);
+            GenerateHighlight(targetSlot, itemSize);
+        }
+
+        private void GenerateHighlight(SlotView targetSlot, Vector2Int itemSize)
+        {
             if (wantsRotate)
             {
-                Vector2Int itemSize;
-                itemSize = itemSlot.GetItemStack().IsRotated ? itemSlot.ItemData.Size : InvertedSize(itemSlot.ItemData.Size);
                 UpdatePreviewHighlight(targetSlot.itemSlot.ContainerPosition, itemSize, targetSlot.container, targetSlot.gridContainerView);
             }
             else
@@ -321,6 +378,7 @@ namespace InventorySystem
                 //I'm root
                 rootSlotView = this;
             }
+            rootSlotView.DestroyItemHighlight();
             //Create Temporary Image
             GameObject imagePreview = new GameObject();
             imagePreview.SetActive(false);
@@ -342,7 +400,8 @@ namespace InventorySystem
             rootSlotView.imageRectTransform.SetAsLastSibling();
             originalImagePosition = rootSlotView.imageRectTransform.localPosition;
             imagePreview.SetActive(true);
-            isDragging = true;
+            rootSlotView.isDragging = true;
+            InventorySystem.IsDragging = true;
 
         }
 
@@ -408,9 +467,11 @@ namespace InventorySystem
             }
             if (dropTargetSlot.container == container)
             {
-                if (dropTargetSlot.itemSlot.Index == itemSlot.rootIndex && !wantsRotate)
+                if (dropTargetSlot.itemSlot.Index == itemSlot.rootIndex && !wantsRotate && !itemSlot.ItemData.IsStackable)
                 {
                     Debug.Log("Dropped on the same slot");
+                    rootSlotView.CreateItemHighlight();
+                    dropTargetSlot.ClearHighlight();
                     ReturnSlotState();
                     return;
                 }
@@ -418,25 +479,58 @@ namespace InventorySystem
 
             if (!dropTargetSlot.isEmpty)
             {
-                ReturnSlotState();
-                return;
+                if (dropTargetSlot.rootSlotView != rootSlotView)
+                {
+                    if (dropTargetSlot.itemSlot.ItemData == itemSlot.ItemData && itemSlot.ItemData.IsStackable && !dropTargetSlot.itemSlot.IsFull && !itemSlot.IsFull)
+                    {
+                        bool canPlace = dropTargetSlot.container.AddItemToSlot(itemSlot, dropTargetSlot.itemSlot.ContainerPosition.x, dropTargetSlot.itemSlot.ContainerPosition.y, out int remainingAmount);
+                        if (canPlace)
+                        {
+                            if (remainingAmount > 0)
+                            {
+                                dropTargetSlot.container.AddItem(new ItemStack(itemSlot.ItemData,false,remainingAmount),out int currentRemainingAmount);
+                                Debug.Log($"Remaining Amount {remainingAmount}, currentRemainingAmount {currentRemainingAmount}");
+                            }
+                            Debug.Log("Item sucessfully added");
+                            container.RemoveItem(itemSlot.rootIndex);
+                        }
+                        else
+                        {
+                            ReturnSlotState();
+                        }
+                        ClearSlotHighlight();
+                        Debug.Log("Not empty and same item and is stackable");
+                        return;
+                    }
+                    else
+                    {
+                        Debug.Log("Not empty and not the same item and not stackable");
+                        dropTargetSlot.rootSlotView.CreateItemHighlight();
+                        ReturnSlotState();
+                        return;
+                    }
+                }
             }
             ItemStack itemStack = itemSlot.GetItemStack();
             container.RemoveItem(itemSlot.rootIndex);
             if (dropTargetSlot.itemSlot.HasItemStack)
             {
+                bool success;
                 //for now return later make a way to swap if there is 1 item in the required slots
                 if (dropTargetSlot.container != container)
                 {
-                    dropTargetSlot.container.AddItemAt(itemStack, rootSlotView.itemSlot.ContainerPosition.x, rootSlotView.itemSlot.ContainerPosition.y);
+                    success = dropTargetSlot.container.AddItemToSlot(itemSlot, dropTargetSlot.itemSlot.ContainerPosition.x, dropTargetSlot.itemSlot.ContainerPosition.y, out int _);
                 }
                 else
                 {
-                    container.AddItemAt(itemStack, rootSlotView.itemSlot.ContainerPosition.x, rootSlotView.itemSlot.ContainerPosition.y);
+                    success = container.AddItemToSlot(itemSlot, dropTargetSlot.itemSlot.ContainerPosition.x, dropTargetSlot.itemSlot.ContainerPosition.y, out int _);
+                }
+                if (success)
+                {
+                    Debug.Log("Item sucessfully added");
                 }
                 ReturnSlotState();
-                Debug.Log("There is already an item here and i can't swap yet");
-                return;
+                //Todo Add a way to add to stacks
             }
             else
             {
@@ -466,8 +560,9 @@ namespace InventorySystem
                     {
                         gridContainerView.ClearHighlight();
                     }
-                    Debug.Log("Sucessfully added");
-                    Debug.Log(itemStack.IsRotated);
+                    dropTargetSlot.CreateItemHighlight();
+                    Debug.Log("Item sucessfully added");
+                    //Debug.Log(itemStack.IsRotated);
                 }
                 else
                 {
@@ -480,19 +575,27 @@ namespace InventorySystem
                     Debug.LogWarning("Failed to add");
                 }
             }
-            isDragging = false;
+            rootSlotView.isDragging = false;
+            InventorySystem.IsDragging = false;
         }
 
         private void ReturnSlotState()
         {
             wantsRotate = false;
+            ClearSlotHighlight();
+            rootSlotView.imageRectTransform.gameObject.SetActive(true);
+            rootSlotView.imageRectTransform.localPosition = originalImagePosition;
+            rootSlotView.isDragging = false;
+            InventorySystem.IsDragging = false;
+        }
+
+        private void ClearSlotHighlight()
+        {
             gridContainerView.ClearHighlight();
             if (currentTargetSlot != null)
             {
                 currentTargetSlot.gridContainerView.ClearHighlight();
             }
-            rootSlotView.imageRectTransform.gameObject.SetActive(true);
-            rootSlotView.imageRectTransform.localPosition = originalImagePosition;
         }
 
         private Vector2Int InvertedSize(Vector2Int size)
@@ -500,5 +603,51 @@ namespace InventorySystem
             return new Vector2Int(size.y, size.x);
         }
 
+        [SerializeField] private Image highlightImagePrefab;
+        private Image itemHighlightImageInstance;
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (highlightImagePrefab == null)
+            {
+                Debug.LogWarning("Item Highlight not set");
+                return;
+            }
+            if (isEmpty || InventorySystem.IsDragging || rootSlotView == null)
+                return;
+            rootSlotView.CreateItemHighlight();
+
+        }
+
+        public void CreateItemHighlight()
+        {
+            DestroyItemHighlight();
+            itemHighlightImageInstance = Instantiate(highlightImagePrefab, imageHolderTransform);
+            if (itemSlot.GetItemStack().IsRotated)
+                itemHighlightImageInstance.rectTransform.sizeDelta = new Vector2(rootSlotView.imageRectTransform.sizeDelta.y, rootSlotView.imageRectTransform.sizeDelta.x);
+            else
+                itemHighlightImageInstance.rectTransform.sizeDelta = rootSlotView.imageRectTransform.sizeDelta;
+            itemHighlightImageInstance.rectTransform.SetParent(imageHolderTransform);
+            itemHighlightImageInstance.rectTransform.SetAsFirstSibling();
+            itemHighlightImageInstance.rectTransform.localScale = Vector2.one;
+            itemHighlightImageInstance.transform.position = rootSlotView.transform.position;
+        }
+
+        public void DestroyItemHighlight()
+        {
+            if (itemHighlightImageInstance != null)
+            {
+                Destroy(itemHighlightImageInstance);
+            }
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (!rootSlotView)
+                return;
+            if (isEmpty || InventorySystem.IsDragging)
+                return;
+            rootSlotView.DestroyItemHighlight();
+        }
     }
 }

@@ -13,10 +13,30 @@ MonoBehaviour:
   m_Name: ItemDatabase
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: bc2fad14aa324e341a35cffb9a0c11e1, type: 2}
-  - {fileID: 11400000, guid: 8dfb2d4b459ad4e40aa0e771f9d939da, type: 2}
-  - {fileID: 11400000, guid: 4e7c10fb1164cb9459e50d218da4e1c8, type: 2}
-  - {fileID: 11400000, guid: 091975cf397afc34e8fba70a0538e3f1, type: 2}
-  - {fileID: 11400000, guid: aad093cb757f8c045808d9ae88be501e, type: 2}
-  - {fileID: 11400000, guid: e40d26068ae4a354a88556ad0d2347f2, type: 2}
+  - {fileID: 11400000, guid: 80865847c095b9b43876b541882af3cb, type: 2}
+  - {fileID: 11400000, guid: a885ff9292787c446becadf7cca10f34, type: 2}
+  - {fileID: 11400000, guid: 52874f170898f3741908817797decd11, type: 2}
+  - {fileID: 11400000, guid: f602e1ac07af6624e86afa64b8b23a7c, type: 2}
+  - {fileID: 11400000, guid: b747586c0e7013d4a9b8d5298c677f16, type: 2}
+  - {fileID: 11400000, guid: 488cd99211d1a1344ad605a412f46704, type: 2}
+  - {fileID: 11400000, guid: 2d4a962e2b77ec14fa44c5c2942edd49, type: 2}
+  - {fileID: 11400000, guid: 3b2fcbe14331d834db8e60e3d9c6abb3, type: 2}
+  - {fileID: 11400000, guid: ac9ce0e9447f93a42b7cbbbaa1a2551f, type: 2}
+  - {fileID: 11400000, guid: a2b07e26783d78e4dabb113344087c10, type: 2}
+  - {fileID: 11400000, guid: 2d2a83124867ea04aa391a50377d6cdb, type: 2}
+  - {fileID: 11400000, guid: 2353c35055ed7da4490d3f76697af568, type: 2}
+  - {fileID: 11400000, guid: 7b5a8ded27668ba45a49be28b1090e2c, type: 2}
+  - {fileID: 11400000, guid: 46636ec76a5e4114083a9a15a02c2ce7, type: 2}
+  - {fileID: 11400000, guid: 9351e61fcb306f4489288f96cd65f5ed, type: 2}
+  - {fileID: 11400000, guid: a42a4ccaf029d7a41a83a158d64235c3, type: 2}
+  - {fileID: 11400000, guid: 92396e44746eeb344b91ef13ef84d87f, type: 2}
+  - {fileID: 11400000, guid: 37269054524c64f44867d131aa3ed112, type: 2}
+  - {fileID: 11400000, guid: 7c6bc1795e0636b4dbacebe4d6ce4d78, type: 2}
+  - {fileID: 11400000, guid: ba85fcdf7c02565478577e25091a5d92, type: 2}
+  - {fileID: 11400000, guid: 98ecc525c367b4b4eaa12df527355617, type: 2}
+  - {fileID: 11400000, guid: 0037cfc60a0343c4b823fd336f982c68, type: 2}
+  - {fileID: 11400000, guid: 2aa74cbaa94e4e342ad3821a4fd3c334, type: 2}
+  - {fileID: 11400000, guid: aafed8d00f212234fb6043823542973c, type: 2}
+  - {fileID: 11400000, guid: 36e5e09ba383f564687e024f07285e89, type: 2}
+  - {fileID: 11400000, guid: 527e8de091e051c42b35f4be8dd480dd, type: 2}
   itemsFolder: Assets/InventorySystemV2/Runtime/Sample/ItemDbTest/Items

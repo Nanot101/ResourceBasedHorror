@@ -1,11 +1,13 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace InventorySystem
 {
-    public class ContextMenuButton : MonoBehaviour, IPointerClickHandler
+    public class ContextMenuButton : MonoBehaviour
     {
+        [SerializeField] Button m_Button;
         [SerializeField] TextMeshProUGUI buttonText;
         ItemSlot itemSlot;
         ItemAction action;
@@ -15,12 +17,12 @@ namespace InventorySystem
             action = _action;
             itemSlot = _itemSlot;
             buttonText.text = action.ActionName;
+            m_Button.onClick.AddListener(OnClick);
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        public void OnClick()
         {
-            if (eventData.button == PointerEventData.InputButton.Left)
-                action.Execute(itemSlot);
+            action.Execute(itemSlot);
         }
     }
 }

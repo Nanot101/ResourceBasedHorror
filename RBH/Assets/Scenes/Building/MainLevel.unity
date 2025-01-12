@@ -146121,7 +146121,7 @@ GameObject:
   - component: {fileID: 7178455947033734049}
   - component: {fileID: 3337991581447685950}
   - component: {fileID: 5048616256079364905}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: InteractableUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146237,7 +146237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3684418257463712966}
   - component: {fileID: 619944962760216723}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146485,7 +146485,7 @@ GameObject:
   - component: {fileID: 2858603241205660846}
   - component: {fileID: 5240990084059597722}
   - component: {fileID: 684792042884477727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DialogueInteractable Variant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146568,7 +146568,7 @@ GameObject:
   - component: {fileID: 6763844229690640049}
   - component: {fileID: 5974747730715172095}
   - component: {fileID: 6566704653996586649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146586,7 +146586,7 @@ GameObject:
   - component: {fileID: 6329556863790056614}
   - component: {fileID: 7877234767371794456}
   - component: {fileID: 5759816586157946321}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

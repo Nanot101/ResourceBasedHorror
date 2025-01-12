@@ -34,15 +34,16 @@ namespace InventorySystem
                 buttons.Add(button);
             }
         }
-
+        public void Open()
+        {
+            gameObject.SetActive(true);
+        }
         public void Close()
         {
-            //for(int i = 0;i < buttons.Count; i++)
-            //{
-            //    Destroy(buttons[i].gameObject);   
-            //}
-            //buttons.Clear();
-            Destroy(transform.gameObject);
+            buttons.DestroyAllObjectsInList();
+            buttons.Clear();
+            gameObject.SetActive(false);
+
         }
     }
 }

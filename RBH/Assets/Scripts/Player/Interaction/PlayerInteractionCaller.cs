@@ -9,7 +9,9 @@ public class PlayerInteractionCaller : MonoBehaviour, IInteractionCaller
 
     [field: SerializeField] public RecipePageStore RecipePages { get; private set; }
 
-    [field: SerializeField] public ContainerHandler InventoryContainer { get; private set; }
+    public Container InventoryContainer => PlayerInventoryContainer.Container;
+
+    [SerializeField] private ContainerHandler PlayerInventoryContainer;
 
     private readonly List<Interactable> interactables = new();
 

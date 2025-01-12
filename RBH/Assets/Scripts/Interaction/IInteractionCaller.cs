@@ -12,5 +12,5 @@ public interface IInteractionCaller
 
     public RecipePageStore RecipePages { get; }
 
-    public ContainerHandler InventoryContainer { get; }
+    public Container InventoryContainer { get; }
 }

@@ -12,15 +12,17 @@ namespace InventorySystem
 
         public int containerWidth;
         public readonly List<ItemSlot> itemSlots = new List<ItemSlot>();
-
-        //Todo: Logic for each property
         public bool IsFull => itemSlots.Count >= containerSlots;
         public bool HasSpace => itemSlots.Count >= containerSlots;
         public bool ItemAmount => itemSlots.Count >= containerSlots;
         public int SlotCount => containerSlots;
         public int RemainingSpace => containerSlots - itemSlots.Count;
 
-        public Container(string _containerName,int _containerSlots, int _containerWidth, IEnumerable<ItemStack> _initialItems = null)
+        public event EventHandler<ItemRootRemovedEventArgs> OnItemRootRemoved;
+
+        public event EventHandler<ItemPlacedAtEventArgs> OnItemPlacedAt;
+
+        public Container(string _containerName, int _containerSlots, int _containerWidth, IEnumerable<ItemStack> _initialItems = null)
         {
             containerWidth = _containerWidth;
             containerSlots = _containerSlots;
@@ -29,10 +31,10 @@ namespace InventorySystem
             {
                 itemSlots.Add(new ItemSlot(this, i, GetGridPos(i)));
             }
-            Debug.Log($"Initial item count: {initialItemCount}");
+            //Debug.Log($"Initial item count: {initialItemCount}");
             for (int i = 0; i < initialItemCount; i++)
             {
-                Debug.Log($"Adding item: {_initialItems.ElementAt(i).ItemData.ItemName}");
+                //Debug.Log($"Adding item: {_initialItems.ElementAt(i).ItemData.ItemName}");
                 AddItem(_initialItems.ElementAt(i), out int _);
             }
         }
@@ -61,48 +63,89 @@ namespace InventorySystem
             //If it finds a slot and the item stack is maxxed out try to add the remaining amount to another slot
             //If there is no slot that can accept the item, try to add the item to an empty slot
             //If there is no slot empty and all maxed out return remaining amount of the tried added item
-            Debug.Log($"Attempting to add item: {itemStack.ItemData.ItemName}, Amount: {itemStack.Amount}");
+            //Debug.Log($"Attempting to add item: {itemStack.ItemData.ItemName}, Amount: {itemStack.Amount}");
             remainingAmount = itemStack.Amount;
-            //Check if there already is a stack of the item
-            foreach (var slot in itemSlots)
+            Debug.Log(remainingAmount +"remaining");
+            if (itemStack.ItemData.IsStackable)
             {
-                if (slot.HasItemStack && slot.GetItemStack().ItemData == itemStack.ItemData && !slot.IsFull)
+                //Check if there already is a stack of the item
+                foreach (var slot in itemSlots)
                 {
-                    int spaceLeft = slot.GetItemStack().ItemData.MaxStackSize - slot.GetItemStack().Amount;
-                    int amountToAdd = Mathf.Min(spaceLeft, remainingAmount);
-                    slot.AddAmount(amountToAdd);
-                    remainingAmount -= amountToAdd;
-
-                    Debug.Log($"Added {amountToAdd} to existing stack in slot {slot.Index}. Remaining amount: {remainingAmount}");
-
-                    if (remainingAmount <= 0)
+                    if (slot.HasItemStack && slot.GetItemStack().ItemData == itemStack.ItemData && !slot.IsFull)
                     {
-                        Debug.Log($"Successfully added item: {itemStack.ItemData.ItemName}");
-                        return true;
-                    }
-                }
-            }
-            //If the item is stackable and has size 1
-            if (itemStack.ItemData.Size == Vector2Int.one)
-            {
-                Debug.Log("Item is stackable and size is 1x1. Trying to add to empty slots.");
-                for (int index = 0; index < itemSlots.Count; index++)
-                {
-                    if (itemSlots[index].IsEmpty)
-                    {
-                        int amountToAdd = Mathf.Min(remainingAmount, itemStack.ItemData.MaxStackSize);
-                        ItemStack newStack = new ItemStack(itemStack.ItemData, itemStack.IsRotated, amountToAdd);
-                        itemSlots[index].SetItemStack(newStack, Vector2Int.zero, Vector2Int.one, index);
-                        remainingAmount -= amountToAdd;
+                        int spaceLeft = itemStack.ItemData.MaxStackSize - itemStack.Amount;
+                        int amountToAdd = Mathf.Min(spaceLeft, remainingAmount);
+                        slot.AddAmount(amountToAdd, out remainingAmount);
 
-                        Debug.Log($"Created new stack in slot {index}. Amount added: {amountToAdd}. Remaining amount: {remainingAmount}");
+                        Debug.Log($"Added {amountToAdd} to existing stack in slot {slot.Index}. Remaining amount: {remainingAmount} with max {slot.GetItemStack().ItemData.MaxStackSize}");
 
                         if (remainingAmount <= 0)
                         {
-                            Debug.Log("Successfully added all items to empty slots.");
+                            Debug.Log($"Successfully added item: {itemStack.ItemData.ItemName}");
                             return true;
                         }
                     }
+                }
+
+                //If the item is stackable and has size 1
+                if (itemStack.ItemData.Size == Vector2Int.one)
+                {
+                    //Debug.Log("Item is stackable and size is 1x1. Trying to add to empty slots.");
+                    for (int index = 0; index < itemSlots.Count; index++)
+                    {
+                        if (itemSlots[index].IsEmpty)
+                        {
+                            int amountToAdd = Mathf.Min(remainingAmount, itemStack.ItemData.MaxStackSize);
+                            ItemStack newStack = new ItemStack(itemStack.ItemData, itemStack.IsRotated, amountToAdd);
+                            itemSlots[index].SetItemStack(newStack, Vector2Int.zero, Vector2Int.one, index);
+                            remainingAmount -= amountToAdd;
+
+                            Debug.Log($"Created new stack in slot {index}. Amount added: {amountToAdd}. Remaining amount: {remainingAmount}");
+
+                            if (remainingAmount <= 0)
+                            {
+                                Debug.Log("Successfully added all items to empty slots.");
+                                return true;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Vector2Int itemSize = itemStack.IsRotated
+                        ? new(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x)
+                        : itemStack.ItemData.Size;
+
+                    // Keep placing as many stacks as possible until no more remain
+                    while (remainingAmount > 0)
+                    {
+                        // Find a free region of size itemSize
+                        bool placedStack = false;
+                        for (int index = 0; index < itemSlots.Count; index++)
+                        {
+                            Vector2Int gridPos = GetGridPos(index);
+                            if (CanPlaceItemAt(gridPos.x, gridPos.y, itemSize))
+                            {
+                                int amountToAdd = Mathf.Min(remainingAmount, itemStack.ItemData.MaxStackSize);
+
+                                ItemStack newStack = new ItemStack(
+                                    itemStack.ItemData,
+                                    itemStack.IsRotated,
+                                    amountToAdd
+                                );
+
+                                PlaceItemAt(newStack, gridPos.x, gridPos.y, itemSize, out int _);
+
+                                remainingAmount -= amountToAdd;
+                                placedStack = true;
+                                break;
+                            }
+                        }
+
+                        if (!placedStack) { break; }
+                    }
+
+                    return (remainingAmount <= 0);
                 }
             }
             //If the item is not stackable or has size greater than 1
@@ -134,7 +177,7 @@ namespace InventorySystem
 
                     if (CanPlaceItemAt(gridPos.x, gridPos.y, itemSize))
                     {
-                        PlaceItemAt(itemStack, gridPos.x, gridPos.y, itemSize);
+                        PlaceItemAt(itemStack, gridPos.x, gridPos.y, itemSize, out int _);
 
                         remainingAmount -= itemStack.Amount;
 
@@ -158,7 +201,7 @@ namespace InventorySystem
             {
                 if (CanPlaceItemAt(startX, startY, itemStack.ItemData.Size))
                 {
-                    PlaceItemAt(itemStack, startX, startY, itemStack.ItemData.Size);
+                    PlaceItemAt(itemStack, startX, startY, itemStack.ItemData.Size, out _);
                     return true;
                 }
             }
@@ -166,16 +209,62 @@ namespace InventorySystem
             {
                 if (CanPlaceItemAt(startX, startY, new Vector2(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x)))
                 {
-                    PlaceItemAt(itemStack, startX, startY, new Vector2Int(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x));
+                    PlaceItemAt(itemStack, startX, startY, new Vector2Int(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x), out int _);
                     return true;
                 }
             }
             return false;
         }
+        public bool AddItemToSlot(ItemSlot itemSlot, int startX, int startY,out int remainingAmount)
+        {
+            remainingAmount = 0;
+            ItemStack itemStack = null;
+            if (itemSlot.HasItemStack)
+            {
+                itemStack = itemSlot.GetItemStack();
+            }
+            if (itemStack == null)
+                return false;
 
-        private void PlaceItemAt(ItemStack itemStack, int startX, int startY, Vector2Int itemSize)
+            if (!itemStack.IsRotated)
+            {
+                if (CanPlaceItemAt(startX, startY, itemStack.ItemData.Size,itemSlot, itemSlot))
+                {
+                    PlaceItemAt(itemStack, startX, startY, itemStack.ItemData.Size, out remainingAmount);
+                    if (remainingAmount > 0)
+                    {
+                        Debug.Log($"Remaining amount: {remainingAmount}");
+                        itemSlot.Container.AddItem(new ItemStack(itemStack.ItemData, false, remainingAmount), out int _);
+                    }
+                    return true;
+                }
+            }
+            else
+            {
+                if (CanPlaceItemAt(startX, startY, new Vector2(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x), itemSlot, itemSlot))
+                {
+                    PlaceItemAt(itemStack, startX, startY, new Vector2Int(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x), out remainingAmount);
+                    if (remainingAmount > 0)
+                    {
+                        AddItem(new ItemStack(itemStack.ItemData, true, remainingAmount), out int _);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+        private void PlaceItemAt(ItemStack itemStack, int startX, int startY, Vector2Int itemSize, out int remainingAmount)
         {
             int rootIndex = GetIndexFromGridPos(startX, startY);
+            remainingAmount = itemStack.Amount;
+            if (itemSlots[rootIndex].HasItemStack)
+            {
+                if (itemSlots[rootIndex].ItemData.IsStackable)
+                {
+                    itemSlots[rootIndex].AddAmount(remainingAmount, out remainingAmount);
+                    return;
+                }
+            }
             for (int x = 0; x < itemSize.x; x++)
             {
                 for (int y = 0; y < itemSize.y; y++)
@@ -188,10 +277,21 @@ namespace InventorySystem
                     itemSlots[index].SetItemStack(itemStack, positionInItem, itemSize, rootIndex);
                 }
             }
+
+            OnItemPlacedAt?.Invoke(this, new ItemPlacedAtEventArgs
+            {
+                ItemStack = itemStack,
+                RootIndex = rootIndex
+            });
         }
         //Ignored slots can be a list later
-        public bool CanPlaceItemAt(int startX, int startY, Vector2 itemSize, ItemSlot ignoredSlot = null)
+        public bool CanPlaceItemAt(int startX, int startY, Vector2 itemSize, ItemSlot ignoredSlot = null, ItemSlot targetItem = null)
         {
+            //int rootSlot = GetIndexFromGridPos(startX, startY);
+            //if (targetItem != null &&itemSlots[rootSlot].ItemData == targetItem.ItemData && targetItem.ItemData.IsStackable)
+            //{
+            //    return true;
+            //}
             for (int x = 0; x < itemSize.x; x++)
             {
                 for (int y = 0; y < itemSize.y; y++)
@@ -207,14 +307,34 @@ namespace InventorySystem
                     }
 
                     int index = GetIndexFromGridPos(gridX, gridY);
+                    ItemSlot currentSlot = itemSlots[index];
+
+                   
 
                     if (index < 0 || index >= itemSlots.Count)
                     {
                         return false;
                     }
 
-                    if (itemSlots[index].HasItemStack && itemSlots[index].rootIndex != ignoredSlot?.rootIndex)
+
+                    if (ignoredSlot != null && currentSlot.rootIndex == ignoredSlot.rootIndex && currentSlot.Container == ignoredSlot.Container)
                     {
+                        continue;
+                    }
+
+                    bool hasItemStack = currentSlot.HasItemStack;
+
+
+                    if (hasItemStack)
+                    {
+                        if (targetItem != null)
+                        {
+                            if (!targetItem.ItemData.IsStackable || currentSlot.ItemData != targetItem.ItemData || currentSlot.IsFull || targetItem.IsFull)
+                            {
+                                return false;
+                            }
+                            continue;
+                        }
                         return false;
                     }
                 }
@@ -222,10 +342,6 @@ namespace InventorySystem
             return true;
         }
 
-        public bool CanAddItem(ItemStack itemStack)
-        {
-            return false;
-        }
 
         public bool RemoveItem(ItemStack itemStack)
         {
@@ -274,7 +390,7 @@ namespace InventorySystem
                     ItemSlot slot = itemSlots[slotIndex];
                     if (slot.HasItemStack && slot.GetItemStack().ItemData == itemStack.ItemData)
                     {
-                        Debug.Log($"Slot at position ({gridX}, {gridY}) cleared");
+                        //Debug.Log($"Slot at position ({gridX}, {gridY}) cleared");
                         slot.Clear();
                     }
                     else
@@ -283,7 +399,11 @@ namespace InventorySystem
                     }
                 }
             }
-
+            OnItemRootRemoved?.Invoke(this, new ItemRootRemovedEventArgs
+            {
+                ItemStack = itemStack,
+                RootIndex = rootIndex
+            });
             return true;
         }
 
@@ -305,7 +425,7 @@ namespace InventorySystem
             int column = (index % containerWidth);
             int row = Mathf.FloorToInt(index / containerWidth);
             return new Vector2Int(column, row);
-        }
+        } 
         public int GetIndexFromGridPos(int x, int y)
         {
             return y * containerWidth + x;
@@ -319,14 +439,11 @@ namespace InventorySystem
     [Serializable]
     public class ItemType
     {
-        //Just a base class for all item types
-        //I can't inherit from item data because then i couldn't have item with multiple types
     }
 
     public class EquippableItemType : ItemType
     {
-        public GameObject EquippableItemPrefab; //Should i put all the info inside the prefab?
-                                                //Instead of Gameobject should be something like EquippableItem?
+        public GameObject EquippableItemPrefab;
     }
 
     public class ConsumableItemType : ItemType
@@ -341,7 +458,7 @@ namespace InventorySystem
     }
     public class ItemSlot
     {
-        //this doesn't seem a good solution but it sure is working well
+        //This worked well
         public int rootIndex;
         private ItemStack itemStack;
         public Container Container { get; private set; }
@@ -352,6 +469,8 @@ namespace InventorySystem
         public bool HasItemStack => itemStack != null;
         public bool IsFull => itemStack.Amount >= itemStack.ItemData.MaxStackSize;
         public bool IsEmpty => !HasItemStack || itemStack.Amount == 0 || ItemData == null;
+
+        public bool IsRoot => ContainerPosition == Vector2Int.zero ? true : false;
 
         public event Action<ItemSlot> OnItemAdded;
         public event Action<ItemSlot> OnItemChanged;
@@ -372,9 +491,21 @@ namespace InventorySystem
         {
 
         }
-        public void AddAmount(int value)
+        public void AddAmount(int value, out int remainingAmount)
         {
-            itemStack.AddAmount(value);
+            int currentAmount = itemStack.Amount;
+            int maxStackSize = itemStack.ItemData.MaxStackSize;
+
+            if (currentAmount + value > maxStackSize)
+            {
+                int amountToAdd = maxStackSize - currentAmount;
+                itemStack.AddAmount(amountToAdd);
+                remainingAmount = value - amountToAdd;
+            }
+            else
+            {
+                remainingAmount = itemStack.AddAmount(value);
+            }
             OnItemChanged?.Invoke(this);
         }
         public void RemoveAmount(int value)
@@ -447,8 +578,15 @@ namespace InventorySystem
 
         public int AddAmount(int value)
         {
-            amount += value;
-            return amount;
+            int newAmount = amount += value;
+            if (amount > itemData.MaxStackSize)
+            {
+                int leftover = newAmount - itemData.MaxStackSize;
+                amount = itemData.MaxStackSize;
+                return leftover;
+            }
+            amount = newAmount;
+            return 0;
         }
 
         public bool IsRotated => isRotated;

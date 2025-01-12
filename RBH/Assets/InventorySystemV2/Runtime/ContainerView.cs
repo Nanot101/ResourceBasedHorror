@@ -11,6 +11,7 @@ namespace InventorySystem
 
         protected readonly List<SlotView> slots = new List<SlotView>();
 
+
         public bool IsVisible { get; private set; }
         public virtual void ShowContainer(Container container)
         {
@@ -25,7 +26,7 @@ namespace InventorySystem
             IsVisible = true;
         }
 
-        public void HideContainer()
+        public virtual void HideContainer()
         {
             IsVisible = false;
             gameObject.SetActive(false);

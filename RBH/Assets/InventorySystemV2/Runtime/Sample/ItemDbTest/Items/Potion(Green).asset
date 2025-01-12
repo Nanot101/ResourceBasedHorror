@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4a058a6c7236d479c52a9c23fc7f17, type: 3}
+  m_Name: Potion(Green)
+  m_EditorClassIdentifier: 
+  id: 6afbdcc3-d06e-4cf8-b152-677cf2b10905
+  itemName: Potion(Green)
+  description: 
+  itemSprite: {fileID: 21300000, guid: 82151f27ed3ab7c4d9b3ce9a8772cafd, type: 3}
+  size: {x: 1, y: 2}
+  maxStackSize: 4
+  tags: []
+  itemType: []
+  action:
+  - rid: 8876430099645202434
+  - rid: 8876430099645202435
+  references:
+    version: 2
+    RefIds:
+    - rid: 8876430099645202434
+      type: {class: UseAction, ns: InventorySystem, asm: InventorySystem}
+      data: 
+    - rid: 8876430099645202435
+      type: {class: RemoveAction, ns: InventorySystem, asm: InventorySystem}
+      data: 

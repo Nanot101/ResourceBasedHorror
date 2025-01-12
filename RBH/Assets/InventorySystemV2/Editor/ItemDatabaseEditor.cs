@@ -240,7 +240,7 @@ namespace InventorySystem.Editor
                     {
                         if (GUILayout.Button("Add to target container"))
                         {
-                            AddItemToSelectedContainer(new ItemStack(item, true, 1));
+                            AddItemToSelectedContainer(new ItemStack(item, false, 1));
                         }
                     }
                     if (string.IsNullOrEmpty(item.Id))

@@ -1,14 +1,19 @@
 using InventorySystem;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInventoryController>
 {
     [SerializeField] private InventoryViewController viewController;
 
+    [FormerlySerializedAs("interactionCaller")] [SerializeField]
+    private InventoryContainerDropItemSynchronization dropItemSynchronization;
+
     [SerializeField] private int tempContainerSlots = 32;
     [SerializeField] private int tempContainerWidth = 4;
 
-    private Container tempContainer;
+    private Container temporaryInventoryContainer;
+    private Transform playerTransform;
 
     private void Start()
     {
@@ -32,28 +37,31 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
 
         HideInventory();
 
-        DropItemsInTempContainer();
+        ClearTemporaryContainer();
     }
 
-    public void StartDropComplexInventory(Transform playerTransform)
+    public void TriggerDropComplexInventory(Transform playerTransform)
     {
-        PickUpItemsAroundPlayer();
+        this.playerTransform = playerTransform;
+
+        temporaryInventoryContainer = new Container("Temporary Container", tempContainerSlots, tempContainerWidth);
+
+        dropItemSynchronization.StartSynchronization(this.playerTransform.position, temporaryInventoryContainer);
 
         ShowInventory();
     }
 
-    private void PickUpItemsAroundPlayer()
+    private void ClearTemporaryContainer()
     {
-    }
+        dropItemSynchronization.StopSynchronization();
 
-    private void DropItemsInTempContainer()
-    {
-        tempContainer = null;
+        temporaryInventoryContainer.Clear();
+        temporaryInventoryContainer = null;
     }
 
     private void ShowInventory()
     {
-        viewController.ShowPlayerAndTempInventory(tempContainer);
+        viewController.ShowPlayerAndTempInventory(temporaryInventoryContainer);
 
         GamePause.RequestPause<EnemyDropComplexInventoryController>();
 

@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace InventorySystem
@@ -12,6 +13,10 @@ namespace InventorySystem
         private InventorySystem.InventoryPositionType inventoryPositionType;
 
         public InventorySystem.InventoryPositionType InventoryPositionType { get => inventoryPositionType; }
+
+        public static Action<GridContainerView> OnInventoryOpen;
+        public static Action<GridContainerView> OnInventoryClosed;
+
 
         private void Awake()
         {
@@ -44,6 +49,7 @@ namespace InventorySystem
             container = _container;
             gridLayoutGroup.constraintCount = _container.containerWidth;
             Initialize(_container);
+            OnInventoryOpen?.Invoke(this);
         }
         //Makes me able to create and initialize it entirely from code
         public void ShowContainer(Container _container, SlotView _slotViewPrefab)
@@ -119,6 +125,12 @@ namespace InventorySystem
             {
                 slotView.ClearHighlight();
             }
+        }
+
+        public override void HideContainer()
+        {
+            base.HideContainer();
+            OnInventoryClosed?.Invoke(this);
         }
 
     }

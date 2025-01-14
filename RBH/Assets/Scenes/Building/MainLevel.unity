@@ -735,10 +735,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.47
@@ -766,6 +762,18 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 2.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5699,12 +5707,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 450278014}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &450278014
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8066,12 +8074,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 661921310}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &661921310
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8475,10 +8483,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.5
@@ -8502,6 +8506,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 5.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8665,10 +8677,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -8696,6 +8704,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11381,10 +11397,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.625
@@ -11404,6 +11416,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 3.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11478,10 +11498,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.5
@@ -11505,6 +11521,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 5.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12055,10 +12079,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -12078,6 +12098,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13329,10 +13357,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.5
@@ -13356,6 +13380,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 5.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13836,10 +13868,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -13859,6 +13887,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13933,10 +13969,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.5
@@ -13960,6 +13992,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 5.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15030,10 +15070,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.25
@@ -15061,6 +15097,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 2.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15404,12 +15448,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1337530316}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1337530316
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18300,9 +18344,9 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
+    - target: {fileID: 4675121347169914155, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
@@ -18312,10 +18356,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 8435534981630774395, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8545411005926374180, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Size.x
       value: 3.12
@@ -18324,9 +18364,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorInteractable
       objectReference: {fileID: 0}
-    - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 3
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 3.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19436,12 +19480,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1651193864}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1651193864
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -141085,10 +141129,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.74
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.25
@@ -141104,6 +141144,10 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -141727,12 +141771,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1754535828}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1754535828
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -142813,10 +142857,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 5.25
@@ -142836,6 +142876,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -142990,10 +143038,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.66
@@ -143013,6 +143057,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 3.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -144074,12 +144126,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1962026998}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1962026998
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -144186,10 +144238,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -144217,6 +144265,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -144432,10 +144488,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.74
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.27
@@ -144451,6 +144503,10 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -144735,12 +144791,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 2014020425}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &2014020425
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -145625,10 +145681,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 7196895896584870214, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7837872727773787348, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.5
@@ -145652,6 +145704,14 @@ PrefabInstance:
     - target: {fileID: 8609764279916983126, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_Name
       value: DoorInteractable (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Size.x
+      value: 5.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144574044166847195, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

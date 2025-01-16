@@ -43,7 +43,7 @@ AudioSource:
   m_GameObject: {fileID: 2242723501891023897}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 1622169130384422832, guid: f3b7d3148fdea134d83d3664462d8a5b, type: 2}
+  OutputAudioMixerGroup: {fileID: 7098862276876122811, guid: f3b7d3148fdea134d83d3664462d8a5b, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -139,7 +139,7 @@ AudioSource:
   m_GameObject: {fileID: 2242723501891023897}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 1622169130384422832, guid: f3b7d3148fdea134d83d3664462d8a5b, type: 2}
+  OutputAudioMixerGroup: {fileID: 7098862276876122811, guid: f3b7d3148fdea134d83d3664462d8a5b, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -839,6 +839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <StoryPages>k__BackingField: {fileID: 5818715236183140842}
   <RecipePages>k__BackingField: {fileID: 5935669521737519630}
+  PlayerInventoryContainer: {fileID: 0}
 --- !u!114 &5818715236183140842
 MonoBehaviour:
   m_ObjectHideFlags: 0

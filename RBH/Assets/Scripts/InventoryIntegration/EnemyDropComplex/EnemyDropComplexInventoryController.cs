@@ -13,7 +13,6 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
     [SerializeField] private int tempContainerWidth = 4;
 
     private Container temporaryInventoryContainer;
-    private Transform playerTransform;
 
     private void Start()
     {
@@ -29,9 +28,14 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
             return;
         }
 
-        if (!Input.GetKeyDown(viewController.KeyToOpenInventory) ||
-            !GamePause.IsPauseRequested<EnemyDropComplexInventoryController>())
+        if (!Input.GetKeyDown(viewController.KeyToOpenInventory))
         {
+            return;
+        }
+
+        if (!GamePause.IsPauseRequested<EnemyDropComplexInventoryController>())
+        {
+            ManualTriggerDropComplexInventory();
             return;
         }
 
@@ -42,13 +46,24 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
 
     public void TriggerDropComplexInventory(Transform playerTransform)
     {
-        this.playerTransform = playerTransform;
-
         temporaryInventoryContainer = new Container("Temporary Container", tempContainerSlots, tempContainerWidth);
 
-        dropItemSynchronization.StartSynchronization(this.playerTransform.position, temporaryInventoryContainer);
+        dropItemSynchronization.StartSynchronization(playerTransform.position, temporaryInventoryContainer);
 
         ShowInventory();
+    }
+
+    private void ManualTriggerDropComplexInventory()
+    {
+        var playerInteractionCaller = FindObjectOfType<PlayerInteractionCaller>();
+
+        if (!playerInteractionCaller)
+        {
+            Debug.LogError("PlayerInteractionCaller not found in scene.", this);
+            return;
+        }
+
+        TriggerDropComplexInventory(playerInteractionCaller.gameObject.transform);
     }
 
     private void ClearTemporaryContainer()

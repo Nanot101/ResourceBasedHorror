@@ -47,7 +47,7 @@ public class PlayerStamina : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        AssertDesignerFileds();
+        AssertDesignerFields();
 
         CurrentStamina = maxStamina;
         canBeConsumedFormDepleated = true;
@@ -61,10 +61,13 @@ public class PlayerStamina : MonoBehaviour
     private void Update()
     {
         //DebugHandleInput();
-        if (GamePause.IsPaused)
-        {
-            return;
-        }
+        
+        // TODO: Maybe we will need that
+        // if (GamePause.IsPaused)
+        // {
+        //     return;
+        // }
+        
         HandleRecovery();
 
         //DebugDisplayValues();
@@ -193,14 +196,14 @@ public class PlayerStamina : MonoBehaviour
         canBeConsumedFormDepleated = true;
     }
 
-    private void AssertDesignerFileds()
+    private void AssertDesignerFields()
     {
         Debug.Assert(maxStamina > 0.0f, "Max stamina must be greater than 0");
         Debug.Assert(recoveryRateNormal > 0.0f, "Recovery rate normal must be greater than 0");
         Debug.Assert(recoveryDelayNormal > 0.0f, "Recovery delay normal must be greater than 0");
         Debug.Assert(recoveryRateOnDepleted > 0.0f, "Recovery rate on depleted must be greater than 0");
         Debug.Assert(recoverySwitchValue > 0.0f && recoverySwitchValue <= 1.0f, "Recovery switch value must be between 0 and 1");
-        Debug.Assert(minStaminaAvailable > 0.0f && minStaminaAvailable <= 1.0f, "Min stamina avaiable must be between 0 and 1");
+        Debug.Assert(minStaminaAvailable > 0.0f && minStaminaAvailable <= 1.0f, "Min stamina available must be between 0 and 1");
     }
 
     private void DebugHandleInput()
@@ -235,7 +238,7 @@ public class PlayerStamina : MonoBehaviour
     {
         Debug.Log($"stamina: {CurrentStamina}");
         Debug.Log($"recovery delay: {currentRecoveryDelay}");
-        Debug.Log($"recovery from depleated: {recoveryFromDepleated}");
-        Debug.Log($"can be consumed form depleated: {canBeConsumedFormDepleated}");
+        Debug.Log($"recovery from depleted: {recoveryFromDepleated}");
+        Debug.Log($"can be consumed form depleted: {canBeConsumedFormDepleated}");
     }
 }

@@ -66,6 +66,9 @@ public class DialogueSystem : MonoBehaviour
         this.onDialogEndedCallback = onDialogEndedCallback;
 
         StartDialogue(dialogueFile, iconList);
+
+        GamePause.RequestPause<DialogueSystem>();
+        Time.timeScale = 0;
     }
 
     public void StartDialogue(TextAsset dialogueFile, List<Texture> iconList)
@@ -81,6 +84,7 @@ public class DialogueSystem : MonoBehaviour
 
         DialogueTriggered = true;
     }
+
     void NextLine()
     {
         if (dialogueScript.IndexOf("\n", currentPos) < 0)
@@ -104,6 +108,7 @@ public class DialogueSystem : MonoBehaviour
 
         StartCoroutine(ReadLine());
     }
+
     IEnumerator ReadLine()
     {
         //Display all dialogue with name and line displayed and with their corresponding photo
@@ -113,9 +118,10 @@ public class DialogueSystem : MonoBehaviour
         while (lineText.text.Length < line.Length)
         {
             lineText.text += line.Substring(lineText.text.Length, 1);
-            yield return new WaitForSeconds(dialogueSpeed);
+            yield return new WaitForSecondsRealtime(dialogueSpeed);
         }
     }
+
     void ChangeIcon(string nameOfIcon)
     {
         for (int i = 0; i < icons.Count; i++)
@@ -128,6 +134,7 @@ public class DialogueSystem : MonoBehaviour
             }
         }
     }
+
     void EndDialogue()
     {
         currentPos = 0;
@@ -137,6 +144,9 @@ public class DialogueSystem : MonoBehaviour
         dialogueScreen.SetActive(false);
 
         InvokeCallback();
+
+        GamePause.RequestResume<DialogueSystem>();
+        Time.timeScale = 1;
 
         //End dialogue
     }

@@ -26,11 +26,11 @@ public class InteractionDialog : InteractionBase
     }
 
     public override bool CanInteract(IInteractionCaller caller)
-        => base.CanInteract(caller) && !dialogStarted && !dialogueSystem.DialogueTriggered;
+        => base.CanInteract(caller) && !dialogStarted && !dialogueSystem.DialogueTriggered && !GamePause.IsPaused;
 
     public override void Interact(IInteractionCaller caller)
     {
-        if (dialogStarted || dialogueSystem.DialogueTriggered)
+        if (dialogStarted || dialogueSystem.DialogueTriggered || GamePause.IsPaused)
         {
             return;
         }

@@ -6,8 +6,7 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
 {
     [SerializeField] private InventoryViewController viewController;
 
-    [FormerlySerializedAs("interactionCaller")] [SerializeField]
-    private InventoryContainerDropItemSynchronization dropItemSynchronization;
+    [SerializeField] private InventoryContainerDropItemSynchronization dropItemSynchronization;
 
     [SerializeField] private int tempContainerSlots = 32;
     [SerializeField] private int tempContainerWidth = 4;
@@ -24,7 +23,6 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
     {
         if (GamePause.IsPaused && !GamePause.IsPauseRequested<EnemyDropComplexInventoryController>())
         {
-            // The game is paused, but not by us.
             return;
         }
 
@@ -79,8 +77,6 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
         viewController.ShowPlayerAndTempInventory(temporaryInventoryContainer);
 
         GamePause.RequestPause<EnemyDropComplexInventoryController>();
-
-        Time.timeScale = 0;
     }
 
     private void HideInventory()
@@ -88,7 +84,5 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
         viewController.HideInventories();
 
         GamePause.RequestResume<EnemyDropComplexInventoryController>();
-
-        Time.timeScale = 1;
     }
 }

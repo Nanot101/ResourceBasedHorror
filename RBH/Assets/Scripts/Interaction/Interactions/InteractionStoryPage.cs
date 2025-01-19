@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class InteractionStoryPage : InteractionBase
 {
-    [SerializeField]
-    private DialogueSystem dialogueSystem;
+    [SerializeField] private DialogueSystem dialogueSystem;
 
-    [SerializeField]
-    private StoryPage storyPage;
+    [SerializeField] private StoryPage storyPage;
 
     private void Start()
     {
@@ -17,7 +15,8 @@ public class InteractionStoryPage : InteractionBase
     public override bool CanInteract(IInteractionCaller caller)
     {
         if (dialogueSystem.DialogueTriggered
-            || caller.StoryPages.Contains(storyPage))
+            || caller.StoryPages.Contains(storyPage)
+            || GamePause.IsPaused)
         {
             return false;
         }

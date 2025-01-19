@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Tooltip("Player's walking speed. Must be greater than 0.")]
-    [SerializeField]
+    [Tooltip("Player's walking speed. Must be greater than 0.")] [SerializeField]
     private float walkingSpeed = 5.0f;
 
-    [Tooltip("Player's running speed. Must be greater than 0.")]
-    [SerializeField]
+    [Tooltip("Player's running speed. Must be greater than 0.")] [SerializeField]
     private float runningSpeed = 10.0f;
 
-    [Tooltip("Player's speed when he has no stamina. Must be greater than 0.")]
-    [SerializeField]
+    [Tooltip("Player's speed when he has no stamina. Must be greater than 0.")] [SerializeField]
     private float exhaustedSpeed = 2.5f;
 
-    [SerializeField]
-    [Tooltip("Amount of stamina consumption per second while running. Must be greater than 0.")]
+    [SerializeField] [Tooltip("Amount of stamina consumption per second while running. Must be greater than 0.")]
     private float runningStaminaConsumption = 40.0f;
 
-    [SerializeField]
-    private DayNightPhase stopMovementPhase;
+    [SerializeField] private DayNightPhase stopMovementPhase;
 
     #region Properties
-    public float RunningSpeed { get { return runningSpeed; } }
+
+    public float RunningSpeed
+    {
+        get { return runningSpeed; }
+    }
+
     #endregion
 
     private PlayerStamina playerStamina;
@@ -58,10 +58,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (GamePause.IsPaused)
-        {
-            return;
-        }
         PlayerMove();
     }
 
@@ -70,6 +66,12 @@ public class PlayerMovement : MonoBehaviour
         velocityX = Input.GetAxisRaw("Horizontal");
         velocityY = Input.GetAxisRaw("Vertical");
         wantsToRun = Input.GetKey(KeyCode.LeftShift);
+
+        if (GamePause.IsPaused)
+        {
+            velocityX = 0.0f;
+            velocityY = 0.0f;
+        }
 
         velocity = new Vector2(velocityX, velocityY);
         velocity.Normalize();

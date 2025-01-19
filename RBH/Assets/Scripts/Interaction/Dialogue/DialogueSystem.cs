@@ -66,13 +66,13 @@ public class DialogueSystem : MonoBehaviour
         this.onDialogEndedCallback = onDialogEndedCallback;
 
         StartDialogue(dialogueFile, iconList);
-
-        GamePause.RequestPause<DialogueSystem>();
-        Time.timeScale = 0;
     }
 
     public void StartDialogue(TextAsset dialogueFile, List<Texture> iconList)
     {
+        GamePause.RequestPause<DialogueSystem>();
+        Time.timeScale = 0;
+        
         currentPos = 0;
 
         dialogueScript = dialogueFile.text;

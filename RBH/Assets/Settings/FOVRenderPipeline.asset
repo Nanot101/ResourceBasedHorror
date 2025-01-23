@@ -15,7 +15,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: FieldOfViewMask
-    Event: 250
+    Event: 450
     filterSettings:
       RenderQueueType: 1
       LayerMask:
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: VisibleInFOVRender
-    Event: 250
+    Event: 500
     filterSettings:
       RenderQueueType: 1
       LayerMask:

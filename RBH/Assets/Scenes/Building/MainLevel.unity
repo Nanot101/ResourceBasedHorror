@@ -8861,16 +8861,56 @@ PrefabInstance:
     m_TransformParent: {fileID: 1959183922}
     m_Modifications:
     - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: dayNightGradient.ctime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: dayNightGradient.ctime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: dayNightGradient.ctime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: dayNightGradient.key0.b
+      value: 0.5767177
+      objectReference: {fileID: 0}
+    - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: dayNightGradient.key0.g
+      value: 0.788876
+      objectReference: {fileID: 0}
+    - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: dayNightGradient.key0.r
+      value: 0.9056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: dayNightGradient.key1.b
-      value: 0.8018868
+      value: 0.2735849
       objectReference: {fileID: 0}
     - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: dayNightGradient.key1.g
-      value: 0.4089652
+      value: 0.21689627
       objectReference: {fileID: 0}
     - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: dayNightGradient.key1.r
-      value: 0.20803669
+      value: 0.21551263
+      objectReference: {fileID: 0}
+    - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: dayNightGradient.key2.b
+      value: 0.2735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: dayNightGradient.key2.g
+      value: 0.21689627
+      objectReference: {fileID: 0}
+    - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: dayNightGradient.key2.r
+      value: 0.21551263
+      objectReference: {fileID: 0}
+    - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: dayNightGradient.m_NumColorKeys
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 18261251298857917, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: m_Name

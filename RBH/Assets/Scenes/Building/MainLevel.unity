@@ -8874,15 +8874,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: dayNightGradient.key0.b
-      value: 0.5767177
+      value: 0.69166076
       objectReference: {fileID: 0}
     - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: dayNightGradient.key0.g
-      value: 0.788876
+      value: 0.847426
       objectReference: {fileID: 0}
     - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: dayNightGradient.key0.r
-      value: 0.9056604
+      value: 0.9339623
       objectReference: {fileID: 0}
     - target: {fileID: 16152280724289530, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: dayNightGradient.key1.b

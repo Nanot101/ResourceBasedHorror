@@ -97,7 +97,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneGlobalProfile: {fileID: 11400000, guid: 63f5322293d4a2d48a1fd018e189de89, type: 2}
   gradientZeroPercentPhase: {fileID: 11400000, guid: 617ae0065d14da04284b5337a37af514, type: 2}
-  gradientMoveFormZeroToHundredPhase: {fileID: 11400000, guid: bac3fd524bbce1b46b74286eaf07755e, type: 2}
+  gradientMoveFormZeroToHundredPhases:
+  - {fileID: 11400000, guid: dbbffb46257d8c44781caccf95143d93, type: 2}
+  - {fileID: 11400000, guid: bac3fd524bbce1b46b74286eaf07755e, type: 2}
   gradientHundredPercentPhase: {fileID: 11400000, guid: 329d963565edaca46962f629f4f65eeb, type: 2}
   dayNightGradient:
     serializedVersion: 2

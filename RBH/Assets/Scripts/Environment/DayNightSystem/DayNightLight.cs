@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -7,11 +9,12 @@ public class DayNightLight : MonoBehaviour
     [SerializeField] private VolumeProfile sceneGlobalProfile;
 
     [SerializeField] private DayNightPhase gradientZeroPercentPhase;
-    [SerializeField] private DayNightPhase gradientMoveFormZeroToHundredPhase;
+    [SerializeField] private List<DayNightPhase> gradientMoveFormZeroToHundredPhases = new();
     [SerializeField] private DayNightPhase gradientHundredPercentPhase;
     [SerializeField] private Gradient dayNightGradient;
 
-    private float currentPhaseTime = 0.0f;
+    private float currentBlendTime = 0.0f;
+    private float blendTimeTotal = 0.0f;
     private ColorAdjustments colorAdjustments;
 
     private void Start()
@@ -23,6 +26,9 @@ public class DayNightLight : MonoBehaviour
             Debug.LogError($"Did not find {nameof(ColorAdjustments)} in {nameof(sceneGlobalProfile)}");
         }
 
+        blendTimeTotal = gradientMoveFormZeroToHundredPhases
+            .Aggregate(0.0f, (acu, x) => acu + x.Duration);
+
         SetColorFromGradientByTime(0.0f);
 
         DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
@@ -32,21 +38,19 @@ public class DayNightLight : MonoBehaviour
     {
         var currentPhase = DayNightSystem.Instance.CurrentPhase;
 
-        if (currentPhase != gradientMoveFormZeroToHundredPhase)
+        if (!gradientMoveFormZeroToHundredPhases.Contains(currentPhase))
         {
             return;
         }
 
-        var currentPhaseDuration = currentPhase.Duration;
-
-        if (currentPhaseTime >= currentPhaseDuration)
+        if (currentBlendTime >= blendTimeTotal)
         {
             return;
         }
 
-        currentPhaseTime += Time.deltaTime;
+        currentBlendTime += Time.deltaTime;
 
-        var time = currentPhaseTime / currentPhaseDuration;
+        var time = currentBlendTime / blendTimeTotal;
         SetColorFromGradientByTime(time);
     }
 
@@ -72,16 +76,12 @@ public class DayNightLight : MonoBehaviour
 
         if (currentPhase == gradientZeroPercentPhase)
         {
+            currentBlendTime = 0.0f;
             SetColorFromGradientByTime(0.0f);
         }
         else if (currentPhase == gradientHundredPercentPhase)
         {
             SetColorFromGradientByTime(1.0f);
-        }
-        else if (currentPhase == gradientMoveFormZeroToHundredPhase)
-        {
-            SetColorFromGradientByTime(0.0f);
-            currentPhaseTime = 0.0f;
         }
     }
 
@@ -91,8 +91,6 @@ public class DayNightLight : MonoBehaviour
             this);
         Debug.Assert(gradientZeroPercentPhase,
             $"{nameof(gradientZeroPercentPhase)} is required for {nameof(DayNightLight)}", this);
-        Debug.Assert(gradientMoveFormZeroToHundredPhase,
-            $"{nameof(gradientMoveFormZeroToHundredPhase)} is required for {nameof(DayNightLight)}", this);
         Debug.Assert(gradientHundredPercentPhase,
             $"{nameof(gradientHundredPercentPhase)} is required for {nameof(DayNightLight)}",
             this);

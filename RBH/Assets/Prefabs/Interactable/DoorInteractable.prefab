@@ -385,7 +385,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1963802923355030947}
   - component: {fileID: 4675121347169914155}
-  - component: {fileID: 7163887772106639339}
   m_Layer: 3
   m_Name: Door
   m_TagString: Untagged
@@ -457,19 +456,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &7163887772106639339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7196895896584870214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 359582328d3393f70bdc031fde09da70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorUI: {fileID: 2996106630864200342}
 --- !u!1 &8435534981630774395
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +628,7 @@ GameObject:
   - component: {fileID: 3916917421057139901}
   - component: {fileID: 9144574044166847195}
   - component: {fileID: 1326705436755548343}
+  - component: {fileID: 6826879733014209180}
   m_Layer: 0
   m_Name: DoorInteractionArea
   m_TagString: Untagged
@@ -713,6 +700,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 4247209186913224026}
   <Interaction>k__BackingField: {fileID: 2096836034266162037}
+--- !u!114 &6826879733014209180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8896506545111797790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359582328d3393f70bdc031fde09da70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorUI: {fileID: 2996106630864200342}
 --- !u!1 &8982555029494775599
 GameObject:
   m_ObjectHideFlags: 0

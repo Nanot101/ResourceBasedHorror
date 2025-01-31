@@ -1,11 +1,15 @@
 using System;
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerDamageReceiver : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerHealthSystem healthSystem;
+    [SerializeField] private PlayerHealthSystem healthSystem;
+
+    [SerializeField] private CinemachineImpulseSource impulseSource;
+
+    [SerializeField] private AudioSource hurtAudioSource;
 
     [Tooltip("How long in seconds the player is invincible after receiving damage. Must be greater than 0.")]
     [SerializeField]
@@ -24,13 +28,9 @@ public class PlayerDamageReceiver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Assert(invincibilityTime > 0.0f, "Invincibility time must be greater than 0");
-
-        if (healthSystem == null)
-        {
-            Debug.LogError("Health system is required for player damage reciver.");
-            Destroy(this);
-        }
+        Debug.Assert(invincibilityTime > 0.0f, "Invincibility time must be greater than 0", this);
+        Debug.Assert(healthSystem, "Health system is required for player damage receiver.", this);
+        Debug.Assert(impulseSource, "Impulse Source is required for player damage receiver.", this);
 
         PlayerHealthSystem.onPlayerDied += OnPlayerDied;
     }
@@ -54,6 +54,10 @@ public class PlayerDamageReceiver : MonoBehaviour
         }
 
         healthSystem.TakeDamage(damageAmount);
+        impulseSource.GenerateImpulse();
+
+        // hurtAudioSource.Stop();
+        hurtAudioSource.Play();
 
         if (!playerDied)
         {

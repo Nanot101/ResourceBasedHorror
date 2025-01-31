@@ -8,6 +8,8 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
 
     [SerializeField] private InventoryContainerDropItemSynchronization dropItemSynchronization;
 
+    [SerializeField] private InventoryOpenCloseAudio openCloseAudio;
+
     [SerializeField] private int tempContainerSlots = 32;
     [SerializeField] private int tempContainerWidth = 4;
 
@@ -17,6 +19,8 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
     {
         Debug.Assert(viewController,
             $"{nameof(viewController)} is required for {nameof(EnemyDropComplexInventoryController)}", this);
+        Debug.Assert(openCloseAudio,
+            $"{nameof(openCloseAudio)} is required for {nameof(EnemyDropComplexInventoryController)}", this);
     }
 
     private void Update()
@@ -76,6 +80,8 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
     {
         viewController.ShowPlayerAndTempInventory(temporaryInventoryContainer);
 
+        openCloseAudio.PlayOpen();
+        
         GamePause.RequestPause<EnemyDropComplexInventoryController>();
     }
 
@@ -84,5 +90,7 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
         viewController.HideInventories();
 
         GamePause.RequestResume<EnemyDropComplexInventoryController>();
+        
+        openCloseAudio.PlayClose();
     }
 }

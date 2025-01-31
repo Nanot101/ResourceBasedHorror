@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0ad878d49c4e0468242616af5ae242, type: 3}
   m_Name: MaleVisual
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  <Color>k__BackingField: {r: 0.24905658, g: 0.4653767, b: 1, a: 1}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 5df965ee5b355c646af8b6d7f59cef3c, type: 3}
+  <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}

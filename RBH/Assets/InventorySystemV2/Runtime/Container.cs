@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,8 +65,11 @@ namespace InventorySystem
             //If there is no slot that can accept the item, try to add the item to an empty slot
             //If there is no slot empty and all maxed out return remaining amount of the tried added item
             //Debug.Log($"Attempting to add item: {itemStack.ItemData.ItemName}, Amount: {itemStack.Amount}");
+            remainingAmount = 0;
+            if (itemStack == null)
+                return false;
             remainingAmount = itemStack.Amount;
-            Debug.Log(remainingAmount +"remaining");
+            //Debug.Log(remainingAmount + "remaining");
             if (itemStack.ItemData.IsStackable)
             {
                 //Check if there already is a stack of the item
@@ -73,11 +77,10 @@ namespace InventorySystem
                 {
                     if (slot.HasItemStack && slot.GetItemStack().ItemData == itemStack.ItemData && !slot.IsFull)
                     {
-                        int spaceLeft = itemStack.ItemData.MaxStackSize - itemStack.Amount;
-                        int amountToAdd = Mathf.Min(spaceLeft, remainingAmount);
-                        slot.AddAmount(amountToAdd, out remainingAmount);
+                        slot.AddAmount(remainingAmount, out remainingAmount);
 
-                        Debug.Log($"Added {amountToAdd} to existing stack in slot {slot.Index}. Remaining amount: {remainingAmount} with max {slot.GetItemStack().ItemData.MaxStackSize}");
+
+                        //Debug.Log($"Added {remainingAmount} to existing stack in slot {slot.Index}. Remaining amount: {remainingAmount} with max {slot.GetItemStack().ItemData.MaxStackSize}");
 
                         if (remainingAmount <= 0)
                         {
@@ -104,6 +107,11 @@ namespace InventorySystem
 
                             if (remainingAmount <= 0)
                             {
+                                OnItemPlacedAt?.Invoke(this, new ItemPlacedAtEventArgs
+                                {
+                                    ItemStack = itemStack,
+                                    RootIndex = itemSlots[index].rootIndex
+                                });
                                 Debug.Log("Successfully added all items to empty slots.");
                                 return true;
                             }
@@ -215,7 +223,7 @@ namespace InventorySystem
             }
             return false;
         }
-        public bool AddItemToSlot(ItemSlot itemSlot, int startX, int startY,out int remainingAmount)
+        public bool AddItemToSlot(ItemSlot itemSlot, int startX, int startY, out int remainingAmount)
         {
             remainingAmount = 0;
             ItemStack itemStack = null;
@@ -228,7 +236,7 @@ namespace InventorySystem
 
             if (!itemStack.IsRotated)
             {
-                if (CanPlaceItemAt(startX, startY, itemStack.ItemData.Size,itemSlot, itemSlot))
+                if (CanPlaceItemAt(startX, startY, itemStack.ItemData.Size, itemSlot, itemSlot))
                 {
                     PlaceItemAt(itemStack, startX, startY, itemStack.ItemData.Size, out remainingAmount);
                     if (remainingAmount > 0)
@@ -277,7 +285,6 @@ namespace InventorySystem
                     itemSlots[index].SetItemStack(itemStack, positionInItem, itemSize, rootIndex);
                 }
             }
-
             OnItemPlacedAt?.Invoke(this, new ItemPlacedAtEventArgs
             {
                 ItemStack = itemStack,
@@ -309,7 +316,7 @@ namespace InventorySystem
                     int index = GetIndexFromGridPos(gridX, gridY);
                     ItemSlot currentSlot = itemSlots[index];
 
-                   
+
 
                     if (index < 0 || index >= itemSlots.Count)
                     {
@@ -425,7 +432,7 @@ namespace InventorySystem
             int column = (index % containerWidth);
             int row = Mathf.FloorToInt(index / containerWidth);
             return new Vector2Int(column, row);
-        } 
+        }
         public int GetIndexFromGridPos(int x, int y)
         {
             return y * containerWidth + x;
@@ -495,8 +502,7 @@ namespace InventorySystem
         {
             int currentAmount = itemStack.Amount;
             int maxStackSize = itemStack.ItemData.MaxStackSize;
-
-            if (currentAmount + value > maxStackSize)
+            if (currentAmount + value >= maxStackSize)
             {
                 int amountToAdd = maxStackSize - currentAmount;
                 itemStack.AddAmount(amountToAdd);

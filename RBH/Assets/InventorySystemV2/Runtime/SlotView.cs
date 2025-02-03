@@ -21,7 +21,7 @@ namespace InventorySystem
         private Vector2 originalRotation;
 
         private Vector3 originalImagePosition;
-        SlotView rootSlotView;
+        public SlotView rootSlotView;
 
         private Image highlightOverlay;
         bool isDragging;
@@ -196,6 +196,7 @@ namespace InventorySystem
             if (itemSlot.ItemData.IsStackable)
             {
                 rootSlotView.stackAmountText.text = itemSlot.GetItemStack().Amount.ToString();
+                RotateImage(imageRectTransform, itemStack.IsRotated);
             }
 
         }
@@ -324,23 +325,13 @@ namespace InventorySystem
             {
                 imageRectTransform.pivot = new Vector2(0f, 1f);
                 imageRectTransform.localEulerAngles = new Vector3(0, 0, 90);
-
-
-                // Swap width and height
-                //Vector2 originalSize = imageRectTransform.sizeDelta;
-                //imageRectTransform.sizeDelta = new Vector2(originalSize.y, originalSize.x);
-
-                // Adjust pivot to maintain position
-                //imageRectTransform.   pivot = new Vector2(0, 1f);
-                //imageRectTransform.localEulerAngles = new Vector3(0, 0, 0);
+                //Stack amount text is children of image and that one gets rotated so we return it to 0 so that it's orientation ignores the rotation
+                stackAmountText.transform.eulerAngles = Vector3.zero;
             }
             else
             {
                 imageRectTransform.localEulerAngles = Vector3.zero;
-
-                // Swap width and height back
-                //Vector2 originalSize = imageRectTransform.sizeDelta;
-                //imageRectTransform.sizeDelta = new Vector2(originalSize.x, originalSize.y);
+                stackAmountText.transform.eulerAngles = Vector3.zero;
 
                 // Reset pivot to original
                 imageRectTransform.pivot = new Vector2(0, 1);

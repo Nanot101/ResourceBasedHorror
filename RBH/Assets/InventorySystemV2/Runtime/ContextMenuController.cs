@@ -57,6 +57,10 @@ namespace InventorySystem
                 if (Input.GetKey(KeyCode.LeftShift)&&currentSlotView.itemSlot.HasItemStack)
                 {
                     var desiredInventory = system.GetContainerGridInPosition(InventorySystem.InventoryPositionType.TemporaryInventory);
+                    if (!desiredInventory) 
+                    {
+                        desiredInventory = system.GetContainerGridInPosition(InventorySystem.InventoryPositionType.ChestInventory);
+                    }
                     if (!desiredInventory||currentSlotView.GridContainerView == desiredInventory )
                     {
                         desiredInventory = system.GetContainerGridInPosition(InventorySystem.InventoryPositionType.PlayerInventory);

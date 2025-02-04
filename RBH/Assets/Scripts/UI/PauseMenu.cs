@@ -4,9 +4,9 @@ using UnityEngine.Audio;
 
 public class PauseMenu : MonoBehaviour
 {
-    private const string MusicWithPauseVolume = "MusicWithPauseVolume";
+    public const string MusicWithPauseVolume = "MusicWithPauseVolume";
     
-    private const string SFXWithPauseVolume = "SFXWithPauseVolume";
+    public const string SFXWithPauseVolume = "SFXWithPauseVolume";
 
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject optionsMenu;

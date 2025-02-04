@@ -986,9 +986,10 @@ MonoBehaviour:
   healthSystem: {fileID: 584156333593417796}
   damageReceiver: {fileID: 8287974565075454170}
   stamina: {fileID: 1164421808771507386}
-  weaponController: {fileID: 0}
+  weaponController: {fileID: 5863169801935298924}
   moveToRespawnPhase: {fileID: 11400000, guid: 274edebd41b7f6a428f5312b49574b76, type: 2}
   respawnPhase: {fileID: 11400000, guid: dbbffb46257d8c44781caccf95143d93, type: 2}
+  mainMixer: {fileID: 24100000, guid: f3b7d3148fdea134d83d3664462d8a5b, type: 2}
 --- !u!114 &-3768524912040191805
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,33 +1,31 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerMovement movement;
+    [SerializeField] private PlayerMovement movement;
 
-    [SerializeField]
-    private PlayerHealthSystem healthSystem;
+    [SerializeField] private PlayerHealthSystem healthSystem;
 
-    [SerializeField]
-    private PlayerDamageReceiver damageReceiver;
+    [SerializeField] private PlayerDamageReceiver damageReceiver;
 
-    [SerializeField]
-    private PlayerStamina stamina;
+    [SerializeField] private PlayerStamina stamina;
 
-    [SerializeField]
-    private WeaponController weaponController;
+    [SerializeField] private WeaponController weaponController;
 
-    [SerializeField]
-    private DayNightPhase moveToRespawnPhase;
+    [SerializeField] private DayNightPhase moveToRespawnPhase;
 
-    [SerializeField]
-    private DayNightPhase respawnPhase;
+    [SerializeField] private DayNightPhase respawnPhase;
+
+    [SerializeField] private AudioMixer mainMixer;
 
     private void Start()
     {
         AssertComponents();
 
         DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
+
+        PlayerHealthSystem.onPlayerDied += OnPlayerDied;
     }
 
     private void OnDestroy()
@@ -36,6 +34,8 @@ public class PlayerRespawn : MonoBehaviour
         {
             dayNightSys.OnPhaseChanged -= OnDayNightPhaseChanged;
         }
+
+        PlayerHealthSystem.onPlayerDied -= OnPlayerDied;
     }
 
     private void OnDayNightPhaseChanged(object sender, DayNightSystemEventArgs args)
@@ -65,6 +65,10 @@ public class PlayerRespawn : MonoBehaviour
         damageReceiver.OnPlayerRespawned();
         stamina.OnPlayerRespawned();
         weaponController.WeaponsEnabled = true;
+
+        GamePause.RequestResume<PlayerRespawn>();
+        // Time.timeScale = 1.0f;
+        // mainMixer.SetFloat(PauseMenu.SFXWithPauseVolume, 0.0f);
     }
 
     private void TryMovePlayerToRespawnPoint()
@@ -77,6 +81,13 @@ public class PlayerRespawn : MonoBehaviour
         }
 
         PlayerRespawnPoint.Instance.MovePlayerObjectToRespawnPoint(gameObject);
+    }
+
+    private void OnPlayerDied()
+    {
+        GamePause.RequestPause<PlayerRespawn>();
+        // Time.timeScale = 0.0f;
+        // mainMixer.SetFloat(PauseMenu.SFXWithPauseVolume, -80.0f);
     }
 
     private void AssertComponents()
@@ -95,7 +106,7 @@ public class PlayerRespawn : MonoBehaviour
 
         if (damageReceiver == null)
         {
-            Debug.LogError("Player damage reciver is required for player respawn");
+            Debug.LogError("Player damage receiver is required for player respawn");
             Destroy(this);
         }
 
@@ -108,6 +119,12 @@ public class PlayerRespawn : MonoBehaviour
         if (weaponController == null)
         {
             Debug.LogError("Player weapon controller is required for player respawn");
+            Destroy(this);
+        }
+
+        if (mainMixer == null)
+        {
+            Debug.LogError("Main mixer is required for player respawn");
             Destroy(this);
         }
     }

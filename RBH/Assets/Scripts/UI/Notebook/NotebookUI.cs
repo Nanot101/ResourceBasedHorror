@@ -51,7 +51,8 @@ public class NotebookUI : MonoBehaviour
     private void MoveToStory()
     {
         moveToStoryBtn.gameObject.SetActive(false);
-        moveToRecipeBtn.gameObject.SetActive(true);
+        // moveToRecipeBtn.gameObject.SetActive(true);
+        moveToRecipeBtn.gameObject.SetActive(false);
 
         storyPageUI.Show(true);
         recipePageUI.Hide();
@@ -61,6 +62,8 @@ public class NotebookUI : MonoBehaviour
 
     private void MoveToRecipe()
     {
+        return;
+        
         moveToStoryBtn.gameObject.SetActive(true);
         moveToRecipeBtn.gameObject.SetActive(false);
 
@@ -75,7 +78,8 @@ public class NotebookUI : MonoBehaviour
         if (storyPageUISelected)
         {
             moveToStoryBtn.gameObject.SetActive(false);
-            moveToRecipeBtn.gameObject.SetActive(true);
+            // moveToRecipeBtn.gameObject.SetActive(true);
+            moveToRecipeBtn.gameObject.SetActive(false);
 
             storyPageUI.Show();
             recipePageUI.Hide();

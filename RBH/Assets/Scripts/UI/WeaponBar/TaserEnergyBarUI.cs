@@ -30,9 +30,9 @@ public class TaserEnergyBarUI : MonoBehaviour
         taserWeapon.OnTaserSelected += OnTaserSelected;
         taserWeapon.OnTaserDeselected += OnTaserDeselected;
 
-        weaponIcon.SetActive(false);
-
-        gameObject.SetActive(false);
+        // weaponIcon.SetActive(false);
+        //
+        // gameObject.SetActive(false);
     }
 
     private void Update()

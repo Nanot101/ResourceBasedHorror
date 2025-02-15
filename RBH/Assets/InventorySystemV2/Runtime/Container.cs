@@ -13,9 +13,7 @@ namespace InventorySystem
 
         public int containerWidth;
         public readonly List<ItemSlot> itemSlots = new List<ItemSlot>();
-        public bool IsFull => itemSlots.Count >= containerSlots;
-        public bool HasSpace => itemSlots.Count >= containerSlots;
-        public bool ItemAmount => itemSlots.Count >= containerSlots;
+        public bool IsFull => itemSlots.All(slot => slot != null && slot.IsFull);
         public int SlotCount => containerSlots;
         public int RemainingSpace => containerSlots - itemSlots.Count;
 
@@ -69,6 +67,8 @@ namespace InventorySystem
             if (itemStack == null)
                 return false;
             remainingAmount = itemStack.Amount;
+            if (IsFull)
+                return false;
             //Debug.Log(remainingAmount + "remaining");
             if (itemStack.ItemData.IsStackable)
             {
@@ -78,8 +78,6 @@ namespace InventorySystem
                     if (slot.HasItemStack && slot.GetItemStack().ItemData == itemStack.ItemData && !slot.IsFull)
                     {
                         slot.AddAmount(remainingAmount, out remainingAmount);
-
-
                         //Debug.Log($"Added {remainingAmount} to existing stack in slot {slot.Index}. Remaining amount: {remainingAmount} with max {slot.GetItemStack().ItemData.MaxStackSize}");
 
                         if (remainingAmount <= 0)
@@ -89,7 +87,9 @@ namespace InventorySystem
                         }
                     }
                 }
-
+                //Check if it is full after completing all stacked items
+                if (IsFull)
+                    return false;
                 //If the item is stackable and has size 1
                 if (itemStack.ItemData.Size == Vector2Int.one)
                 {
@@ -374,7 +374,7 @@ namespace InventorySystem
             }
             return amountToRemove <= 0;
         }
-        public bool RemoveItem(int rootIndex)
+        public bool RemoveItem(int rootIndex, int amountToRemove = 0)
         {
             ItemSlot rootSlot = itemSlots[rootIndex];
 
@@ -384,25 +384,45 @@ namespace InventorySystem
             }
 
             ItemStack itemStack = rootSlot.GetItemStack();
+
+            if (amountToRemove == 0)
+            {
+                amountToRemove = itemStack.Amount;
+            }
+
+            int currentAmount = itemStack.Amount;
             Vector2Int itemSize = rootSlot.ItemSize;
 
-            for (int x = 0; x < itemSize.x; x++)
+            if (currentAmount - amountToRemove <= 0)
             {
-                for (int y = 0; y < itemSize.y; y++)
+                for (int x = 0; x < itemSize.x; x++)
                 {
-                    int gridX = rootSlot.ContainerPosition.x + x;
-                    int gridY = rootSlot.ContainerPosition.y + y;
-
-                    int slotIndex = GetIndexFromGridPos(gridX, gridY);
-                    ItemSlot slot = itemSlots[slotIndex];
-                    if (slot.HasItemStack && slot.GetItemStack().ItemData == itemStack.ItemData)
+                    for (int y = 0; y < itemSize.y; y++)
                     {
-                        //Debug.Log($"Slot at position ({gridX}, {gridY}) cleared");
-                        slot.Clear();
+                        int gridX = rootSlot.ContainerPosition.x + x;
+                        int gridY = rootSlot.ContainerPosition.y + y;
+                        int slotIndex = GetIndexFromGridPos(gridX, gridY);
+                        ItemSlot slot = itemSlots[slotIndex];
+                        if (slot.HasItemStack && slot.GetItemStack().ItemData == itemStack.ItemData)
+                        {
+                            slot.Clear();
+                        }
                     }
-                    else
+                }
+            }
+            else
+            {
+                rootSlot.GetItemStack().RemoveAmount(amountToRemove);
+
+                for (int x = 0; x < itemSize.x; x++)
+                {
+                    for (int y = 0; y < itemSize.y; y++)
                     {
-                        Debug.LogWarning($"Slot at position ({gridX}, {gridY}) does not match the item being removed.");
+                        int gridX = rootSlot.ContainerPosition.x + x;
+                        int gridY = rootSlot.ContainerPosition.y + y;
+                        int slotIndex = GetIndexFromGridPos(gridX, gridY);
+                        ItemSlot slot = itemSlots[slotIndex];
+                        slot.RaiseOnItemChanged();
                     }
                 }
             }
@@ -413,7 +433,6 @@ namespace InventorySystem
             });
             return true;
         }
-
         public void Clear()
         {
             foreach (ItemSlot slot in itemSlots)
@@ -474,7 +493,7 @@ namespace InventorySystem
         public int Amount => itemStack.Amount;
         public ItemData ItemData => itemStack.ItemData;
         public bool HasItemStack => itemStack != null;
-        public bool IsFull => itemStack.Amount >= itemStack.ItemData.MaxStackSize;
+        public bool IsFull => itemStack != null && itemStack.ItemData != null && itemStack.Amount >= itemStack.ItemData.MaxStackSize;
         public bool IsEmpty => !HasItemStack || itemStack.Amount == 0 || ItemData == null;
 
         public bool IsRoot => ContainerPosition == Vector2Int.zero ? true : false;
@@ -485,6 +504,8 @@ namespace InventorySystem
 
         public Vector2Int ItemPositionInGrid { get; private set; }
         public Vector2Int ItemSize { get { if (itemStack != null) { if (itemStack.IsRotated) { return new Vector2Int(itemStack.ItemData.Size.y, itemStack.ItemData.Size.x); } else { return itemStack.ItemData.Size; } } return Vector2Int.zero; } }
+
+        public void RaiseOnItemChanged() => OnItemChanged?.Invoke(this);
 
         public ItemSlot(Container _container, int index, Vector2Int slotPositionOnContainer, ItemStack _itemStack = null)
         {
@@ -518,6 +539,7 @@ namespace InventorySystem
         {
             itemStack.RemoveAmount(value);
             OnItemRemoved?.Invoke(this);
+            OnItemChanged?.Invoke(this);
         }
         public bool CanAcceptItem(ItemStack itemStack)
         {

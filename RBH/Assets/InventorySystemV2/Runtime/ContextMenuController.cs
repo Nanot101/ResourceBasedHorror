@@ -51,24 +51,37 @@ namespace InventorySystem
             {
                 isMouseOverMenuInstance = false;
             }
-            
+
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (Input.GetKey(KeyCode.LeftShift)&&currentSlotView.itemSlot.HasItemStack)
+                if (Input.GetKey(KeyCode.LeftShift) && currentSlotView.itemSlot.HasItemStack)
                 {
                     var desiredInventory = system.GetContainerGridInPosition(InventorySystem.InventoryPositionType.TemporaryInventory);
-                    if (!desiredInventory) 
+                    if (!desiredInventory)
                     {
                         desiredInventory = system.GetContainerGridInPosition(InventorySystem.InventoryPositionType.ChestInventory);
                     }
-                    if (!desiredInventory||currentSlotView.GridContainerView == desiredInventory )
+                    if (!desiredInventory || currentSlotView.GridContainerView == desiredInventory)
                     {
                         desiredInventory = system.GetContainerGridInPosition(InventorySystem.InventoryPositionType.PlayerInventory);
                     }
-                    if (desiredInventory != null)
+                    if (desiredInventory != null && !desiredInventory.container.IsFull)
                     {
-                        desiredInventory.container.AddItem(currentSlotView.rootSlotView.itemSlot.GetItemStack(),out int asss);
-                        currentSlotView.GridContainerView.container.RemoveItem(currentSlotView.itemSlot.rootIndex);
+                        bool success = desiredInventory.container.AddItem(currentSlotView.rootSlotView.itemSlot.GetItemStack(), out int leftover);
+                        int tempStackAmount = currentSlotView.itemSlot.GetItemStack().Amount;
+                        if (success)
+                        {
+                            int transferred = tempStackAmount - leftover;
+                            if (leftover == 0)
+                                currentSlotView.GridContainerView.container.RemoveItem(currentSlotView.itemSlot.rootIndex);
+                            else if (transferred > 0)
+                                currentSlotView.GridContainerView.container.RemoveItem(currentSlotView.itemSlot.rootIndex, leftover);
+                        } else
+                        if (leftover > 0&&leftover != tempStackAmount) {
+                            var currentSlot = currentSlotView.GridContainerView.container.itemSlots[currentSlotView.itemSlot.rootIndex];
+                            int transferred = tempStackAmount - leftover;
+                            currentSlotView.GridContainerView.container.RemoveItem(currentSlotView.itemSlot.rootIndex,transferred);
+                        }
                         currentSlotView.rootSlotView.DestroyItemHighlight();
                     }
                 }

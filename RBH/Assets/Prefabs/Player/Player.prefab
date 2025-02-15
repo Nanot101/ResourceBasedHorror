@@ -471,7 +471,7 @@ MonoBehaviour:
   gunAudio: {fileID: 837131521433582908}
   playerCollider: {fileID: 1335401080097150228}
   projectilePrefab: {fileID: 6785678445432073186, guid: f6b1a37ddbd9b704abcc9b6d9d392efb, type: 3}
-  cooldown: 6
+  cooldown: 1
   <FireAudioClip>k__BackingField: {fileID: 8300000, guid: ecc3465c0105d86b5a87bf95a2d114d5, type: 3}
 --- !u!114 &1364752541414751352
 MonoBehaviour:
@@ -518,7 +518,7 @@ Transform:
   m_GameObject: {fileID: 8479202090399757915}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: -1}
   m_LocalScale: {x: 0.25, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -562,9 +562,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 148073827
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -605,7 +605,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4796908623950150170}
@@ -652,10 +652,10 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.94991595, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e03218eb29a1a3e46a88d8219b49f812, type: 3}
+  m_Color: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -706,7 +706,7 @@ GameObject:
   - component: {fileID: 1357903879866390462}
   - component: {fileID: 8168168768188559179}
   m_Layer: 7
-  m_Name: FieldOfView
+  m_Name: FieldOfViewMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 2901623580591662852}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -885,7 +885,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 9065289971253864303}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -1044,7 +1044,6 @@ MonoBehaviour:
   weaponDisablePhase: {fileID: 11400000, guid: 274edebd41b7f6a428f5312b49574b76, type: 2}
   playerProjectileWeapons:
   - {fileID: 487708150151464056}
-  - {fileID: 1364752541414751352}
 --- !u!114 &2901623580591662852
 MonoBehaviour:
   m_ObjectHideFlags: 0

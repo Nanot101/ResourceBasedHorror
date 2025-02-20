@@ -65,7 +65,7 @@ public class PlayerInteractionCaller : MonoBehaviour, IInteractionCaller
             return;
         }
 
-        if (!Input.GetKeyDown(KeyCode.E))
+        if (!InputManager.Instance.Interact)
         {
             return;
         }

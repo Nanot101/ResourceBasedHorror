@@ -17,8 +17,6 @@ public class InventoryViewController : MonoBehaviour
 
     [SerializeField] private GraphicRaycaster graphicRaycaster;
 
-    [field: SerializeField] public KeyCode KeyToOpenInventory { get; private set; } = KeyCode.Tab;
-
     private GridContainerView playerContainerView;
     private GridContainerView tempContainerView;
 

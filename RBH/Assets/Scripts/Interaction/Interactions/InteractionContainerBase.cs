@@ -25,7 +25,7 @@ public class InteractionContainerBase : InteractionBase
     {
         if (isOpen&& interactionCooldownCoroutine == null)
         {
-            if (Input.GetKeyDown(KeyCode.E)||Input.GetKeyDown(KeyCode.B))
+            if (InputManager.Instance.Interact||InputManager.Instance.Cancel)
             {
                 inventoryViewController.HideInventories();
                 openCloseAudio.PlayClose();

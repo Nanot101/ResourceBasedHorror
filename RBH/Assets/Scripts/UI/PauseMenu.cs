@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
             return;
         }
 
-        if (!Input.GetKeyDown(KeyCode.Escape))
+        if (!InputManager.Instance.Cancel)
         {
             return;
         }

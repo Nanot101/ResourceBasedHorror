@@ -68,8 +68,7 @@ public class WeaponController : MonoBehaviour
             return;
         }
 
-        if (!Input.GetKeyDown(KeyCode.Alpha1)
-            && !Input.GetKeyDown(KeyCode.Alpha2))
+        if (!InputManager.Instance.SwitchWeapon)
         {
             return;
         }
@@ -99,12 +98,12 @@ public class WeaponController : MonoBehaviour
 
         var currentWeapon = playerProjectileWeapons[currentWeaponIndex];
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (InputManager.Instance.Fire)
         {
             currentWeapon.TryShoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (InputManager.Instance.Reload)
         {
             currentWeapon.TryReload();
         }

@@ -15,6 +15,7 @@ public class SkipScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Todo: new Input system here
         if (Input.GetKeyDown(KeyCode.Escape)) {
             nextScene.SetActive(true);
         }

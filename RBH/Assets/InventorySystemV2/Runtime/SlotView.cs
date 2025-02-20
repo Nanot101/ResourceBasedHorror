@@ -45,7 +45,7 @@ namespace InventorySystem
             isEmpty = itemSlot.IsEmpty;
             if (currentTargetSlot == null)
                 return;
-            if (Input.GetKeyDown(KeyCode.R) && rootSlotView.isDragging)
+            if (InputManager.Instance.RotateItem && rootSlotView.isDragging)
             {
                 wantsRotate = !wantsRotate;
                 if (tempPreviewImage == null)

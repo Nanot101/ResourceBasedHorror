@@ -30,7 +30,7 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
             return;
         }
 
-        if (!Input.GetKeyDown(viewController.KeyToOpenInventory))
+        if (!InputManager.Instance.OpenInventory)
         {
             return;
         }

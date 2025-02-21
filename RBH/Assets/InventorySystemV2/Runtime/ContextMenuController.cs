@@ -1,8 +1,9 @@
+using Sirenix.OdinInspector.Editor.Examples;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
 namespace InventorySystem
 {
     public class ContextMenuController : MonoBehaviour
@@ -52,9 +53,9 @@ namespace InventorySystem
                 isMouseOverMenuInstance = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (InputManager.Instance.PickupItem)
             {
-                if (Input.GetKey(KeyCode.LeftShift) && currentSlotView.itemSlot.HasItemStack)
+                if (InputManager.Instance.QuickMove && currentSlotView.itemSlot.HasItemStack)
                 {
                     var desiredInventory = system.GetContainerGridInPosition(InventorySystem.InventoryPositionType.TemporaryInventory);
                     if (!desiredInventory)
@@ -88,7 +89,7 @@ namespace InventorySystem
                 if (menuInstance != null && !isMouseOverMenuInstance)
                     menuInstance.Close();
             }
-            if (Input.GetKeyDown(KeyCode.Mouse1))
+            if (InputManager.Instance.OpenContextMenu)
             {
                 targetSlotView = currentSlotView;
                 if (menuInstance == null)

@@ -63,9 +63,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerMove()
     {
-        velocityX = Input.GetAxisRaw("Horizontal");
-        velocityY = Input.GetAxisRaw("Vertical");
-        wantsToRun = Input.GetKey(KeyCode.LeftShift);
+        velocityX = InputManager.Instance.MoveInput.x;
+        velocityY = InputManager.Instance.MoveInput.y;
+        wantsToRun = InputManager.Instance.IsSprinting;
 
         if (GamePause.IsPaused)
         {

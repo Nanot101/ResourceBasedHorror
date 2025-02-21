@@ -19,7 +19,7 @@ public class PlayerInventoryController : MonoBehaviour
             return;
         }
 
-        if (!Input.GetKeyDown(viewController.KeyToOpenInventory))
+        if (!InputManager.Instance.OpenInventory)
         {
             return;
         }

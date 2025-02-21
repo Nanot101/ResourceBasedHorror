@@ -28,7 +28,8 @@ namespace InventorySystem
 
         private void Update()
         {
-            if (Input.GetKeyDown(openChestKeycode))
+            //Use player interaction
+            if (InputManager.Instance.Interact)
             {
                 gridContainerView.ToggleContainer(containerHandler.Container);
             }

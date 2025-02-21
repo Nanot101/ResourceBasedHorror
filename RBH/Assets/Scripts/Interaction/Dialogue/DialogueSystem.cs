@@ -47,7 +47,7 @@ public class DialogueSystem : MonoBehaviour
     void Update()
     {
         // if (Input.GetKeyDown("e") && DialogueTriggered)
-        if (Input.GetKeyDown(KeyCode.Space) && DialogueTriggered)
+        if (InputManager.Instance.NextDialogue && DialogueTriggered)
         {
             //clickSound.Play();
             if (endOfDialogue)

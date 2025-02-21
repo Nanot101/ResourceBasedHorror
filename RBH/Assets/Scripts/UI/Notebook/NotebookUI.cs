@@ -33,7 +33,7 @@ public class NotebookUI : MonoBehaviour
             return;
         }
 
-        if (!Input.GetKeyDown(KeyCode.N))
+        if (!InputManager.Instance.OpenNotebook)
         {
             return;
         }

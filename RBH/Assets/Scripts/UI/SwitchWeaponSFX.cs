@@ -21,7 +21,7 @@ public class PlaySoundOnKeyPress : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) // 1 key
+        if (InputManager.Instance.SwitchWeapon) // 1 key
         {
             if (SwitchWeaponClip != null)
             {

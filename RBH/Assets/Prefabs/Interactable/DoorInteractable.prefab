@@ -385,6 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1963802923355030947}
   - component: {fileID: 4675121347169914155}
+  - component: {fileID: 2907818018643594831}
   m_Layer: 3
   m_Name: Door
   m_TagString: Untagged
@@ -456,6 +457,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.5}
   m_EdgeRadius: 0
+--- !u!95 &2907818018643594831
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7196895896584870214}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ad78abcf89c9cd342a9b506cb4b2c09a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8435534981630774395
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,6 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorRotationController: {fileID: 7512448741067511104}
+  enemyCanInteract: 0
 --- !u!114 &7512448741067511104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +624,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAudio: {fileID: 2321042516306307735}
+  doorAnimator: {fileID: 2907818018643594831}
+  doorShakeAnimaParamName: Shake
+  openDelay: 3
 --- !u!114 &1931220684582120732
 MonoBehaviour:
   m_ObjectHideFlags: 0

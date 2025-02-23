@@ -3,8 +3,9 @@ using UnityEngine.Serialization;
 
 public class DoorInteraction : InteractionBase
 {
-    [SerializeField]
-    private DoorRotationController doorRotationController;
+    [SerializeField] private DoorRotationController doorRotationController;
+
+    [SerializeField] private bool enemyLocked = false;
 
     private void Start()
     {
@@ -23,6 +24,17 @@ public class DoorInteraction : InteractionBase
 
         // Debug.Log($"Interact triggered for door: {doorRotationController.name}");
 
-        doorRotationController.ToggleState(caller.GameObject.transform.position);
+        if (caller is PlayerInteractionCaller playerCaller)
+        {
+            doorRotationController.ToggleState(playerCaller.GameObject.transform.position);
+            return;
+        }
+
+        //TODO: Uncomment when enemy will have proper navigation sys
+        // if (enemyCanInteract && caller is EnemyInteractionCaller enemyCaller)
+        // {
+        //     doorRotationController.ToggleState(enemyCaller.GameObject.transform.position, true);
+        //     return;
+        // }
     }
 }

@@ -29,7 +29,12 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
         {
             return;
         }
-
+        if (InputManager.Instance.Cancel && GamePause.IsPauseRequested<EnemyDropComplexInventoryController>())
+        {
+            HideInventory();
+            ClearTemporaryContainer();
+            return;
+        }
         if (!InputManager.Instance.OpenInventory)
         {
             return;
@@ -51,8 +56,14 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
         temporaryInventoryContainer = new Container("Temporary Container", tempContainerSlots, tempContainerWidth);
 
         dropItemSynchronization.StartSynchronization(playerTransform.position, temporaryInventoryContainer);
-
-        ShowInventory();
+        if (!temporaryInventoryContainer.IsEmpty)
+        {
+            ShowPlayerAndTempInventory();
+        }
+        else
+        {
+            ShowOnlyPlayerInventory();
+        }
     }
 
     private void ManualTriggerDropComplexInventory()
@@ -76,12 +87,20 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
         temporaryInventoryContainer = null;
     }
 
-    private void ShowInventory()
+    private void ShowPlayerAndTempInventory()
     {
         viewController.ShowPlayerAndTempInventory(temporaryInventoryContainer);
 
         openCloseAudio.PlayOpen();
-        
+
+        GamePause.RequestPause<EnemyDropComplexInventoryController>();
+    }
+    private void ShowOnlyPlayerInventory()
+    {
+        viewController.ShowPlayerInventory();
+
+        openCloseAudio.PlayOpen();
+
         GamePause.RequestPause<EnemyDropComplexInventoryController>();
     }
 
@@ -90,7 +109,7 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
         viewController.HideInventories();
 
         GamePause.RequestResume<EnemyDropComplexInventoryController>();
-        
+
         openCloseAudio.PlayClose();
     }
 }

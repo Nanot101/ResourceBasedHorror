@@ -1,8 +1,6 @@
 ﻿using InventorySystem;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
 [RequireComponent(typeof(ContainerHandler))]
 public class InteractionContainerBase : InteractionBase
 {

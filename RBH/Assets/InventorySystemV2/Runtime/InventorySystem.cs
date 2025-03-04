@@ -107,7 +107,7 @@ namespace InventorySystem
                 return;
             }
             inventories.Remove(containerView);
-            Destroy(containerView);
+            Destroy(containerView.gameObject);
         }
 
         public GridContainerView GetGridContainerView(Container targetContainer)

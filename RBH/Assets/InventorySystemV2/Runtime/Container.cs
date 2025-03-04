@@ -14,6 +14,7 @@ namespace InventorySystem
         public int containerWidth;
         public readonly List<ItemSlot> itemSlots = new List<ItemSlot>();
         public bool IsFull => itemSlots.All(slot => slot != null && slot.IsFull);
+        public bool IsEmpty => itemSlots.All(slot => slot != null && slot.IsEmpty);
         public int SlotCount => containerSlots;
         public int RemainingSpace => containerSlots - itemSlots.Count;
 

@@ -34,8 +34,6 @@ public class InventoryViewController : MonoBehaviour
             InvPos.PlayerInventory);
     }
 
-    //All the logic in update was moved to Context Menu Controller
-
     public void ShowPlayerInventory()
     {
         if (playerContainerView.IsVisible)

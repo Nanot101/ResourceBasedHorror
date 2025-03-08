@@ -51,5 +51,7 @@ public class InteractionDialog : InteractionBase
         yield return new WaitForSeconds(dialogueRestartDelay);
 
         dialogStarted = false;
+
+        Destroy(gameObject);
     }
 }

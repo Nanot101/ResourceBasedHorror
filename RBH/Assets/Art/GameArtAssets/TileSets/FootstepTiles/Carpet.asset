@@ -15,5 +15,5 @@ MonoBehaviour:
   tiles:
   - {fileID: 11400000, guid: aa4cfe33434595f48bea0213c17dd84e, type: 2}
   audioClip:
-  - {fileID: 8300000, guid: f8541254d5e95e64da8b3fb74d5d628a, type: 3}
+  - {fileID: 8300000, guid: ce28334e2578c294fb51bd86354968f0, type: 3}
   floorType: 2

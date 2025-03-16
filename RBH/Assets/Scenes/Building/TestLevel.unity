@@ -2700,6 +2700,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 207726397}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!212 &214600413 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3730619173331360887, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+  m_PrefabInstance: {fileID: 1616968771}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &220857870 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1242562714324250258, guid: 20a6c2b379725f1459dd0266451997f7, type: 3}
@@ -22352,6 +22357,11 @@ MonoBehaviour:
     m_FrequencyGain: 1
     m_Duration: 1
     m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!212 &405415814 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1804926769315695474, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+  m_PrefabInstance: {fileID: 1616968771}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &407058838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106016,6 +106026,11 @@ Transform:
   - {fileID: 1112497087}
   m_Father: {fileID: 1725313992}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &968481763 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5229167205806911248, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+  m_PrefabInstance: {fileID: 1616968771}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &969519418
 GameObject:
   m_ObjectHideFlags: 0
@@ -298999,6 +299014,18 @@ PrefabInstance:
       propertyPath: PlayerInventoryContainer
       value: 
       objectReference: {fileID: 163659541}
+    - target: {fileID: 415413887797893205, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: spritesToFade.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 415413887797893205, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: spritesToFade.Array.data[2]
+      value: 
+      objectReference: {fileID: 405415814}
+    - target: {fileID: 415413887797893205, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: spritesToFade.Array.data[3]
+      value: 
+      objectReference: {fileID: 968481763}
     - target: {fileID: 805150156218530174, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -299039,6 +299066,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2594065499770129283, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: bodyRenderer
+      value: 
+      objectReference: {fileID: 214600413}
+    - target: {fileID: 2594065499770129283, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: leftShoeRenderer
+      value: 
+      objectReference: {fileID: 405415814}
+    - target: {fileID: 2594065499770129283, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: rightShoeRenderer
+      value: 
+      objectReference: {fileID: 968481763}
     - target: {fileID: 5060356514367073466, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
       propertyPath: mapManager
       value: 

@@ -526,6 +526,7 @@ Transform:
   m_Children:
   - {fileID: 2852215525366958135}
   - {fileID: 1611724730161542668}
+  - {fileID: 8531831711890106780}
   m_Father: {fileID: 805150156218530174}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7496654748333850850
@@ -547,12 +548,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3033805069991406761}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ac3844a19ef73049b1a231877d40730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gunAudio: {fileID: 837131521433582908}
+  muzzlePosition: {fileID: 8531831711890106780}
   playerCollider: {fileID: 1335401080097150228}
   projectilePrefab: {fileID: 6785678445432073186, guid: f6b1a37ddbd9b704abcc9b6d9d392efb, type: 3}
   cooldown: 1
@@ -997,6 +999,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1303563194988222599}
   mapManager: {fileID: 0}
+  minPitch: 0.55
+  maxPitch: 1.5
 --- !u!1 &8861619459731864912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,6 +1101,37 @@ MonoBehaviour:
   fieldOfViewCollisionLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!1 &8984086044342566708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8531831711890106780}
+  m_Layer: 0
+  m_Name: WeaponMuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8531831711890106780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8984086044342566708}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.194, y: 1.379, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5050251651467756063}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9065289971253864303
 GameObject:
   m_ObjectHideFlags: 0

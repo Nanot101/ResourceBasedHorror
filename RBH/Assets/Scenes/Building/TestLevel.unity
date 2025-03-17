@@ -297062,9 +297062,11 @@ MonoBehaviour:
   dayClips:
   - {fileID: 11400000, guid: e1d979f1e57c53943bf209f7d027a489, type: 2}
   - {fileID: 11400000, guid: d0e5fe1568e74984a94da48af4c79d60, type: 2}
+  - {fileID: 11400000, guid: ba2c761905d038549ab100fba80612c5, type: 2}
   nightClips:
   - {fileID: 11400000, guid: 28fe6fbc804d6ec2e86c5cc3d9746692, type: 2}
   - {fileID: 11400000, guid: a9ac5389399648a4787eb1410cdf6ef9, type: 2}
+  - {fileID: 11400000, guid: 59b50cde5a8ff4c46b77e60982e44ee5, type: 2}
 --- !u!82 &1433099134
 AudioSource:
   m_ObjectHideFlags: 0

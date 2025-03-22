@@ -66,6 +66,8 @@ namespace InventorySystem
                     {
                         desiredInventory = system.GetContainerGridInPosition(InventorySystem.InventoryPositionType.PlayerInventory);
                     }
+                    if (desiredInventory == currentSlotView.GridContainerView)
+                        return;
                     if (desiredInventory != null && !desiredInventory.container.IsFull)
                     {
                         bool success = desiredInventory.container.AddItem(currentSlotView.rootSlotView.itemSlot.GetItemStack(), out int leftover);

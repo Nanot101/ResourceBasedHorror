@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private DayNightPhase stopMovementPhase;
 
+    [SerializeField] private Animator _animator;
+
     #region Properties
 
     public float RunningSpeed
@@ -82,6 +84,32 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.velocity = velocity;
+
+        if (velocity.magnitude != 0 && playerStamina.HasStamina == true) {
+            _animator.SetBool("isWalking", true);
+            _animator.SetBool("isExhausted", false);
+        }
+        else if (velocity.magnitude != 0 && playerStamina.HasStamina == false) {
+            _animator.SetBool("isWalking", true);
+            _animator.SetBool("isExhausted", true);
+        }
+        else {
+            _animator.SetBool("isWalking", false);
+        }
+
+        if (wantsToRun && playerStamina.HasStamina == true) {
+            _animator.SetBool("isSprinting", true);
+            _animator.SetBool("isExhausted", false);
+        }
+        else if (wantsToRun && playerStamina.HasStamina == false) {
+            _animator.SetBool("isSprinting", true);
+            _animator.SetBool("isExhausted", true);
+        }
+        else {
+            _animator.SetBool("isSprinting", false);
+        }
+
+
     }
 
     private float CalculateSpeed()

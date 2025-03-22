@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractionDialog : InteractionBase
+public class InteractionDialog : InteractionEventBase
 {
     [SerializeField]
     private DialogueSystem dialogueSystem;
@@ -30,6 +30,7 @@ public class InteractionDialog : InteractionBase
 
     public override void Interact(IInteractionCaller caller)
     {
+        base.Interact(caller);
         if (dialogStarted || dialogueSystem.DialogueTriggered || GamePause.IsPaused)
         {
             return;
@@ -51,5 +52,7 @@ public class InteractionDialog : InteractionBase
         yield return new WaitForSeconds(dialogueRestartDelay);
 
         dialogStarted = false;
+
+        Destroy(gameObject);
     }
 }

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf68cbc504837e145846c91af99284e0, type: 3}
+  m_Name: Dirt
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: 7797947d1f1441244aa0d3762b4d3fb2, type: 2}
+  audioClip:
+  - {fileID: 8300000, guid: c08d390cb5f60ea41b8535dee32c4888, type: 3}
+  floorType: 1

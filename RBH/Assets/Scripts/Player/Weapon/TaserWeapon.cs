@@ -4,6 +4,7 @@ using UnityEngine;
 public class TaserWeapon : PlayerProjectileWeapon
 {
     [SerializeField] private GunAudio gunAudio;
+    [SerializeField] private Transform muzzlePosition;
 
     [SerializeField] private Collider2D playerCollider;
 
@@ -69,7 +70,7 @@ public class TaserWeapon : PlayerProjectileWeapon
 
     private void SpawnProjectile()
     {
-        Projectile instantiatedProjectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
+        Projectile instantiatedProjectile = Instantiate(projectilePrefab, muzzlePosition.transform.position, transform.rotation);
         instantiatedProjectile.InitializeProjectile(playerCollider);
     }
 

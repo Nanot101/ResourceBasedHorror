@@ -38,4 +38,8 @@ public class EnemyHealth : MonoBehaviour
 
         dropSystem.DropItems();
     }
+    [ContextMenu("Kill")]
+    public void Kill() {
+        DecreaseHealth(currentHealth);
+    }
 }

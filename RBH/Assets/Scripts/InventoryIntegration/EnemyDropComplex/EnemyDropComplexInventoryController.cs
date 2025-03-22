@@ -56,14 +56,8 @@ public class EnemyDropComplexInventoryController : Singleton<EnemyDropComplexInv
         temporaryInventoryContainer = new Container("Temporary Container", tempContainerSlots, tempContainerWidth);
 
         dropItemSynchronization.StartSynchronization(playerTransform.position, temporaryInventoryContainer);
-        if (!temporaryInventoryContainer.IsEmpty)
-        {
-            ShowPlayerAndTempInventory();
-        }
-        else
-        {
-            ShowOnlyPlayerInventory();
-        }
+        ShowPlayerAndTempInventory();
+
     }
 
     private void ManualTriggerDropComplexInventory()

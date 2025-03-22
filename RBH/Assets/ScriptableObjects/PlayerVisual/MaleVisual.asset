@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Sprite>k__BackingField: {fileID: 21300000, guid: 8b81dee81489d9e46a2536b2e93520c5, type: 3}
   <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <LeftShoe>k__BackingField: {fileID: 21300000, guid: c6d71397447a0a746a680930470258e9, type: 3}
+  <RightShoe>k__BackingField: {fileID: 21300000, guid: 3915497a82adff046b24d283babcd0ef, type: 3}

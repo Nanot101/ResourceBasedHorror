@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 35574543425232784}
   - component: {fileID: 6490194221280333710}
   - component: {fileID: 661680297723496659}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 7340630806518455595}
   - component: {fileID: 5526433951573935937}
   - component: {fileID: 1313977854044930956}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 251729112263576381}
   - component: {fileID: 2007167929141077700}
   - component: {fileID: 3179360079952526392}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: InteractableUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +517,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &3179360079952526392
 MonoBehaviour:

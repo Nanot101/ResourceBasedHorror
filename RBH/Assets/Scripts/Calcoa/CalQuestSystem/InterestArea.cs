@@ -6,9 +6,35 @@ public class InterestArea : MonoBehaviour
 {
     [SerializeField] private bool hasTriggered;
 
-    [SerializeField] private InitialExploreQuestStep questStep;
+    public InitialExploreQuestStep questStep;
 
     [SerializeField] private GameObject gatherEffect;
+    [SerializeField] private GameObject questManager;
+
+    void Update()
+    {
+        if(questStep == null)
+        {
+            if(questManager != null)
+            {
+                if(questManager.GetComponentInChildren<InitialExploreQuestStep>() != null)
+                {
+                    questStep = questManager.GetComponentInChildren<InitialExploreQuestStep>();
+                }
+            }
+        }
+
+        if(questManager == null)
+        {
+            if(GameObject.FindGameObjectWithTag("QuestManager") != null)
+            {
+                if(GameObject.FindGameObjectWithTag("QuestManager").GetComponent<QuestManager>() != null)
+                {
+                    questManager = GameObject.FindGameObjectWithTag("QuestManager");
+                }
+            }
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {

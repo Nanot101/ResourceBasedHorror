@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7180315061525598317}
   - component: {fileID: 2649324831517131577}
+  - component: {fileID: 6595320446545628372}
   m_Layer: 0
-  m_Name: AreaInterestEffect
+  m_Name: FinishQuestEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7547675952960950576}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.71, y: 10.35, z: -1.4150655}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,10 +43,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1622169130384422832, guid: f3b7d3148fdea134d83d3664462d8a5b, type: 2}
-  m_audioClip: {fileID: 8300000, guid: b0d1793215160c94cbc862db74d3cc12, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4715e8fa1fd994d4484daafd0535f523, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.7
+  m_Pitch: 1.2
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -128,3 +129,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6595320446545628372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7547675952960950576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32a96065681d70440852b5a08b31efdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 2.5

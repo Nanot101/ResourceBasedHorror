@@ -17,6 +17,7 @@ MonoBehaviour:
   dayRequirement: 1
   nightRequirement: 0
   questPrerequisites: []
-  questStepPrefabs: []
+  questStepPrefabs:
+  - {fileID: 6268951721489288830, guid: b6466ab4143fe954c84038a9c04c5c5f, type: 3}
   currencyReward: 50
   experienceReward: 250

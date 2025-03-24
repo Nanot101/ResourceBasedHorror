@@ -5,16 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Building/Title.unity
     guid: cd2900ec930e3e141bd4fdad8ff2a457
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Building/PlayerSelect.unity
     guid: 339b60b03a7f43c4290375215e0b8486
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Building/IntroCutscene.unity
     guid: f79edf43a1f05e24b85facd1046fc785
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Building/TestLevel.unity
     guid: 2c8b381ae89675544a44c193c7f445d0
+  - enabled: 1
+    path: Assets/Scenes/Building/CalQuest-test-MainLevel V2.unity
+    guid: fda1538766fb5204199ceede9744e449
   m_configObjects: {}

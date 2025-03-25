@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AudioClip>k__BackingField: {fileID: 8300000, guid: 4cf9eacd7c106ce49b7a479e682dfbff, type: 3}
   <FadeOutTime>k__BackingField: 2
-  <DayOrNightNumber>k__BackingField: 3
+  <DayOrNightNumber>k__BackingField: 1

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3580646366986804731}
   - component: {fileID: 2642201404047466539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: QBBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6742422418808122572}
   - component: {fileID: 4513073809289875946}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: QueenBeeChar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6741282935839224447}
   - component: {fileID: 1792577907995486833}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: QBRightWing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8908788916600063606}
   - component: {fileID: 8929368689577468496}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: QBLeftWing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,29 +328,33 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4179476490795392642, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.19795996
+      value: 0.28259134
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.19795996
+      value: 0.28259134
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.19795996
+      value: 0.28259134
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.8382
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: -23.3
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 12.812468
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalRotation.w
@@ -358,15 +362,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -400,6 +404,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: QueenBee Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8645464370514058995, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 9150082429961911144, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: Loop
       value: 1
@@ -432,6 +440,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8645464370514058995, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6503875729299863609}
+    - targetCorrespondingSourceObject: {fileID: 8645464370514058995, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6516633446836781240}
+    - targetCorrespondingSourceObject: {fileID: 8645464370514058995, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2895715287067076628}
   m_SourcePrefab: {fileID: 100100000, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
 --- !u!4 &2727357782609894458 stripped
 Transform:
@@ -488,3 +502,49 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.32, y: 14.45}
   m_EdgeRadius: 0
+--- !u!114 &6516633446836781240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7514682680771431676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c47280d483b1e4295672c8c4b0e0a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 8e61b6b7a8f82c94d81101156f106742, type: 2}
+  detectionRadius: 10
+  player: {fileID: 0}
+  rb: {fileID: 2895715287067076628}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!50 &2895715287067076628
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7514682680771431676}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

@@ -853,6 +853,8 @@ MonoBehaviour:
   spritesToFade:
   - {fileID: 7087995687798769848}
   - {fileID: 3730619173331360887}
+  - {fileID: 1804926769315695474}
+  - {fileID: 5229167205806911248}
   fadeCycleTime: 0.35
   playerDamageReciver: {fileID: 8287974565075454170}
 --- !u!114 &2594065499770129283

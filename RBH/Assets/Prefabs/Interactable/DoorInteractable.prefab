@@ -195,7 +195,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &4247209186913224026
 MonoBehaviour:
@@ -375,6 +375,7 @@ MonoBehaviour:
   doorAudioSource: {fileID: 3329077721594299584}
   doorOpenClip: {fileID: 8300000, guid: c155722df8702c97b866482ea0113c84, type: 3}
   doorCloseClip: {fileID: 8300000, guid: fa9a1b99fd5c38edabf671aba8eabd5f, type: 3}
+  doorShakeClip: {fileID: 0}
 --- !u!1 &7196895896584870214
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorRotationController: {fileID: 7512448741067511104}
-  enemyCanInteract: 0
+  enemyLocked: 0
 --- !u!114 &7512448741067511104
 MonoBehaviour:
   m_ObjectHideFlags: 0

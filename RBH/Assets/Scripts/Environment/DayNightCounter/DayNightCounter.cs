@@ -21,6 +21,8 @@ public class DayNightCounter : Singleton<DayNightCounter>
 
     public event EventHandler<OnNewNightArgs> OnNewNight;
 
+    [SerializeField] private QuestManager questManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,11 @@ public class DayNightCounter : Singleton<DayNightCounter>
             CurrentNight++;
 
             OnNewNight?.Invoke(this, new OnNewNightArgs { NewNightNumber = CurrentNight });
+        }
+
+        if(questManager != null)
+        {
+            questManager.AdjustDayNight(CurrentDay, CurrentNight);
         }
 
         //Debug.Log($"Current day: {CurrentDay}, current night: {CurrentNight}");

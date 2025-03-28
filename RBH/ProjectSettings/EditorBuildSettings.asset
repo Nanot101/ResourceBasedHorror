@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Building/TestLevel.unity
     guid: 2c8b381ae89675544a44c193c7f445d0
+  - enabled: 1
+    path: Assets/Scenes/Building/CalQuest-test-MainLevel V2.unity
+    guid: fda1538766fb5204199ceede9744e449
   m_configObjects: {}

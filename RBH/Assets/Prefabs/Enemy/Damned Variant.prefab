@@ -20,17 +20,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.6784314
       objectReference: {fileID: 0}
+    - target: {fileID: 4179476490795392642, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.11
+      value: -41.1
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 26.9
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 12.812468
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalRotation.w
@@ -38,15 +42,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4209420259909439029, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -68,8 +72,69 @@ PrefabInstance:
       propertyPath: m_Name
       value: Damned Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8645464370514058995, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8645464370514058995, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2949814280417235739}
+    - targetCorrespondingSourceObject: {fileID: 8645464370514058995, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8767544138274971525}
   m_SourcePrefab: {fileID: 100100000, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+--- !u!1 &905558442313294545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8645464370514058995, guid: cb7b953b2e2d49348bef496699632c12, type: 3}
+  m_PrefabInstance: {fileID: 8893461996414565410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2949814280417235739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905558442313294545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c47280d483b1e4295672c8c4b0e0a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 1347e6533dde9b74f8c99dd20a1354df, type: 2}
+  detectionRadius: 10
+  player: {fileID: 0}
+  rb: {fileID: 8767544138274971525}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!50 &8767544138274971525
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905558442313294545}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

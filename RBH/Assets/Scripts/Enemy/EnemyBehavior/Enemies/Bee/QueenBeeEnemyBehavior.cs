@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,18 @@ public class QueenBeeEnemyBehavior : EnemyBehavior
     List<IAttackAbility> abilities = new List<IAttackAbility>();
     IAttackAbility currentAttack;
     [Header("Dash Attack")]
+    public float dashChance = 1f;
     public float dashSpeed = 16;
     public float dashMaxDistance = 15;
     [Header("Screech Attack")]
+    public float screechChance = 0.3f;
     public float screechMinDistance = 16;
     [Header("Stinger Shotgun Attack")]
+    public float stingerShotgunChance = 0.8f;
     public float stingerShotgunMinDistance = 15;
     [SerializeField] ParticleSystem stingerSpreadPrefab;
+
+    [SerializeField, ReadOnly] EnemyStateType currentStateType;
     protected override void Awake()
     {
         base.Awake();
@@ -35,7 +41,8 @@ public class QueenBeeEnemyBehavior : EnemyBehavior
         QueenBeeStingerDashAttack dashAttack = new QueenBeeStingerDashAttack(16, 15, aiController, gameObject, sensor, player);
         QueenBeeScreechAttack screechAttack = new QueenBeeScreechAttack(screechMinDistance, aiController, gameObject, sensor, player);
         QueenBeeStingerSpread stingerSpreadAttack = new QueenBeeStingerSpread(stingerSpreadPrefab, stingerShotgunMinDistance, aiController, sensor, gameObject, player);
-        //abilities.Add(dashAttack);
+        abilities.Add(dashAttack);
+        abilities.Add(screechAttack);
         abilities.Add(stingerSpreadAttack);
         patrol.SetupDependencies(stateMachine, sensor, enemyPatrol, aiController, player);
         attack.SetupDependencies(stateMachine, screechAttack);
@@ -59,7 +66,11 @@ public class QueenBeeEnemyBehavior : EnemyBehavior
     protected override void Update()
     {
         base.Update();
+        //Debug only
+        currentStateType = stateDictionary.FirstOrDefault(pair => pair.Value == stateMachine.GetCurrentState()).Key;
         if (stateMachine.GetCurrentState() != stateMachine.behavior.GetState(EnemyStateType.Chase))
+            return;
+        if (!cooldown.IsReady)
             return;
         if (currentAttack != null && currentAttack.IsFinished)
         {
@@ -69,19 +80,77 @@ public class QueenBeeEnemyBehavior : EnemyBehavior
         {
             return;
         }
-        abilities = abilities.OrderBy(x => UnityEngine.Random.value).ToList();
-        foreach (IAttackAbility ability in abilities)
+        List<IAttackAbility> eligibleAbilities = abilities.Where(ability => ability.CanActivate()).ToList();
+        if (eligibleAbilities.Count == 0)
         {
-            if (ability.CanActivate() && cooldown.IsReady)
+            return;
+        }
+        //Doing this manually for simplicity and because this might be due to changes so this makes it easier to change without having to rewrite lots of things
+        float totalChance = 0;
+        foreach (IAttackAbility ability in eligibleAbilities)
+        {
+            if (ability is QueenBeeStingerDashAttack)
             {
-                currentAttack = ability;
-                attack.SetupDependencies(stateMachine, ability);
-                stateMachine.ChangeState(stateMachine.behavior.GetState(EnemyStateType.Attack));
-                cooldown.Use();
-                break;
+                totalChance += dashChance;
+            }
+            else
+            if (ability is QueenBeeScreechAttack)
+            {
+                totalChance += screechChance;
+            }else if (ability is QueenBeeStingerSpread)
+            {
+                totalChance += stingerShotgunChance;
+            }
+        }
+
+        float roll = UnityEngine.Random.Range(0f, totalChance);
+
+        float cumulative = 0f;
+
+        IAttackAbility selectedAbility = null;
+
+        foreach (IAttackAbility ability in eligibleAbilities)
+        {
+            if (ability is QueenBeeStingerDashAttack)
+            {
+                cumulative += dashChance;
+            }
+            else
+            if (ability is QueenBeeScreechAttack)
+            {
+                cumulative += screechChance;
+            }
+            else if (ability is QueenBeeStingerSpread)
+            {
+                cumulative += stingerShotgunChance;
             }
 
+            if (roll <= cumulative)
+            {
+                selectedAbility = ability;
+                break;
+            }
         }
+        if (selectedAbility != null)
+        {
+            currentAttack = selectedAbility;
+            attack.SetupDependencies(stateMachine, selectedAbility);
+            stateMachine.ChangeState(stateMachine.behavior.GetState(EnemyStateType.Attack));
+            cooldown.Use();
+        }
+        //abilities = abilities.OrderBy(x => UnityEngine.Random.value).ToList();
+        //foreach (IAttackAbility ability in abilities)
+        //{
+        //    if (ability.CanActivate() && cooldown.IsReady)
+        //    {
+        //        currentAttack = ability;
+        //        attack.SetupDependencies(stateMachine, ability);
+        //        stateMachine.ChangeState(stateMachine.behavior.GetState(EnemyStateType.Attack));
+        //        cooldown.Use();
+        //        break;
+        //    }
+
+        //}
     }
 }
 

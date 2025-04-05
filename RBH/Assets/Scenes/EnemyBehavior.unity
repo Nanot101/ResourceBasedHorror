@@ -206041,6 +206041,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1874819524}
     m_Modifications:
+    - target: {fileID: 40993993726225529, guid: 98a267187a78fec4f8d1915cbdd67398, type: 3}
+      propertyPath: dashChance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2088632840080203413, guid: 98a267187a78fec4f8d1915cbdd67398, type: 3}
       propertyPath: m_Name
       value: QueenBeeController

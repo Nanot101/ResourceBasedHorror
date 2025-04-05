@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,14 +17,18 @@ public class HuggerEnemyBehavior : EnemyBehavior
     Cooldown cooldown;
     List<IAttackAbility> abilities = new List<IAttackAbility>();
     IAttackAbility currentAttack;
-   
+
     [Header("Dash Attack")]
+    public float dashChance = 1f;
     public float dashSpeed = 16;
     public float dashMaxDistance = 15;
     [Header("Hook Ability")]
+    public float hookChance = 1f;
     public float hookSpeed = 20;
     public float hookMaxDistance = 30;
     public HookProjectile hookProjectilePrefab;
+
+    [SerializeField, ReadOnly] EnemyStateType currentStateType;
     protected override void Awake()
     {
         base.Awake();
@@ -33,8 +38,8 @@ public class HuggerEnemyBehavior : EnemyBehavior
         enemyPatrol = GetComponent<EnemyPatrol>();
 
         QueenBeeStingerDashAttack dashAttack = new QueenBeeStingerDashAttack(dashSpeed, dashMaxDistance, aiController, gameObject, sensor, player, false);
-        HuggerHookAbility hookAbility = new HuggerHookAbility(hookSpeed,hookMaxDistance,aiController,gameObject,sensor,player,hookProjectilePrefab);
-        //abilities.Add(dashAttack);
+        HuggerHookAbility hookAbility = new HuggerHookAbility(hookSpeed, hookMaxDistance, aiController, gameObject, sensor, player, hookProjectilePrefab);
+        abilities.Add(dashAttack);
         abilities.Add(hookAbility);
         patrol.SetupDependencies(stateMachine, sensor, enemyPatrol, aiController, player);
         attack.SetupDependencies(stateMachine, dashAttack);
@@ -58,7 +63,11 @@ public class HuggerEnemyBehavior : EnemyBehavior
     protected override void Update()
     {
         base.Update();
+        //Debug only
+        currentStateType = stateDictionary.FirstOrDefault(pair => pair.Value == stateMachine.GetCurrentState()).Key;
         if (stateMachine.GetCurrentState() != stateMachine.behavior.GetState(EnemyStateType.Chase))
+            return;
+        if (!cooldown.IsReady)
             return;
         if (currentAttack != null && currentAttack.IsFinished)
         {
@@ -68,19 +77,71 @@ public class HuggerEnemyBehavior : EnemyBehavior
         {
             return;
         }
-        abilities = abilities.OrderBy(x => UnityEngine.Random.value).ToList();
-        foreach (IAttackAbility ability in abilities)
+        List<IAttackAbility> eligibleAbilities = abilities.Where(ability => ability.CanActivate()).ToList();
+        if (eligibleAbilities.Count == 0)
         {
-            if (ability.CanActivate() && cooldown.IsReady)
+            return;
+        }
+        //Doing this manually for simplicity and because this might be due to changes so this makes it easier to change without having to rewrite lots of things
+        float totalChance = 0;
+        foreach (IAttackAbility ability in eligibleAbilities)
+        {
+            if (ability is QueenBeeStingerDashAttack)
             {
-                currentAttack = ability;
-                attack.SetupDependencies(stateMachine, ability);
-                stateMachine.ChangeState(stateMachine.behavior.GetState(EnemyStateType.Attack));
-                cooldown.Use();
-                break;
+                totalChance += dashChance;
+            }
+            else
+            if (ability is HuggerHookAbility)
+            {
+                totalChance += hookChance;
+            }
+        }
+
+        float roll = UnityEngine.Random.Range(0f, totalChance);
+
+        float cumulative = 0f;
+
+        IAttackAbility selectedAbility = null;
+
+        foreach (IAttackAbility ability in eligibleAbilities)
+        {
+            if (ability is QueenBeeStingerDashAttack)
+            {
+                cumulative += dashChance;
+            }
+            else
+            if (ability is HuggerHookAbility)
+            {
+                cumulative += hookChance;
             }
 
+            if (roll <= cumulative)
+            {
+                selectedAbility = ability;
+                break;
+            }
         }
+        if (selectedAbility != null)
+        {
+            currentAttack = selectedAbility;
+            attack.SetupDependencies(stateMachine, selectedAbility);
+            stateMachine.ChangeState(stateMachine.behavior.GetState(EnemyStateType.Attack));
+            cooldown.Use();
+        }
+
+        //foreach (IAttackAbility ability in abilities)
+        //{
+        //    if (ability.CanActivate() && cooldown.IsReady)
+        //    {
+        //        currentAttack = ability;
+        //        attack.SetupDependencies(stateMachine, ability);
+        //        stateMachine.ChangeState(stateMachine.behavior.GetState(EnemyStateType.Attack));
+        //        cooldown.Use();
+        //        break;
+        //    }
+
+        //}
+
     }
 }
 [Serializable]
@@ -189,7 +250,7 @@ public class HuggerHookAbility : IAttackAbility
         direction.z = 0;
         //I would probably call this a lazy solution for now as we can have other things later like tables and environment in geral and this will need to be updated
         int layerMask = LayerMask.GetMask("Wall");
-        RaycastHit2D hit = Physics2D.Raycast(player.transform.position, direction, maxDistance,layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(player.transform.position, direction, maxDistance, layerMask);
         float finalDistance;
         if (hit.collider == null)
             finalDistance = maxDistance;
@@ -197,7 +258,6 @@ public class HuggerHookAbility : IAttackAbility
         {
             finalDistance = hit.distance;
         }
-        Debug.Log(finalDistance);
         HookProjectile hook = GameObject.Instantiate(hookPrefab.gameObject).GetComponent<HookProjectile>();
         hook.transform.position = actor.transform.position;
         hook.transform.parent = actor.transform;

@@ -90115,6 +90115,10 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[4]
       value: 
       objectReference: {fileID: 72390899}
+    - target: {fileID: 6617488339664347618, guid: 3d088d163af7ce6488e7e02536935302, type: 3}
+      propertyPath: abilityCooldownTimer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6625300400727654803, guid: 3d088d163af7ce6488e7e02536935302, type: 3}
       propertyPath: m_LocalPosition.x
       value: -49.20754

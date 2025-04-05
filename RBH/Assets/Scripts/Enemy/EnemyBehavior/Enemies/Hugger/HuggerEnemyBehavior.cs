@@ -18,6 +18,8 @@ public class HuggerEnemyBehavior : EnemyBehavior
     List<IAttackAbility> abilities = new List<IAttackAbility>();
     IAttackAbility currentAttack;
 
+    public float abilityCooldownTimer = 6;
+
     [Header("Dash Attack")]
     public float dashChance = 1f;
     public float dashSpeed = 16;
@@ -57,7 +59,7 @@ public class HuggerEnemyBehavior : EnemyBehavior
     protected virtual void Start()
     {
         stateMachine.Initialize(patrol, this);
-        cooldown = new Cooldown(6);
+        cooldown = new Cooldown(abilityCooldownTimer);
     }
 
     protected override void Update()

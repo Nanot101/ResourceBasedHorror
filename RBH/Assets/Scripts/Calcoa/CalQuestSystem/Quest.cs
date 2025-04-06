@@ -36,6 +36,13 @@ public class Quest
         {
             QuestStep questStep = Object.Instantiate<GameObject>(questStepPrefab, parentTransform).GetComponent<QuestStep>();
             questStep.InitializeQuestStep(info.id);
+
+                if (GameObject.FindGameObjectWithTag("QuestManager") != null)
+                {
+                    GameObject.FindGameObjectWithTag("QuestManager").GetComponent<QuestManager>().MapQuestUI(questStep);
+
+                Debug.Log("called mapquestui");
+                }      
         }
     }
 

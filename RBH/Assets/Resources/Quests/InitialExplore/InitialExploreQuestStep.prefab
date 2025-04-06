@@ -44,5 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594718baca2d6154f9263302003fe8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questManager: {fileID: 0}
+  hasCount: 1
+  count: 0
+  maxCount: 2
+  stepDescription: Explore Areas
+  stepDesc: 
   areasExplored: 0
   areasToComplete: 2

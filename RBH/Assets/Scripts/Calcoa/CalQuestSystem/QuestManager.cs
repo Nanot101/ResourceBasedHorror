@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
+    [SerializeField] private QuestUI questUI;
+
     private Dictionary<string, Quest> questMap;
 
     public bool mapCreated;
@@ -129,6 +131,11 @@ public class QuestManager : MonoBehaviour
         quest.InstantiateCurrentQuestStep(this.transform);
         ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
 
+        if (questUI != null)
+        {
+            questUI.UpdateTitle(quest.info.displayName);
+        }
+
         Debug.Log("Start Quest: " + id);
     }
 
@@ -156,6 +163,12 @@ public class QuestManager : MonoBehaviour
         ClaimRewards(quest);
         ChangeQuestState(quest.info.id, QuestState.FINISHED);
 
+        if(questUI != null)
+        {
+            questUI.UpdateTitle("None");
+            questUI.KillStep();
+        }
+
         Debug.Log("Finish Quest: " + id);
     }
 
@@ -170,7 +183,7 @@ public class QuestManager : MonoBehaviour
 
     private void QuestSubmitPressed(string id)
     {
-        // to do finish quest
+        // to do interact stuffs
 
         Debug.Log("Submit Quest: " + id);
     }
@@ -212,6 +225,34 @@ public class QuestManager : MonoBehaviour
         return quest;
     }
 
+    public void MapQuestUI(QuestStep questStep)
+    {
+        if(questUI != null)
+        {
+            questUI.currentStepItemText = questStep.stepDescription;
+
+            CheckQuestStepInfo(questStep);
+
+            questUI.currentStepItemHasCount = questStep.hasCount;
+            questUI.currentStepItemCount = questStep.count;
+            questUI.currentStepItemMaxCount = questStep.maxCount;
+            questUI.currentStepItemQuestStep = questStep;
+
+            CheckQuestStepInfo(questStep);
+
+            questUI.MapStep();
+        }
+    }
+
+    public void UpdateQuestUICount(int count, int maxCount)
+    {
+        if (questUI != null)
+        {
+            questUI.UpdateCounts(count, maxCount);
+
+            Debug.Log("called update counts in quest manager: count " + count + " and max count " + maxCount);
+        }
+    }
 
     // for debug purposes
     public void CheckQuestInfo(Quest quest)
@@ -221,5 +262,11 @@ public class QuestManager : MonoBehaviour
         Debug.Log("Quest night req. " + quest.info.nightRequirement);
         Debug.Log("Quest state " + quest.state);
         Debug.Log("Step exists " + quest.CurrentStepExists());
+    }
+
+    public void CheckQuestStepInfo(QuestStep questStep)
+    {
+        Debug.Log("Step Text Description = " + questStep.stepDescription);
+
     }
 }

@@ -3412,6 +3412,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 790824498}
+  - {fileID: 800058881}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &318350983
@@ -90172,6 +90173,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3667201065730035994, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
   m_PrefabInstance: {fileID: 1424038416}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &800058881 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3667201065730035994, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
+  m_PrefabInstance: {fileID: 1693328955}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &828061378 stripped
 Transform:
@@ -296608,6 +296614,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1164421808771507386, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
+      propertyPath: maxStamina
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 5060356514367073466, guid: 590063a9c3d21de49a14aecbee2a5c36, type: 3}
       propertyPath: mapManager
       value: 
@@ -418834,19 +418844,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 300103657}
     m_Modifications:
     - target: {fileID: 3667201065730035994, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.81
+      value: 20.58813
       objectReference: {fileID: 0}
     - target: {fileID: 3667201065730035994, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.004
+      value: -2.8828425
       objectReference: {fileID: 0}
     - target: {fileID: 3667201065730035994, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.530201
       objectReference: {fileID: 0}
     - target: {fileID: 3667201065730035994, guid: e390a8d3de9ba4f91b4273ea5c73aac2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -422693,6 +422703,10 @@ PrefabInstance:
       propertyPath: playerStamina
       value: 
       objectReference: {fileID: 1616968773}
+    - target: {fileID: 217094222993212673, guid: 9bca63f485e300345a7ce25d10c29473, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -14.000244
+      objectReference: {fileID: 0}
     - target: {fileID: 1310936289714575280, guid: 9bca63f485e300345a7ce25d10c29473, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -423072,4 +423086,3 @@ SceneRoots:
   - {fileID: 1485068025}
   - {fileID: 1275694837}
   - {fileID: 7528665772415740862}
-  - {fileID: 1693328955}

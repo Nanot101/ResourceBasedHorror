@@ -296,4 +296,8 @@ public class HuggerHookAbility : IAttackAbility
         return false;
     }
 
+    public void ExitAttack()
+    {
+
+    }
 }

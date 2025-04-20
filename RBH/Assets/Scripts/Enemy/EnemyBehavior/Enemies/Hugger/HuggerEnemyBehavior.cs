@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class HuggerEnemyBehavior : EnemyBehavior
+public class HuggerEnemyBehavior : EnemyBehavior, IStunnable
 {
     [SerializeField] AIController aiController;
     [SerializeField] EnemyVisionSensor sensor;
@@ -14,6 +14,7 @@ public class HuggerEnemyBehavior : EnemyBehavior
     [SerializeField] HuggerPatrolStateBehavior patrol;
     [SerializeField] DefaultChaseStateBehavior chase;
     [SerializeField] DefaultSearchStateBehavior search;
+    [SerializeField] StunStateBehavior stun;
     Cooldown cooldown;
     List<IAttackAbility> abilities = new List<IAttackAbility>();
     IAttackAbility currentAttack;
@@ -47,12 +48,14 @@ public class HuggerEnemyBehavior : EnemyBehavior
         attack.SetupDependencies(stateMachine, dashAttack);
         chase.SetupDependencies(stateMachine, sensor, aiController, player);
         search.SetupDependencies(stateMachine, sensor, aiController, player);
+        stun.SetupDependencies(stateMachine,aiController,0f);
 
         stateDictionary = new System.Collections.Generic.Dictionary<EnemyStateType, EnemyStatesBehavior>() {
             { EnemyStateType.Patrol, patrol },
             { EnemyStateType.Chase,chase},
             { EnemyStateType.Attack,attack},
-            { EnemyStateType.Search, search}
+            { EnemyStateType.Search, search},
+            {EnemyStateType.Stunned, stun }
         };
     }
 
@@ -144,6 +147,12 @@ public class HuggerEnemyBehavior : EnemyBehavior
 
         //}
 
+    }
+
+    public void Stun(float duration)
+    {
+        stun.SetupDependencies(stateMachine, aiController, duration);
+        stateMachine.ChangeState(stateMachine.behavior.GetState(EnemyStateType.Stunned));
     }
 }
 [Serializable]

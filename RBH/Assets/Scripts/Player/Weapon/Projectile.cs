@@ -11,6 +11,9 @@ public class Projectile : MonoBehaviour
     private float projectileSpeed = 2f;
 
     [SerializeField]
+    private float stunDuration = 3f;
+
+    [SerializeField]
     private DayNightPhase projectileDestroyPhase;
 
     [SerializeField]
@@ -61,29 +64,38 @@ public class Projectile : MonoBehaviour
 
     private void TryDealDamage(Collider2D other)
     {
-        if (!other.TryGetComponent<Enemy>(out var enemy))
+        //Because of the navmesh plugin hierarchy of enemies IStunnable will be in children and this already checks whether the enemy can be stunned or not as
+        //he cannot be stunned if he doesn't implement the IStunnable interface
+        IStunnable stunnable = other.GetComponentInChildren<IStunnable>();
+        if (stunnable != null)
         {
+            stunnable.Stun(stunDuration);
             return;
         }
+        
+        //if (!other.TryGetComponent<Enemy>(out var enemy))
+        //{
+        //    return;
+        //}
 
-        var enemyDamageEntry = enemyDamageTable.SingleOrDefault(x => x.Equals(enemy.Attributes));
+        //var enemyDamageEntry = enemyDamageTable.SingleOrDefault(x => x.Equals(enemy.Attributes));
 
-        if (enemyDamageEntry.Equals((EnemyDamageEntry)default))
-        {
-            return;
-        }
+        //if (enemyDamageEntry.Equals((EnemyDamageEntry)default))
+        //{
+        //    return;
+        //}
 
-        if (enemyDamageEntry.CanStun
-            && enemy.TryGetComponent<EnemyStun>(out var enemyStun))
-        {
-            enemyStun.TryStun();
-        }
+        //if (enemyDamageEntry.CanStun
+        //    && enemy.TryGetComponent<IStunnable>(out var enemyStun))
+        //{
+        //    enemyStun.Stun(5f);
+        //}
 
-        if (enemyDamageEntry.Damage > 0.0f
-            && enemy.TryGetComponent<EnemyHealth>(out var enemyHealth))
-        {
-            enemyHealth.DecreaseHealth(enemyDamageEntry.Damage);
-        }
+        //if (enemyDamageEntry.Damage > 0.0f
+        //    && enemy.TryGetComponent<EnemyHealth>(out var enemyHealth))
+        //{
+        //    enemyHealth.DecreaseHealth(enemyDamageEntry.Damage);
+        //}
     }
 
     private void OnDayNightPhaseChanged(object sender, DayNightSystemEventArgs args)

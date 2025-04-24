@@ -5,7 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class QueenBeeEnemyBehavior : EnemyBehavior
+
+public class QueenBeeEnemyBehavior : EnemyBehavior, IStunnable
 {
     [SerializeField] AIController aiController;
     [SerializeField] EnemyVisionSensor sensor;
@@ -14,6 +15,7 @@ public class QueenBeeEnemyBehavior : EnemyBehavior
     [SerializeField] QueenBeeAttackStateBehavior attack;
     [SerializeField] DefaultChaseStateBehavior chase;
     [SerializeField] DefaultSearchStateBehavior search;
+    [SerializeField] StunStateBehavior stun;
     Cooldown cooldown;
     List<IAttackAbility> abilities = new List<IAttackAbility>();
     IAttackAbility currentAttack;
@@ -42,6 +44,7 @@ public class QueenBeeEnemyBehavior : EnemyBehavior
         QueenBeeStingerDashAttack dashAttack = new QueenBeeStingerDashAttack(16, 15, aiController, gameObject, sensor, player);
         QueenBeeScreechAttack screechAttack = new QueenBeeScreechAttack(screechMinDistance, aiController, gameObject, sensor, player);
         QueenBeeStingerSpread stingerSpreadAttack = new QueenBeeStingerSpread(stingerSpreadPrefab, stingerShotgunMinDistance, aiController, sensor, gameObject, player);
+
         abilities.Add(dashAttack);
         abilities.Add(screechAttack);
         abilities.Add(stingerSpreadAttack);
@@ -49,12 +52,13 @@ public class QueenBeeEnemyBehavior : EnemyBehavior
         attack.SetupDependencies(stateMachine, screechAttack);
         chase.SetupDependencies(stateMachine, sensor, aiController, player);
         search.SetupDependencies(stateMachine, sensor, aiController, player);
-
+        stun.SetupDependencies(stateMachine, aiController, 0f);
         stateDictionary = new System.Collections.Generic.Dictionary<EnemyStateType, EnemyStatesBehavior>() {
             { EnemyStateType.Patrol,patrol},
             { EnemyStateType.Chase,chase},
             { EnemyStateType.Attack,attack},
-            { EnemyStateType.Search, search}
+            { EnemyStateType.Search, search},
+            {EnemyStateType.Stunned, stun }
         };
     }
 
@@ -67,9 +71,10 @@ public class QueenBeeEnemyBehavior : EnemyBehavior
     protected override void Update()
     {
         base.Update();
+
         //Debug only
         currentStateType = stateDictionary.FirstOrDefault(pair => pair.Value == stateMachine.GetCurrentState()).Key;
-        if (stateMachine.GetCurrentState() != stateMachine.behavior.GetState(EnemyStateType.Chase))
+        if (stateMachine.GetCurrentState() != stateMachine.behavior.GetState(EnemyStateType.Chase) || stateMachine.GetCurrentState() == stateMachine.behavior.GetState(EnemyStateType.Stunned))
             return;
         if (!cooldown.IsReady)
             return;
@@ -98,7 +103,8 @@ public class QueenBeeEnemyBehavior : EnemyBehavior
             if (ability is QueenBeeScreechAttack)
             {
                 totalChance += screechChance;
-            }else if (ability is QueenBeeStingerSpread)
+            }
+            else if (ability is QueenBeeStingerSpread)
             {
                 totalChance += stingerShotgunChance;
             }
@@ -152,6 +158,12 @@ public class QueenBeeEnemyBehavior : EnemyBehavior
         //    }
 
         //}
+    }
+
+    public void Stun(float duration)
+    {
+        stun.SetupDependencies(stateMachine, aiController, duration);
+        stateMachine.ChangeState(stateMachine.behavior.GetState(EnemyStateType.Stunned));
     }
 }
 
@@ -338,6 +350,48 @@ public class QueenBeeAttackStateBehavior : EnemyStatesBehavior
 
     public override void Exit()
     {
+        attackAbility.ExitAttack();
+    }
+}
+[Serializable]
+public class StunStateBehavior : EnemyStatesBehavior
+{
+    public AudioSource audioSource;
+    public AudioClip stunAudioClip;
+
+    float stunDuration;
+    Cooldown stunCooldown;
+    AIController controller;
+    public void SetupDependencies(StateMachine stateMachine, AIController controller, float stunDuration)
+    {
+        Setup(stateMachine);
+        this.stunDuration = stunDuration;
+        this.controller = controller;
+        stunCooldown = new Cooldown(stunDuration);
+    }
+
+    public override void Initialize()
+    {
+        stunCooldown.Use();
+        controller.Stop();
+        if (audioSource != null)
+        {
+            audioSource.clip = stunAudioClip;
+            audioSource.Play();
+        }
+    }
+
+    public override void Execute()
+    {
+        if (stunCooldown.IsReady)
+        {
+            stateMachine.ChangeState(stateMachine.behavior.GetState(EnemyStateType.Search));
+
+        }
+    }
+
+    public override void Exit()
+    {
 
     }
 }
@@ -346,6 +400,7 @@ public interface IAttackAbility
     bool CanActivate();
     void Activate();
     void UpdateAttack(float deltaTime);
+    void ExitAttack();
     bool IsFinished { get; }
 }
 
@@ -419,6 +474,11 @@ public class QueenBeeStingerDashAttack : IAttackAbility
         }
         return false;
     }
+
+    public void ExitAttack()
+    {
+
+    }
 }
 //The game has no battle so common enemies won't work, enemie's objective is to follow you so they should have abilities that are dangerous for running away
 //Ok the bee will screech draining our stamina entirely making the character slow
@@ -432,7 +492,7 @@ public class QueenBeeScreechAttack : IAttackAbility
     private GameObject actor;
     private Transform player;
     Cooldown cooldown;
-    public QueenBeeScreechAttack( float maxDistance, AIController controller, GameObject actor, EnemyVisionSensor sensor, Transform player)
+    public QueenBeeScreechAttack(float maxDistance, AIController controller, GameObject actor, EnemyVisionSensor sensor, Transform player)
     {
         this.abilityDistance = maxDistance;
         this.controller = controller;
@@ -471,6 +531,11 @@ public class QueenBeeScreechAttack : IAttackAbility
             return true;
         }
         return false;
+    }
+
+    public void ExitAttack()
+    {
+
     }
 }
 public class QueenBeeStingerSpread : IAttackAbility
@@ -513,7 +578,6 @@ public class QueenBeeStingerSpread : IAttackAbility
         stingerInstance.transform.rotation = Quaternion.Euler(0, 0, angle + 90);
         if (cooldown.IsReady)
         {
-            stingerInstance.GetComponent<ParticleSystem>().Stop();
             finished = true;
         }
     }
@@ -526,6 +590,11 @@ public class QueenBeeStingerSpread : IAttackAbility
             return true;
         }
         return false;
+    }
+
+    public void ExitAttack()
+    {
+        stingerInstance.GetComponent<ParticleSystem>().Stop();
     }
 }
 public class Cooldown

@@ -194,6 +194,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bac3fd524bbce1b46b74286eaf07755e, type: 2}
   nightPhases:
   - {fileID: 11400000, guid: 329d963565edaca46962f629f4f65eeb, type: 2}
+  clockBG: {fileID: 2934262971962108766}
+  clockTextGO: {fileID: 389642498357402912}
 --- !u!1 &2934262971962108766
 GameObject:
   m_ObjectHideFlags: 0

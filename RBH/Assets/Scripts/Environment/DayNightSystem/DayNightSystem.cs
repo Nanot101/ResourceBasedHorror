@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class DayNightSystem : Singleton<DayNightSystem>
 {
+    public bool useQuestSystem;
+    [SerializeField] private QuestManager questManager;
+
     [SerializeField]
     [Tooltip("All phases of day and night. They will be switched in a loop starting from the first phase. There must be at least one phase.")]
     private List<DayNightPhase> dayNightPhases = new();
 
     private int currentPhaseIndex = 0;
-    private float currentPhaseTime = 0.0f;
+    [SerializeField] private float currentPhaseTime = 0.0f;
 
     public DayNightPhase CurrentPhase => dayNightPhases[currentPhaseIndex];
 
@@ -25,13 +28,69 @@ public class DayNightSystem : Singleton<DayNightSystem>
 
     private void Update()
     {
-        if (currentPhaseTime < CurrentPhase.Duration)
+        if (!useQuestSystem)
         {
-            currentPhaseTime += Time.deltaTime;
-            return;
-        }
+            Debug.Log("Current Phase Duration is " + CurrentPhase.Duration);
 
-        MoveToNextPhase();
+            if (currentPhaseTime < CurrentPhase.Duration)
+            {
+                currentPhaseTime += Time.deltaTime;
+                return;
+            }
+
+            MoveToNextPhase();
+        }
+        else
+        {
+            //do Quest system update
+
+            Debug.Log("Current Phase Duration is " + CurrentPhase.Duration);
+
+            if (questManager != null)
+            {
+                Debug.Log("Current Phase Quest Day Progress is " + questManager.questDayProgress);
+            }
+            else
+            {
+                if (GameObject.FindGameObjectWithTag("QuestManager") != null)
+                {
+                    questManager = GameObject.FindGameObjectWithTag("QuestManager").GetComponent<QuestManager>();
+                }
+            }
+
+            if (currentPhaseTime < CurrentPhase.Duration)
+            {
+                currentPhaseTime += Time.deltaTime;
+            }
+
+            if (questManager != null)
+            {
+                if (questManager.questDayProgress < questManager.nextPhaseExperience)
+                {
+                    if (CurrentPhase.Duration >= 11f)
+                    {
+                        currentPhaseTime += Time.deltaTime *10;
+
+                        return;
+                    }
+                    else
+                    {
+                        if (currentPhaseTime < CurrentPhase.Duration)
+                        {
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    currentPhaseTime += CurrentPhase.Duration;
+                }
+
+                questManager.NextPhase();
+            }
+
+            MoveToNextPhase();
+        }
     }
 
     private void MoveToNextPhase()
@@ -43,6 +102,8 @@ public class DayNightSystem : Singleton<DayNightSystem>
         OnPhaseChanged?.Invoke(this, new DayNightSystemEventArgs { CurrentPhase = CurrentPhase });
 
         //Debug.Log($"Day night system moved to {CurrentPhase.name}");
+
+
     }
 
     private void StartPhases()

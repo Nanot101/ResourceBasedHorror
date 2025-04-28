@@ -7292,7 +7292,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -59.400024, y: -150}
+  m_AnchoredPosition: {x: -59.399902, y: -150}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &217132586
@@ -147186,6 +147186,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 18261251298857917, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: m_TagString
+      value: DayNightSystem
+      objectReference: {fileID: 0}
     - target: {fileID: 1530063302224984722, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -147256,6 +147260,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8819161559872492601, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819161559872492601, guid: 7517167bd77ef51488d2ca6c646fc136, type: 3}
+      propertyPath: useQuestSystem
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -449452,6 +449460,7 @@ MonoBehaviour:
   currentNight: 0
   currentExperience: 0
   currentCurrency: 0
+  questDayProgress: 0
 --- !u!4 &2023205871
 Transform:
   m_ObjectHideFlags: 0

@@ -19,6 +19,9 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private int currentExperience;
     [SerializeField] private int currentCurrency;
 
+    public float questDayProgress;
+    public float nextPhaseExperience = 100f;
+
     private void Awake()
     {
         questMap = CreateQuestMap();
@@ -179,6 +182,8 @@ public class QuestManager : MonoBehaviour
 
         currentCurrency += quest.info.currencyReward;
         currentExperience += quest.info.experienceReward;
+
+        questDayProgress = currentExperience;
     }
 
     private void QuestSubmitPressed(string id)
@@ -252,6 +257,15 @@ public class QuestManager : MonoBehaviour
 
             Debug.Log("called update counts in quest manager: count " + count + " and max count " + maxCount);
         }
+    }
+
+    public void NextPhase()
+    {
+        currentExperience = 0;
+
+        nextPhaseExperience = 100f;
+
+        questDayProgress = currentExperience;
     }
 
     // for debug purposes

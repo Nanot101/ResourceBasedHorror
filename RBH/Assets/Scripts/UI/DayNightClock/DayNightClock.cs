@@ -32,11 +32,30 @@ public class DayNightClock : MonoBehaviour
     private DateTime currentTime;
     private bool IsDayPhase;
 
+    private bool useQuestSystem;
+
+    private DayNightSystem dayNightSystem;
+
+    //UI Clock references
+    [SerializeField] private GameObject clockBG;
+    [SerializeField] private GameObject clockTextGO;
+
     private void Awake()
     {
         AsserDesignerFields();
 
         DayNightSystem.Instance.OnPhaseChanged += OnDayNightPhaseChanged;
+    }
+
+    private void Start()
+    {
+        if(dayNightSystem == null)
+        {
+            if(GameObject.FindGameObjectWithTag("DayNightSystem") != null)
+            {
+                dayNightSystem = GameObject.FindGameObjectWithTag("DayNightSystem").GetComponent<DayNightSystem>();
+            }
+        }
     }
 
     private void Update()
@@ -45,7 +64,25 @@ public class DayNightClock : MonoBehaviour
 
         currentTime = currentTime.AddMinutes(minuteChangeSpeed);
 
-        UpdateUI();
+        useQuestSystem = DayNightSystem.Instance.useQuestSystem;
+
+        if (!useQuestSystem)
+        {
+            UpdateUI();
+        }
+        else
+        {
+            //hide clock
+            if (clockBG != null)
+            {
+                clockBG.SetActive(false);
+            }
+
+            if (clockTextGO != null)
+            {
+                clockTextGO.SetActive(false);
+            }
+        }
     }
 
     private void OnDestroy()

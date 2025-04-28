@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 16152280724289530}
   m_Layer: 0
   m_Name: DayNightSystem
-  m_TagString: Untagged
+  m_TagString: DayNightSystem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad1cbe79442789b4e813cd36a9a5c918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useQuestSystem: 0
+  questManager: {fileID: 0}
   dayNightPhases:
   - {fileID: 11400000, guid: dbbffb46257d8c44781caccf95143d93, type: 2}
   - {fileID: 11400000, guid: bac3fd524bbce1b46b74286eaf07755e, type: 2}
@@ -55,6 +57,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 274edebd41b7f6a428f5312b49574b76, type: 2}
   - {fileID: 11400000, guid: 617ae0065d14da04284b5337a37af514, type: 2}
   - {fileID: 11400000, guid: 82a42f70eaa38824f8aae3aca893210f, type: 2}
+  currentPhaseTime: 0
 --- !u!114 &7888654926560434357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,6 +73,7 @@ MonoBehaviour:
   maxCycles: 5
   dayStartPhase: {fileID: 11400000, guid: dbbffb46257d8c44781caccf95143d93, type: 2}
   nightStartPhase: {fileID: 11400000, guid: 329d963565edaca46962f629f4f65eeb, type: 2}
+  questManager: {fileID: 0}
 --- !u!114 &1530063302224984722
 MonoBehaviour:
   m_ObjectHideFlags: 0

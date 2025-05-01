@@ -449461,6 +449461,7 @@ MonoBehaviour:
   currentExperience: 0
   currentCurrency: 0
   questDayProgress: 0
+  nextPhaseExperience: 100
 --- !u!4 &2023205871
 Transform:
   m_ObjectHideFlags: 0

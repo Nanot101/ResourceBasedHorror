@@ -102,6 +102,8 @@ public class QuestPoint : MonoBehaviour
     {
         QuestEventsManager.instance.questEvents.onQuestStateChange -= QuestStateChange;
         //QuestEventsManager.instance.questEvents.onQuestSubmitPressed -= QuestSubmitPressed;
+
+        initialEnable = false;
     }
 
     private void QuestSubmitPressed()

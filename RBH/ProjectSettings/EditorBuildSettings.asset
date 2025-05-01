@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cal-LoadAsync-1.unity
     guid: 60c852e660c79e9459df57227052c382
+  - enabled: 1
+    path: Assets/Scenes/CalTest-scene-Basement.unity
+    guid: 0115abd846b72b048af8bd82cb673665
   m_configObjects: {}

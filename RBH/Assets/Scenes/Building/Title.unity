@@ -2321,7 +2321,7 @@ GameObject:
   - component: {fileID: 1034328278}
   - component: {fileID: 1034328277}
   m_Layer: 5
-  m_Name: Circle
+  m_Name: Half-Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2343,8 +2343,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -975, y: 0}
-  m_SizeDelta: {x: 960, y: 1080}
+  m_AnchoredPosition: {x: -727.67, y: 0}
+  m_SizeDelta: {x: 465.33, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1034328277
 MonoBehaviour:
@@ -2359,14 +2359,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9245283, g: 0.63234246, b: 0.63234246, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 6b0f49cc8b671344f8f28007747f6f24, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

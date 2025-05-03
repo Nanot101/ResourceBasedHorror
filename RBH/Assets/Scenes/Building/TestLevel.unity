@@ -425418,6 +425418,30 @@ PrefabInstance:
       propertyPath: taserWeapon
       value: 
       objectReference: {fileID: 1616968774}
+    - target: {fileID: 5394189735686616340, guid: 9bca63f485e300345a7ce25d10c29473, type: 3}
+      propertyPath: m_fontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394189735686616340, guid: 9bca63f485e300345a7ce25d10c29473, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d6ed2567a15f81c4cb0627d0e7cb2cbe, type: 2}
+    - target: {fileID: 5394189735686616340, guid: 9bca63f485e300345a7ce25d10c29473, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394189735686616340, guid: 9bca63f485e300345a7ce25d10c29473, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4618594300104081501, guid: d6ed2567a15f81c4cb0627d0e7cb2cbe, type: 2}
+    - target: {fileID: 5394189735686616340, guid: 9bca63f485e300345a7ce25d10c29473, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394189735686616340, guid: 9bca63f485e300345a7ce25d10c29473, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5560357243213292834, guid: 9bca63f485e300345a7ce25d10c29473, type: 3}
       propertyPath: pagesStore
       value: 

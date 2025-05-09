@@ -313,7 +313,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: file://D:/Loon/Docss/GitHub/ResourceBasedHorror/RBH/Assets/StreamingAssets/RightFCutscene.mp4
+  m_Url: file://D:/Loon/Docss/GitHub/ResourceBasedHorror/RBH/Assets/StreamingAssets/fFinalCS3.mp4
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -449,7 +449,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: file://D:/Loon/Docss/GitHub/ResourceBasedHorror/RBH/Assets/StreamingAssets/RightMCutscene.mp4
+  m_Url: file://D:/Loon/Docss/GitHub/ResourceBasedHorror/RBH/Assets/StreamingAssets/mFinalCS3.mp4
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -506,8 +506,8 @@ MonoBehaviour:
   maleVideoPlayer: {fileID: 1084254104}
   femaleVideoPlayer: {fileID: 581286662}
   nextScene: {fileID: 1935963241}
-  maleVideoFileName: RightMCutscene.mp4
-  femaleVideoFileName: RightFCutscene.mp4
+  maleVideoFileName: mFinalCS3.mp4
+  femaleVideoFileName: fFinalCS3.mp4
 --- !u!4 &1186101354
 Transform:
   m_ObjectHideFlags: 0

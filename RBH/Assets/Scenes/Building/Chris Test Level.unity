@@ -1702,7 +1702,7 @@ GameObject:
   - component: {fileID: 101042348}
   - component: {fileID: 101042349}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Combination Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

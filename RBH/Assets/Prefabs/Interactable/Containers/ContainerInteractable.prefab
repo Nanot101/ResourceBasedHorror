@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 7263715267300295685}
   - component: {fileID: 4291026679483238456}
   - component: {fileID: 3720228591819421292}
-  - component: {fileID: 2486668766852962274}
+  - component: {fileID: 5720845323817124516}
   m_Layer: 0
   m_Name: ContainerInteractable
   m_TagString: Untagged
@@ -243,8 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c005c4db60045d9468b50aca685ce9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!70 &2486668766852962274
-CapsuleCollider2D:
+--- !u!58 &5720845323817124516
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -276,8 +276,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 4.1, y: 1.83}
-  m_Direction: 1
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &4851774475618870026
 GameObject:
   m_ObjectHideFlags: 0

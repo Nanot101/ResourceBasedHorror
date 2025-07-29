@@ -284,7 +284,7 @@ MonoBehaviour:
   moveDistance: 320
   moveSpeed: 5
   moveCount: 1
-  maxMoves: 6
+  maxMoves: 7
   mainPanel: {fileID: 1736729053}
   creditsPanel: {fileID: 220744938}
   positionTitleText: {fileID: 546938711}
@@ -1245,7 +1245,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 939e7047569687c4e897d9d1e61a214b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: acac7672cfa7ff74e9cc47c2bb98ff73, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2326,7 +2326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1034328276
 RectTransform:
   m_ObjectHideFlags: 0

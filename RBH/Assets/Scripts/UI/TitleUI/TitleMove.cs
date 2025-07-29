@@ -92,7 +92,9 @@ public class MoveUIWithCredits : MonoBehaviour
         positions.Add("Composers");
         positions.Add("Designers");
         positions.Add("Writers");
+        positions.Add("QA");
         positions.Add("Special Thanks To");
+        
         
 
         credits["Programmers"] = new List<string> { "Artur", "Obleynix", "Calcoa" };
@@ -100,6 +102,7 @@ public class MoveUIWithCredits : MonoBehaviour
         credits["Composers"] = new List<string> { "Aradia (Director)", "NarcolepsyDriver (Music)", "Donovan 'DannyGoldstar' Bautista (SFX)" };
         credits["Designers"] = new List<string> { "Chris", "Loon", "Wild" };
         credits["Writers"] = new List<string> { "Mary", "Chris" };
+        credits["QA"] = new List<string> { "Kitsune" };
         credits["Special Thanks To"] = new List<string> { "DriplessAtoms" };
 
 
